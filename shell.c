@@ -31,7 +31,7 @@ struct SYSTEM3*print(unsigned short moji[][12][8], unsigned int arfa, struct SYS
 	else if (cha==L' ') { print(moji,K_SPACE,system3,black);}
 	else if (cha==K_SPACE) { print(moji,K_SPACE,system3,black);}
 	else if (cha > 60 && cha < 96) {print(moji,cha-65,system3,color); }
-	else if (cha < 58) { print(moji,26,cha-6,system3,color); }
+	else if (cha < 58) { print(moji,26,0/*cha-6*/,system3,color); }
 	else if (cha < 96) { print(moji,cha-9,system3,color); }
 	else { print(moji,cha-97,system3,color);}
 	return system3;
