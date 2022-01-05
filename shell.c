@@ -25,16 +25,16 @@ struct SYSTEM3*print(unsigned short moji[][12][8], unsigned int arfa, struct SYS
 }
 
  struct SYSTEM3*putchar(unsigned short moji[][12][8], unsigned short cha, struct SYSTEM3 *system3, struct EFI_GRAPHICS_OUTPUT_BLT_PIXEL color ) {	
-	if (cha==L'\r') {print(moji,26,c,black);}
+	if (cha==L'\r') {print(moji,26,system3,black);}
 	else if (cha==L'\n') {system3->cons->sp=0;system3->cons->ent+=12;}
-	else if (cha==8) { system3->cons->sp--;print(moji,K_SPACE,c,black);system3->cons->sp--;}
-	else if (cha==L' ') { print(moji,K_SPACE,c,black);}
-	else if (cha==K_SPACE) { print(moji,K_SPACE,c,black);}
-	else if (cha > 60 && cha < 96) {print(moji,cha-65,c,color); }
-	else if (cha < 58) { print(moji,26/*cha-6*/,c,green/*color*/); }
-	else if (cha < 96) { print(moji,cha-9,c,color); }
-	else { print(moji,cha-97,c,color);}
-	return c;
+	else if (cha==8) { system3->cons->sp--;print(moji,K_SPACE,system3,black);system3->cons->sp--;}
+	else if (cha==L' ') { print(moji,K_SPACE,system3,black);}
+	else if (cha==K_SPACE) { print(moji,K_SPACE,system3,black);}
+	else if (cha > 60 && cha < 96) {print(moji,cha-65,system3,color); }
+	else if (cha < 58) { print(moji,26,cha-6,system3,color); }
+	else if (cha < 96) { print(moji,cha-9,system3,color); }
+	else { print(moji,cha-97,system3,color);}
+	return system3;
 }
 
 int icon_print(unsigned short icon[][30][24], unsigned int arfa, int sp, int ent, struct EFI_GRAPHICS_OUTPUT_BLT_PIXEL color ) {
