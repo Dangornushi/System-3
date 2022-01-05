@@ -380,7 +380,9 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	status = SFSP->OpenVolume(SFSP, &root);
 	assert(status, L"SFSP->OpenVolume");
 
-	status = root->Open(root, &file, file_name, EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE | EFI_FILE_MODE_CREATE, 0);
+	status = root->Open(root, &file, file_name, 
+						EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE | \ 
+								EFI_FILE_MODE_CREATE, 0);
 	assert(status, L"root->Open");
 
 	status = file->Write(file, &buf_size, (void *)file_buf);
@@ -1293,16 +1295,16 @@ void cha(int mode) {
 	int list = 0;
 	static unsigned short moji[][12][8] = {
 		{//A
-		        {0,0,0,1,1,0,0,0}, 
-		        {0,0,0,1,1,0,0,0}, 
-		        {0,0,1,0,0,1,0,0}, 
-		        {0,0,1,0,0,1,0,0}, 
-		        {0,0,1,0,0,1,0,0}, 
-		        {0,1,1,1,1,1,1,0}, 
-		        {0,1,1,1,1,1,1,0}, 
-		        {0,1,0,0,0,0,1,0}, 
+			{0,0,0,1,1,0,0,0}, 
+			{0,0,0,1,1,0,0,0}, 
+			{0,0,1,0,0,1,0,0},
+			{0,0,1,0,0,1,0,0}, 
+			{0,0,1,0,0,1,0,0}, 
+			{0,1,1,1,1,1,1,0},     
+			{0,1,1,1,1,1,1,0}, 
+			{0,1,0,0,0,0,1,0}, 
 			{0,1,0,0,0,0,1,0},
-		        {1,1,1,0,0,1,1,1}, },
+			{1,1,1,0,0,1,1,1}, },
 		{//B
 			{0,1,1,1,1,1,0,0},
 			{0,1,1,1,1,1,0,0},
@@ -2126,7 +2128,7 @@ void cha(int mode) {
 			}
 		}
 		buf[n] = L'\0';
-
+		
 		if (!strcmp(L"edit ", command(s1,buf,5))) {
 			cls();
 			edit_mode(buf+5,moji);
