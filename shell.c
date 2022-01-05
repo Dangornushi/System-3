@@ -24,26 +24,6 @@ struct SYSTEM3*print(unsigned short moji[][12][8], unsigned int arfa, struct SYS
 	return c;
 }
 
-/*
-	else if (file_list[idx].name[i] > 60 && file_list[idx].name[i] < 96) {
-		print(moji,file_list[idx].name[i]-65,sp,ent,green); }
-	else if (file_list[idx].name[i] < 96) { print(moji,file_list[idx].name[i]-9,sp,ent,green); }
-	else { print(moji,file_list[idx].name[i]-97,sp,ent,green);}
-
-			if (ch==L'\0') { break; }
-			else if (ch==L' ') { print(moji,26,sp,ent,black);}
-			else if (ch > 60 && ch < 96) {	print(moji,ch-65,sp,ent,green); }
-			else if (ch < 96) { print(moji,ch-6,sp,ent,green); }
-			else { print(moji,ch-97,sp,ent,green);}
-
-			if (ch==L'\0') { break; }
-			else if (ch==L' ') { print(moji,26,sp,ent,black);}
-			else if (ch > 60 && ch < 96) {	print(moji,ch-65,sp,ent,green); }
-			else if (ch < 96) { print(moji,ch-6,sp,ent,green); }
-			else { print(moji,ch-97,sp,ent,green);}
-			inp[i++] = ch;
-*/
-
  struct SYSTEM3*putchar(unsigned short moji[][12][8], unsigned short cha, struct SYSTEM3 *system3, struct EFI_GRAPHICS_OUTPUT_BLT_PIXEL color ) {	
 	if (cha==L'\r') {print(moji,26,c,black);}
 	else if (cha==L'\n') {system3->cons->sp=0;system3->cons->ent+=12;}
@@ -51,7 +31,7 @@ struct SYSTEM3*print(unsigned short moji[][12][8], unsigned int arfa, struct SYS
 	else if (cha==L' ') { print(moji,K_SPACE,c,black);}
 	else if (cha==K_SPACE) { print(moji,K_SPACE,c,black);}
 	else if (cha > 60 && cha < 96) {print(moji,cha-65,c,color); }
-	else if (cha < 58) { print(moji,cha-6,c,color); }
+	else if (cha < 58) { print(moji,26/*cha-6*/,c,color); }
 	else if (cha < 96) { print(moji,cha-9,c,color); }
 	else { print(moji,cha-97,c,color);}
 	return c;
