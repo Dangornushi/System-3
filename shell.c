@@ -1994,7 +1994,7 @@ void cha(int mode, struct SYSTEM3 *system3) {
 		unsigned short put[] = {'p','a','s','s'};
 		int ind = 0;
 		for (;ind<4;) {
-			print(moji,put[ind]-97,system3,white);
+			system3 = print(moji,put[ind]-97,system3,white);
 			ind++;
 		}
 		puts("OK");
