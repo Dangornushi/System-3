@@ -1998,6 +1998,7 @@ void cha(int mode, struct SYSTEM3 *system3) {
 			ind++;
 		}
 		print(moji,28,system3,white);
+		/*
 		while (1) { 
 				buf[n] = getc();
 				if (buf[n] == L'\r') {
@@ -2019,7 +2020,7 @@ void cha(int mode, struct SYSTEM3 *system3) {
 					print(moji,28,system3,white);
 					n++;
 				}
-		}
+		}*/
 		cls();
 		system3->cons->sp=0;
 		system3->cons->ent=0;
