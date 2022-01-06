@@ -1991,10 +1991,8 @@ void cha(int mode, struct SYSTEM3 *system3) {
 
 	while (1) {	
 		unsigned short put[] = {'p','a','s','s'};
-		int ind = 0;
-		for (;ind<4;) {
-			system3 = print(moji,put[ind],system3,white);
-			ind++;
+		for (int ind = 0;ind<4;ind++) {
+			system3 = print(moji,put[ind]-97,system3,white);
 		}
 		//print(moji,28,system3,white);
 		/*
@@ -2024,6 +2022,7 @@ void cha(int mode, struct SYSTEM3 *system3) {
 		system3->cons->sp=0;
 		system3->cons->ent=0;
 		n=0;
+		break;
 		if (!strcmp(L"dango1027",buf)) {break;}
 	}
 	
