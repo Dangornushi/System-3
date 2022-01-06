@@ -23,7 +23,6 @@ struct SYSTEM3*print(unsigned short moji[][12][8], unsigned int arfa, struct SYS
 	system3->cons->sp++;
 	return c;
 }
-
  struct SYSTEM3*putchar(unsigned short moji[][12][8], unsigned short cha, struct SYSTEM3 *system3, struct EFI_GRAPHICS_OUTPUT_BLT_PIXEL color ) {	
 	if (cha==L'\r') {print(moji,26,system3,black);}
 	else if (cha==L'\n') {system3->cons->sp=0;system3->cons->ent+=12;}
@@ -31,7 +30,7 @@ struct SYSTEM3*print(unsigned short moji[][12][8], unsigned int arfa, struct SYS
 	else if (cha==L' ') { print(moji,K_SPACE,system3,black);}
 	else if (cha==K_SPACE) { print(moji,K_SPACE,system3,black);}
 	//else if (cha > 60 && cha < 96) {print(moji,12/*cha-65*/,system3,color); }
-	else if (cha < 58) { print(moji,26,cha-12,system3,color); }
+	else if (cha < 58) { print(moji,26,cha-3,system3,color); }
 	else if (cha < 96) { print(moji,0,system3,color); }//記号
 	else { print(moji,cha-97,system3,color);}
 	return system3;
