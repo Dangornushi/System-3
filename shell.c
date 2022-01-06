@@ -1999,7 +1999,7 @@ void cha(int mode, struct SYSTEM3 *system3) {
 		}
 		print(moji,28,system3,white);
 		while (1) { 
-				buf[n] = getc();
+				buf[n] = *getc();
 				if (buf[n] == L'\r') {
 					system3->cons->ent += 12;
 					system3->cons->sp = 0;	
@@ -2007,14 +2007,13 @@ void cha(int mode, struct SYSTEM3 *system3) {
 					break;
 				}
 				if (buf[n] == 8) {
-					if (sp > 2) {
+					if (sp > 6) {
 						system3->cons->sp--;
 						print(moji,26,system3,black);
 						system3->cons->sp--;
 						n--;
 						buf[n]=0;
 					}
-					else {}
 				}
 				else {	
 					print(moji,28,system3,white);
