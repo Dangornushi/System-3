@@ -1232,7 +1232,7 @@ struct COSNOLE *gui_mode(unsigned short moji[][12][8], struct SYSTEM3 *system3) 
 	}
 }
 */
-void cha(int mode) {
+void cha(int mode, struct SYSTEM3 *system3) {
 	cls();
 	int w = 8;
 	int h = 12;
@@ -2273,5 +2273,5 @@ void shell(void)
 
 	//rogin();
 	int mode = 0;
-	cha(mode);
+	cha(mode, system3);
 }
