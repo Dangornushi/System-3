@@ -2018,7 +2018,7 @@ void cha(int mode, struct SYSTEM3 *system3) {
 					n++;
 				}
 		}*/
-		ST->ConOut->ClearScreen(ST->ConOut);
+		cls();
 		system3->cons->sp=0;
 		system3->cons->ent=0;
 		n=0;
