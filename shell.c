@@ -2020,7 +2020,7 @@ void cha(int mode, struct SYSTEM3 *system3) {
 					n++;
 				}
 		}*/
-		cls();
+		ST->ConOut->ClearScreen(ST->ConOut);
 		system3->cons->sp=0;
 		system3->cons->ent=0;
 		n=0;
