@@ -292,7 +292,7 @@ struct SYSTEM3*le(unsigned short *file_name, unsigned short moji[][12][8], struc
 	root->Close(root);
 	
 	for (int x=0;inp[x]!=L'\0';x++) {
-		c = putchar(moji,inp[x],c,green);
+		putchar(moji,inp[x],system3,green);
 	}
 	
 	system3->cons->sp-=2;
@@ -300,13 +300,13 @@ struct SYSTEM3*le(unsigned short *file_name, unsigned short moji[][12][8], struc
 	i = n2;
 	
 	while (TRUE) {
-		c = putchar(moji,K_SPACE,c,black);
+		putchar(moji,K_SPACE,system3,black);
 		system3->cons->sp--;
-		c = putchar(moji,inp[i-1],c,green);
+		putchar(moji,inp[i-1],system3,green);
 	
-		print(moji,K_SPACE,c,green);
+		print(moji,K_SPACE,system3,green);
 		
-		c = putchar(moji,K_SPACE,c,black);
+		putchar(moji,K_SPACE,system3,black);
 		system3->cons->sp-=2;
 	
 		ch = getc();
@@ -319,14 +319,14 @@ struct SYSTEM3*le(unsigned short *file_name, unsigned short moji[][12][8], struc
 	
 		if (ch == 8) {
 			system3->cons->sp--;
-			print(moji,26,c,black);
+			print(moji,26,system3,black);
 			system3->cons->sp-=2;
 			i--;
 			ch=0;
 		}
 	
 		else {	
-			c = putchar(moji,ch,c,green);
+			putchar(moji,ch,system3,green);
 			system3->cons->sp--;
 			inp[i] = ch;
 			i++;
