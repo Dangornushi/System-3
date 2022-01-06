@@ -371,7 +371,7 @@ struct SYSTEM3*le(unsigned short *file_name, unsigned short moji[][12][8], struc
 	system3->cons->sp = 0;
 	system3->cons->ent = ent+=12;
 
-	return c;
+	return system3;
 }
 
 void cat(unsigned short *file_name) {}
