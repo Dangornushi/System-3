@@ -14,14 +14,14 @@
 
 int to_int(unsigned short *str);
 
-struct SYSTEM3*print(unsigned short moji[][12][8], unsigned int arfa, struct SYSTEM3 *system3, struct EFI_GRAPHICS_OUTPUT_BLT_PIXEL color ) {
+void print(unsigned short moji[][12][8], unsigned int arfa, struct SYSTEM3 *system3, struct EFI_GRAPHICS_OUTPUT_BLT_PIXEL color ) {
 	for(int i=0;i<12;i++){
 		for(int j=0;j<8;j++){
 			if(moji[arfa][i][j]!=0){draw_pixel(j+system3->cons->sp*8,i+system3->cons->ent,color);}
 		}
 	}
 	system3->cons->sp++;
-	return system3;
+	return;
 }
  struct SYSTEM3*putchar(unsigned short moji[][12][8], unsigned short cha, struct SYSTEM3 *system3, struct EFI_GRAPHICS_OUTPUT_BLT_PIXEL color ) {	
 	if (cha==L'\r') {print(moji,26,system3,black);}
@@ -1999,7 +1999,6 @@ void cha(int mode, struct SYSTEM3 *system3) {
 		}
 		print(moji,28,system3,white);
 		while (1) { 
-				puts(L"OK");
 				buf[n] = getc();
 				if (buf[n] == L'\r') {
 					system3->cons->ent += 12;
@@ -2018,10 +2017,10 @@ void cha(int mode, struct SYSTEM3 *system3) {
 					else {}
 				}
 				else {	
-					print(moji,L'A'-97,system3,white);
+					print(moji,97,system3,white);
 					n++;
 				}
-			}
+		}
 		cls();
 		system3->cons->sp=0;
 		system3->cons->ent=0;
