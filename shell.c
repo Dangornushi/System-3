@@ -245,7 +245,7 @@ struct SYSTEM3*le(unsigned short *file_name, unsigned short moji[][12][8], struc
 		}
 		if (ch == 8) {
 			system3->cons->sp--;
-			print(moji,26,c,black);
+			print(moji,26,system3,black);
 			system3->cons->sp--;
 			ch=L'\0';
 		}
