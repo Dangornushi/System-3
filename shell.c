@@ -1751,10 +1751,6 @@ void cha(int mode) {
 				console = print(moji,num-6, console,green);
 			}	
 		}
-		else if (!strcmp(L"gui", buf)) {
-			gui_mode(moji, console);
-			break;
-		}
 		else if (!strcmp(L"cls", buf)) {
 			console->ent = 0;
 			console->sp = 0;		
