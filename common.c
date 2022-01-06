@@ -38,12 +38,10 @@ unsigned short getc(void)
 	struct EFI_INPUT_KEY key;
 	unsigned long long waitidx;
 
-	ST->BootServices->WaitForEvent(1, &(ST->ConIn->WaitForKey),
-				       &waitidx);
+	ST->BootServices->WaitForEvent(1, &(ST->ConIn->WaitForKey), &waitidx);
 	while (ST->ConIn->ReadKeyStroke(ST->ConIn, &key));
 
-	return (key.UnicodeChar) ? key.UnicodeChar
-		: (key.ScanCode + SC_OFS);
+	return (key.UnicodeChar) ? key.UnicodeChar : (key.ScanCode + SC_OFS);
 }
 
 unsigned int gets(unsigned short *buf, unsigned int buf_size)
