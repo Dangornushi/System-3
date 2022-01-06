@@ -1997,8 +1997,8 @@ void cha(int mode, struct SYSTEM3 *system3) {
 			print(moji,put[ind]-97,system3,white);
 			ind++;
 		}
-		print(moji,28,system3,white);
 		puts("OK");
+		print(moji,28,system3,white);
 		while (1) { 
 				buf[n] = getc();
 				if (buf[n] == L'\r') {
