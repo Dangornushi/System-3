@@ -2226,34 +2226,42 @@ void cha(int mode) {
 void startup() {
 	unsigned long long status;
 	struct EFI_FILE_PROTOCOL *root;
-	unsigned long long buf_size;
-	unsigned char file_buf[MAX_FILE_BUF];
-	struct EFI_FILE_INFO *file_info;
-	int idx = 0;
-	int file_num;
-//	int line_counter = 0;
+	struct EFI_FILE_PROTOCOL *file;
+	unsigned long long buf_size = MAX_FILE_BUF;
+	unsigned short file_buf[MAX_FILE_BUF / 2];
 
 	status = SFSP->OpenVolume(SFSP, &root);
 	assert(status, L"SFSP->OpenVolume");
 
+	status = root->Open(root, &file, "set.conf", EFI_FILE_MODE_READ, 0);
+	assert(status, L"root->Open");
+
+	status = file->Read(file, &buf_size, (void *)file_buf);
+	assert(status, L"file->Read");
+
 	while (1) {
-		buf_size = MAX_FILE_BUF;
-		status = root->Read(root, &buf_size, (void *)file_buf);
-		assert(status, L"root->Read");
-		if (!buf_size) break;
-		file_info = (struct EFI_FILE_INFO *)file_buf;
-		strncpy(file_list[idx].name, file_info->FileName, MAX_FILE_NAME_LEN - 1);
-		file_list[idx].name[MAX_FILE_NAME_LEN - 1] = L'\0';
+
+		system3->back_color = black;
+		system3->char_color = green;
 		
 		if (idx == 0) {
-
+			if (strcmp(file_list[idx].name, L"r")) {
+				system3->char_color = red;
+			}
 		}
 
 		idx++;
 	}
 	file_num = idx;
+	for (int n=0;file_buf[n]!=L'\0';n++) {
+		system3 = putchar(moji,file_buf[n], system3, green);
+	}
 
+	file->Close(file);
 	root->Close(root);
+	system3->cons->sp=0;
+	system3->cons->ent+=12;
+
 }
 
 void shell(void)
