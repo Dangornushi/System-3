@@ -31,7 +31,7 @@ struct SYSTEM3*print(unsigned short moji[][12][8], unsigned int arfa, struct SYS
 	else if (cha==K_SPACE) { print(moji,K_SPACE,system3,black);}
 	//else if (cha > 60 && cha < 96) {print(moji,12/*cha-65*/,system3,color); }
 	else if (cha < 58) { print(moji,cha-3,system3,color); }
-	else if (cha < 96) { print(moji,0,system3,color); }//記号
+	else if (cha < 96) { print(moji,cha-9,system3,color); }//記号
 	else { print(moji,cha-97,system3,color);}
 	return system3;
 }
@@ -1994,7 +1994,7 @@ void cha(int mode, struct SYSTEM3 *system3) {
 		unsigned short put[] = {'p','a','s','s'};
 		int ind = 0;
 		for (;ind<4;) {
-				print(moji,put[ind],system3,white);
+				print(moji,put[ind]-97,system3,white);
 				ind++;
 		}
 		print(moji,28,system3,white);
