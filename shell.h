@@ -10,7 +10,7 @@ struct SYSTEM3 {
     struct EFI_GRAPHICS_OUTPUT_BLT_PIXEL char_color;
     struct EFI_GRAPHICS_OUTPUT_BLT_PIXEL back_color;
     struct CONSOLE *cons;
-}
+};
 
 void dialogue_get_filename(int idx);
 void pstat(void);
