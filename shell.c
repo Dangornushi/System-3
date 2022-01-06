@@ -871,8 +871,8 @@ void draw_tag(int w, unsigned short word[], unsigned short moji[][12][8]) {
 	
 } 
 
-/*
 struct COSNOLE *gui_mode(unsigned short moji[][12][8], struct SYSTEM3 *system3) {
+/*
 	unsigned long long status;
 	struct EFI_SIMPLE_POINTER_STATE s;
 	int px = 500, py = 500;
@@ -1230,8 +1230,9 @@ struct COSNOLE *gui_mode(unsigned short moji[][12][8], struct SYSTEM3 *system3) 
 			prev_lb = s.LeftButton;
 			prev_rb = s.RightButton;
 	}
-}
 */
+}
+
 void cha(int mode, struct SYSTEM3 *system3) {
 	cls();
 	int w = 8;
