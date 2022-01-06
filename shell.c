@@ -21,7 +21,7 @@ struct SYSTEM3*print(unsigned short moji[][12][8], unsigned int arfa, struct SYS
 		}
 	}
 	system3->cons->sp++;
-	return c;
+	return system3;
 }
  struct SYSTEM3*putchar(unsigned short moji[][12][8], unsigned short cha, struct SYSTEM3 *system3, struct EFI_GRAPHICS_OUTPUT_BLT_PIXEL color ) {	
 	if (cha==L'\r') {print(moji,26,system3,black);}
