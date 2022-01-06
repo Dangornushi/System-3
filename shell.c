@@ -1994,10 +1994,10 @@ void cha(int mode, struct SYSTEM3 *system3) {
 		unsigned short put[] = {'p','a','s','s'};
 		int ind = 0;
 		for (;ind<4;) {
-			system3 = print(moji,put[ind]-97,system3,white);
+			putchar(moji,put[ind],system3,white);
 			ind++;
 		}
-		system3 = print(moji,28,system3,white);
+		print(moji,28,system3,white);
 		while (1) { 
 				puts(L"OK");
 				buf[n] = getc();
@@ -2018,7 +2018,7 @@ void cha(int mode, struct SYSTEM3 *system3) {
 					else {}
 				}
 				else {	
-					print(moji,L"A",system3,white);
+					print(moji,L'A'-97,system3,white);
 					n++;
 				}
 			}
