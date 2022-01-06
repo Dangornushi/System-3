@@ -2017,7 +2017,7 @@ void cha(int mode, struct SYSTEM3 *system3) {
 					else {}
 				}
 				else {	
-					system3 = print(moji,27,system3,white);
+					system3 = print(moji,buf[n],system3,white);
 					n++;
 				}
 			}
