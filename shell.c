@@ -11,29 +11,54 @@
 #define K_SPACE 26
 
 
+struct CONSOLE {
+	unsigned int sp;
+	unsigned int ent;	
+};
 
 int to_int(unsigned short *str);
 
-struct SYSTEM3 *print(unsigned short moji[][12][8], unsigned int arfa, struct SYSTEM3 *system3, struct EFI_GRAPHICS_OUTPUT_BLT_PIXEL color ) {
+struct CONSOLE *print(unsigned short moji[][12][8], unsigned int arfa, struct CONSOLE *c, struct EFI_GRAPHICS_OUTPUT_BLT_PIXEL color ) {
 	for(int i=0;i<12;i++){
 		for(int j=0;j<8;j++){
-			if(moji[arfa][i][j]!=0){draw_pixel(j+system3->cons->sp*8,i+system3->cons->ent,color);}
+			if(moji[arfa][i][j]!=0){draw_pixel(j+c->sp*8,i+c->ent,color);}
 		}
 	}
-	system3->cons->sp++;
-	return system3;
+	c->sp++;
+	return c;
 }
- struct SYSTEM3*putchar(unsigned short moji[][12][8], unsigned short cha, struct SYSTEM3 *system3, struct EFI_GRAPHICS_OUTPUT_BLT_PIXEL color ) {	
-	if (cha==L'\r') {print(moji,26,system3,black);}
-	else if (cha==L'\n') {system3->cons->sp=0;system3->cons->ent+=12;}
-	else if (cha==8) { system3->cons->sp--;print(moji,K_SPACE,system3,black);system3->cons->sp--;}
-	else if (cha==L' ') { print(moji,K_SPACE,system3,black);}
-	else if (cha==K_SPACE) { print(moji,K_SPACE,system3,black);}
-	//else if (cha > 60 && cha < 96) {print(moji,12/*cha-65*/,system3,color); }
-	else if (cha < 58) { print(moji,cha-3,system3,color); }
-	else if (cha < 96) { print(moji,cha-9,system3,color); }//記号
-	else { print(moji,cha-97,system3,color);}
-	return system3;
+
+/*
+	else if (file_list[idx].name[i] > 60 && file_list[idx].name[i] < 96) {
+		sp = print(moji,file_list[idx].name[i]-65,sp,ent,green); }
+	else if (file_list[idx].name[i] < 96) { sp = print(moji,file_list[idx].name[i]-9,sp,ent,green); }
+	else { sp = print(moji,file_list[idx].name[i]-97,sp,ent,green);}
+
+			if (ch==L'\0') { break; }
+			else if (ch==L' ') { sp = print(moji,26,sp,ent,black);}
+			else if (ch > 60 && ch < 96) {	sp = print(moji,ch-65,sp,ent,green); }
+			else if (ch < 96) { sp = print(moji,ch-6,sp,ent,green); }
+			else { sp = print(moji,ch-97,sp,ent,green);}
+
+			if (ch==L'\0') { break; }
+			else if (ch==L' ') { sp = print(moji,26,sp,ent,black);}
+			else if (ch > 60 && ch < 96) {	sp = print(moji,ch-65,sp,ent,green); }
+			else if (ch < 96) { sp = print(moji,ch-6,sp,ent,green); }
+			else { sp = print(moji,ch-97,sp,ent,green);}
+			inp[i++] = ch;
+*/
+
+ struct CONSOLE *putchar(unsigned short moji[][12][8], unsigned short cha, struct CONSOLE *c, struct EFI_GRAPHICS_OUTPUT_BLT_PIXEL color ) {	
+	if (cha==L'\r') {c = print(moji,26,c,black);}
+	else if (cha==L'\n') {c->sp=0;c->ent+=12;}
+	else if (cha==8) { c->sp--;c = print(moji,K_SPACE,c,black);c->sp--;}
+	else if (cha==L' ') { c = print(moji,K_SPACE,c,black);}
+	else if (cha==K_SPACE) { c = print(moji,K_SPACE,c,black);}
+	else if (cha > 60 && cha < 96) {c = print(moji,cha-65,c,color); }
+	else if (cha < 58) { c = print(moji,cha-6,c,color); }
+	else if (cha < 96) { c = print(moji,cha-9,c,color); }
+	else { c = print(moji,cha-97,c,color);}
+	return c;
 }
 
 int icon_print(unsigned short icon[][30][24], unsigned int arfa, int sp, int ent, struct EFI_GRAPHICS_OUTPUT_BLT_PIXEL color ) {
@@ -62,6 +87,7 @@ void cls(void) {
 					draw_pixel(l,i,black);
 				}
 				if (l > 999) {
+					puts(L"");
 					l=0;
 					break;
 				}
@@ -208,7 +234,7 @@ void edit(unsigned short *file_name)
  *
 */
 
-struct SYSTEM3*le(unsigned short *file_name, unsigned short moji[][12][8], struct SYSTEM3 *system3) {
+struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], struct CONSOLE *c) {
 	unsigned long long status;
 	struct EFI_FILE_PROTOCOL *root;
 	struct EFI_FILE_PROTOCOL *file;
@@ -220,8 +246,8 @@ struct SYSTEM3*le(unsigned short *file_name, unsigned short moji[][12][8], struc
 	unsigned short *ch;
 	int idx = 0;
 	int file_num;
-	int sp = system3->cons->sp=0;
-	int ent = system3->cons->ent+=12;
+	int sp = c->sp=0;
+	int ent = c->ent+=12;
 
 	int k = 0;
 	int number = 0;
@@ -232,7 +258,7 @@ struct SYSTEM3*le(unsigned short *file_name, unsigned short moji[][12][8], struc
 	//warning msg
 	for (int o=0;;o++) {
 		if (buf[o]==L'\0') { break; }
-		else putchar(moji, buf[o], system3 ,green);
+		else c = putchar(moji, buf[o], c ,green);
 	}
 
 	//line num
@@ -243,13 +269,13 @@ struct SYSTEM3*le(unsigned short *file_name, unsigned short moji[][12][8], struc
 			break;
 		}
 		if (ch == 8) {
-			system3->cons->sp--;
-			print(moji,26,system3,black);
-			system3->cons->sp--;
+			c->sp--;
+			c = print(moji,26,c,black);
+			c->sp--;
 			ch=L'\0';
 		}
 		else {	
-			putchar(moji,ch,system3,green);
+			c = putchar(moji,ch,c,green);
 			num = ch;
 			num++;
 			
@@ -257,10 +283,10 @@ struct SYSTEM3*le(unsigned short *file_name, unsigned short moji[][12][8], struc
 
 	}
 
-	system3->cons->sp = 0;
-	system3->cons->ent+=12;
+	c->sp = 0;
+	c->ent+=12;
 
-	//line h
+	//line bunkatu
 	
 	status = SFSP->OpenVolume(SFSP, &root);
 	assert(status, L"SFSP->OpenVolume");
@@ -291,50 +317,50 @@ struct SYSTEM3*le(unsigned short *file_name, unsigned short moji[][12][8], struc
 	root->Close(root);
 	
 	for (int x=0;inp[x]!=L'\0';x++) {
-		putchar(moji,inp[x],system3,green);
+		c = putchar(moji,inp[x],c,green);
 	}
 	
-	system3->cons->sp-=2;
+	c->sp-=2;
 	
 	i = n2;
 	
 	while (TRUE) {
-		putchar(moji,K_SPACE,system3,black);
-		system3->cons->sp--;
-		putchar(moji,inp[i-1],system3,green);
+		c = putchar(moji,K_SPACE,c,black);
+		c->sp--;
+		c = putchar(moji,inp[i-1],c,green);
 	
-		print(moji,K_SPACE,system3,green);
+		c = print(moji,K_SPACE,c,green);
 		
-		putchar(moji,K_SPACE,system3,black);
-		system3->cons->sp-=2;
+		c = putchar(moji,K_SPACE,c,black);
+		c->sp-=2;
 	
 		ch = getc();
 	
 		if (ch == L'\r') {
-			system3->cons->sp=0;
-			system3->cons->ent+=12;
+			c->sp=0;
+			c->ent+=12;
 			break;
 		}
 	
 		if (ch == 8) {
-			system3->cons->sp--;
-			print(moji,26,system3,black);
-			system3->cons->sp-=2;
+			c->sp--;
+			c = print(moji,26,c,black);
+			c->sp-=2;
 			i--;
 			ch=0;
 		}
 	
 		else {	
-			putchar(moji,ch,system3,green);
-			system3->cons->sp--;
+			c = putchar(moji,ch,c,green);
+			c->sp--;
 			inp[i] = ch;
 			i++;
 		}
 
 	}
 
-	system3->cons->sp = 0;
-	system3->cons->ent+=12;
+	c->sp = 0;
+	c->ent+=12;
 
 	inp[i] = L'\0';
 
@@ -354,9 +380,9 @@ struct SYSTEM3*le(unsigned short *file_name, unsigned short moji[][12][8], struc
 	status = SFSP->OpenVolume(SFSP, &root);
 	assert(status, L"SFSP->OpenVolume");
 
-	status = root->Open(root, &file, file_name, 
-						EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE | \ 
-								EFI_FILE_MODE_CREATE, 0);
+	status = root->Open(root, &file, file_name,
+			    EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE | \
+			    EFI_FILE_MODE_CREATE, 0);
 	assert(status, L"root->Open");
 
 	status = file->Write(file, &buf_size, (void *)file_buf);
@@ -367,10 +393,10 @@ struct SYSTEM3*le(unsigned short *file_name, unsigned short moji[][12][8], struc
 	file->Close(file);
 	root->Close(root);
 
-	system3->cons->sp = 0;
-	system3->cons->ent = ent+=12;
+	c->sp = 0;
+	c->ent = ent+=12;
 
-	return system3;
+	return c;
 }
 
 void cat(unsigned short *file_name) {}
@@ -749,7 +775,7 @@ void edit_mode(unsigned short* file_name, unsigned short moji[][12][8]) {
 		sp--;
 		sp = putchar(moji,file_buf[n-1],sp,ent,green);
 
-		print(moji,K_SPACE,sp,ent,green);
+		sp = print(moji,K_SPACE,sp,ent,green);
 		
 		sp = putchar(moji,K_SPACE,sp,ent,black);
 		sp--;
@@ -758,7 +784,7 @@ void edit_mode(unsigned short* file_name, unsigned short moji[][12][8]) {
 		sp--;
 
 		if (!strcmp(inp,L"i")) {
-			print(moji,K_SPACE,sp,ent,green);
+			sp = print(moji,K_SPACE,sp,ent,green);
 			sp--;
 			while (1) {
 				ch = getc();
@@ -773,21 +799,21 @@ void edit_mode(unsigned short* file_name, unsigned short moji[][12][8]) {
 				}
 				else if (ch == 8 && sp>-1) {
 					sp--;
-					print(moji,K_SPACE,sp,ent,black);
+					sp = print(moji,K_SPACE,sp,ent,black);
 					n--;
 					ch=0;
 					sp-=2;
-					print(moji,K_SPACE,sp,ent,green);
+					sp = print(moji,K_SPACE,sp,ent,green);
 //					sp--;
 				}
 				else {	
 					sp--;
-					print(moji,K_SPACE,sp,ent,black);
+					sp = print(moji,K_SPACE,sp,ent,black);
 					sp--;
 					sp = putchar(moji,ch,sp,ent,green);
 					file_buf[n] = ch;
 					n++;
-					print(moji,K_SPACE,sp,ent,green);
+					sp = print(moji,K_SPACE,sp,ent,green);
 //					sp--;
 				}
 			}
@@ -811,7 +837,7 @@ void edit_mode(unsigned short* file_name, unsigned short moji[][12][8]) {
 			file->Close(file);
 			root->Close(root);
 
-//			le(file_name,moji, system3);
+//			le(file_name,moji, console);
 			
 			edit_mode(file_name, moji);
 			return;
@@ -870,8 +896,7 @@ void draw_tag(int w, unsigned short word[], unsigned short moji[][12][8]) {
 	
 } 
 
-struct COSNOLE *gui_mode(unsigned short moji[][12][8], struct SYSTEM3 *system3) {
-/*
+struct COSNOLE *gui_mode(unsigned short moji[][12][8], struct CONSOLE *c) {
 	unsigned long long status;
 	struct EFI_SIMPLE_POINTER_STATE s;
 	int px = 500, py = 500;
@@ -1022,7 +1047,7 @@ struct COSNOLE *gui_mode(unsigned short moji[][12][8], struct SYSTEM3 *system3) 
 		ST->BootServices->WaitForEvent(1, &(SPP->WaitForInput), &waitidx);
 		status = SPP->GetState(SPP, &s);
 
-		/* 右クリックの実行済フラグをクリア
+		/* 右クリックの実行済フラグをクリア */
 		executed_rb = FALSE;
 			//マウスカーソル描画 
 			for ( int i=0;i<7;i++) { 
@@ -1042,11 +1067,11 @@ struct COSNOLE *gui_mode(unsigned short moji[][12][8], struct SYSTEM3 *system3) 
 		
 			//ディスクモード
 			struct RECT disk = {10, 10, 20, 30};
-			system3->cons->sp = icon_print(icon,0,1,8,white);	
+			c->sp = icon_print(icon,0,1,8,white);	
 
-			//system3モード
+			//consoleモード
 			struct RECT cons = {30, 10, 20, 30};
-			system3->cons->sp = icon_print(icon,2,8,8,white);	
+			c->sp = icon_print(icon,2,8,8,white);	
 			
 			k=0;
 			int j=0;
@@ -1070,7 +1095,7 @@ struct COSNOLE *gui_mode(unsigned short moji[][12][8], struct SYSTEM3 *system3) 
 				}
 			}	
 			
-			/* マウスカーソル座標更新 
+			/* マウスカーソル座標更新 */
 			px += s.RelativeMovementX >> 13;
 			if (px < 0)
 				px = 0;
@@ -1152,34 +1177,34 @@ struct COSNOLE *gui_mode(unsigned short moji[][12][8], struct SYSTEM3 *system3) 
 				for (int idx=0;idx<ls();idx++) {
 					w = ((disk_window.w-300)+32+idx*32)+16;
 					h = disk_window.h-200+30;
-					system3->cons->sp = w/8;
+					c->sp = w/8;
 					tmp = icon_print(icon,1,w/8, h, black);
 					for (int i=0;i<MAX_FILE_NAME_LEN-1;i++) {
 						if (i>2) break;
 						if (file_list[idx].name[i]==L'\0') { break; }
 						else if (file_list[idx].name[i] > 60 && file_list[idx].name[i] < 96) {
-							print(moji,file_list[idx].name[i]-65,c/*sp,h+40,green); }
-						else if (file_list[idx].name[i] < 96) { print(moji,file_list[idx].name[i]-9,c/*sp,h+40,green); }
-						else { print(moji,file_list[idx].name[i]-97,c/*sp,h+40,green);}
+							c = print(moji,file_list[idx].name[i]-65,c/*sp,h+40*/,green); }
+						else if (file_list[idx].name[i] < 96) { c = print(moji,file_list[idx].name[i]-9,c/*sp,h+40*/,green); }
+						else { c = print(moji,file_list[idx].name[i]-97,c/*sp,h+40*/,green);}
 					}	
 					struct RECT file = {w, h, 20, 30};
 					sp=0;
 					if (is_in_rect(px, py, file) ) {
-						for (int i=0;i<11;i++) print(moji,26,c/*sp,440,black);
-						system3->cons->sp = 0;	
+						for (int i=0;i<11;i++) c = print(moji,26,c/*sp,440*/,black);
+						c->sp = 0;	
 						for (int i=0;i<11;i++) {
 							if (file_list[idx].name[i]==L'\0') { break; }
 							else if (file_list[idx].name[i] > 60 && file_list[idx].name[i] < 96) {
-								print(moji,file_list[idx].name[i]-65,c/*sp,440,green); }
+								c = print(moji,file_list[idx].name[i]-65,c/*sp,440*/,green); }
 							else if (file_list[idx].name[i] < 96) { 
-								print(moji,file_list[idx].name[i]-9,c/*sp,440,green); }
-							else { print(moji,file_list[idx].name[i]-97,c/*sp,440,green);}
+								c = print(moji,file_list[idx].name[i]-9,c/*sp,440*/,green); }
+							else { c = print(moji,file_list[idx].name[i]-97,c/*sp,440*/,green);}
 						}
 					}
 				}
 				struct RECT close = {disk_window.w-300+14, disk_window.h-200+6, 10, 14,};
 				draw_rect(close,white);
-				print(moji,L'c'-97,c/*((disk_window.w-300)+16)/8,disk_window.h-200+8,green);
+				print(moji,L'c'-97,c/*((disk_window.w-300)+16)/8,disk_window.h-200+8*/,green);
 				if (is_in_rect(px,py,close) && s.LeftButton) {				
 					k=0;
 					for (int i = 0;i < 200;i++) {
@@ -1226,29 +1251,60 @@ struct COSNOLE *gui_mode(unsigned short moji[][12][8], struct SYSTEM3 *system3) 
 			if (is_in_rect(px, py, r) && prev_lb && !s.LeftButton) {
 				break;
 			}
+			//
+
+
+/*			if (!s.LeftButton && px > disk_window.w && py >disk_window.h) {
+				while (s.LeftButton) {};
+			}
+*/
+
+			/* マウスの左右ボタンの前回の状態を更新 */	
 			prev_lb = s.LeftButton;
 			prev_rb = s.RightButton;
+
+			/*if (!s.RightButton) {
+				// アイコン外を右クリックした場合 
+				dialogue_get_filename(file_num);
+				cls();
+				edit(file_list[file_num].name);
+			}*/
+
+			/* ファイルアイコン処理ループ */
+			/*for (idx = 0; idx < file_num; idx++) {
+				if (is_in_rect(px, py, file_list[idx].rect)) {
+					if (!file_list[idx].is_highlight) {
+						draw_rect(file_list[idx].rect, yellow);
+						file_list[idx].is_highlight = TRUE;
+					}
+					if (prev_lb && !s.LeftButton) {
+						cat_gui(file_list[idx].name);
+					}
+					if (prev_rb && !s.RightButton) {
+						edit(file_list[idx].name);
+					}
+				}	
+			}*/
 	}
-*/
 }
 
-void cha(int mode, struct SYSTEM3 *system3) {
+void cha(int mode) {
 	cls();
 	int w = 8;
 	int h = 12;
 	int list = 0;
 	static unsigned short moji[][12][8] = {
 		{//A
-			{0,0,0,1,1,0,0,0}, 
-			{0,0,0,1,1,0,0,0}, 
-			{0,0,1,0,0,1,0,0},
-			{0,0,1,0,0,1,0,0}, 
-			{0,0,1,0,0,1,0,0}, 
-			{0,1,1,1,1,1,1,0},     
-			{0,1,1,1,1,1,1,0}, 
-			{0,1,0,0,0,0,1,0}, 
+		        {0,0,0,1,1,0,0,0}, 
+		        {0,0,0,1,1,0,0,0}, 
+		        {0,0,1,0,0,1,0,0}, 
+		        {0,0,1,0,0,1,0,0}, 
+		        {0,0,1,0,0,1,0,0}, 
+		        {0,1,1,1,1,1,1,0}, 
+		        {0,1,1,1,1,1,1,0}, 
+		        {0,1,0,0,0,0,1,0}, 
 			{0,1,0,0,0,0,1,0},
-			{1,1,1,0,0,1,1,1}, },
+		        {1,1,1,0,0,1,1,1}, },
 		{//B
 			{0,1,1,1,1,1,0,0},
 			{0,1,1,1,1,1,0,0},
@@ -1613,7 +1669,6 @@ void cha(int mode, struct SYSTEM3 *system3) {
 			{0,0,1,1,0,0,0,0},
 			{0,1,1,0,0,0,0,0},
 			{0,0,0,0,0,0,0,0},
-		},
 		{
 			{0,0,0,0,0,0,0,0},
 			{0,0,0,0,0,0,0,0},
@@ -1654,7 +1709,7 @@ void cha(int mode, struct SYSTEM3 *system3) {
 			{0,0,0,1,1,0,0,0},	
 			{0,0,0,0,0,0,0,0},	
 			{0,0,0,0,0,0,0,0},	
-			{0,0,0,0,0,0,0,0}, 
+			{0,0,0,0,0,0,0,0}, },
 		},
 		{
 			{0,0,0,0,0,0,0,0},
@@ -1980,57 +2035,59 @@ void cha(int mode, struct SYSTEM3 *system3) {
 		},
 	};
 
-	unsigned short buf[MAX_COMMAND_LEN/2];
+	unsigned short buf[MAX_COMMAND_LEN];
 	unsigned int sp = 0;
 	unsigned int ent = 0;
 	int n = 0;
 	unsigned short *s1 = L"\0";
-
-	system3->cons->sp = 0;
-	system3->cons->ent = 0;	
+ 
+	struct CONSOLE c, *console;
+	console = &c;
+	console->sp = 0;
+	console->ent = 0;	
 
 	while (1) {	
 		unsigned short put[] = {'p','a','s','s'};
-		for (int ind = 0;ind<4;ind++) {
-			system3 = print(moji,put[ind]-97,system3,white);
+		int ind = 0;
+		for (;ind<4;) {
+				console = print(moji,put[ind]-97,console,white);
+				ind++;
 		}
-		
-		system3 = print(moji,28,system3,white);
-		
-		while (1) { 
+			console = print(moji,28,console,white);
+			while (1) { 
 				buf[n] = getc();
 				if (buf[n] == L'\r') {
-					system3->cons->ent += 12;
-					system3->cons->sp = 0;	
+					console->ent += 12;
+					console->sp = 0;	
 					buf[n] = L'\0';
 					break;
 				}
 				if (buf[n] == 8) {
 					if (sp > 2) {
-						system3->cons->sp--;
-						system3 = print(moji,26,system3,black);
-						system3->cons->sp--;
+						console->sp--;
+						console = print(moji,26,console,black);
+						console->sp--;
 						n--;
 						buf[n]=0;
 					}
+					else {}
 				}
 				else {	
-					system3 = print(moji,27,system3,white);
+					console = print(moji,27,console,white);
 					n++;
 				}
-		}
+			}
 		cls();
-		system3->cons->sp=0;
-		system3->cons->ent=0;
+		console->sp=0;
+		console->ent=0;
 		n=0;
-		break;
 		if (!strcmp(L"dango1027",buf)) {break;}
 	}
 	
 	unsigned short cha[] = {'s','y','s','t','e','m','3','\n','m','a','d','e',' ','b','y',' ','d','a','n','g','o','m','u','s','h','i','\n','\0'};
 
 	for (int i=0;cha[i]!=L'\0';i++) {
-		system3 = putchar(moji, cha[i], system3, green);
+		console = putchar(moji, cha[i], console, green);
 	}
 	
 	while (1) {
@@ -2039,25 +2096,25 @@ void cha(int mode, struct SYSTEM3 *system3) {
 		unsigned short put[] = {'r','o','o','t'};
 		int ind = 0;
 		for (;ind<4;) {
-			print(moji,put[ind]-97, system3,green);
+			console = print(moji,put[ind]-97, console,green);
 			ind++;
 		}
 
-		print(moji,28, system3,green);
-		print(moji, 26, system3, black);
+		console = print(moji,28, console,green);
+		console = print(moji, 26, console, black);
 
 		for (n = 0; n < MAX_COMMAND_LEN - 1;) {
 			buf[n] = getc();
 			if (buf[n] == L'\r') {
-				system3->cons->ent += 12;
-				system3->cons->sp = 0;
+				console->ent += 12;
+				console->sp = 0;
 				break;
 			}
 			if (buf[n] == 8) {
-				if (system3->cons->sp > 2) {
-					system3->cons->sp--;
-					print(moji, 26, system3, black);
-					system3->cons->sp--;
+				if (console->sp > 2) {
+					console->sp--;
+					console = print(moji, 26, console, black);
+					console->sp--;
 					n--;
 					buf[n]=0;
 				}
@@ -2065,18 +2122,20 @@ void cha(int mode, struct SYSTEM3 *system3) {
 			}
 			else {	
 				if (buf[n]==L'\0') { break; }
-				else system3=putchar(moji,buf[n],system3,green);
+				else console=putchar(moji,buf[n],console,green);
 				n++;
 			}
 		}
 		buf[n] = L'\0';
-		
-		if (!strcmp(L"edit ", command(s1,buf,5))) {
+ 
+		if (!strcmp(L"rogo", buf)) {
+		}
+		else if (!strcmp(L"edit ", command(s1,buf,5))) {
 			cls();
 			edit_mode(buf+5,moji);
 			cls();
-			system3->cons->sp=0;
-			system3->cons->ent=0;
+			console->sp=0;
+			console->ent=0;
 		}
 		
 		else if (!strcmp(L"exit",buf))
@@ -2084,16 +2143,16 @@ void cha(int mode, struct SYSTEM3 *system3) {
 		else if (!strcmp(L"key",buf)) {
 			while (1) {
 				unsigned short num = getc();
-				print(moji,num-6, system3,green);
+				console = print(moji,num-6, console,green);
 			}	
 		}
 		else if (!strcmp(L"gui", buf)) {
-			gui_mode(moji, system3);
+			gui_mode(moji, console);
 			break;
 		}
 		else if (!strcmp(L"cls", buf)) {
-			system3->cons->ent = 0;
-			system3->cons->sp = 0;		
+			console->ent = 0;
+			console->sp = 0;		
 			int wait = 0;
 			int l = 0;
 			for (int x = 0;x < 1000;x++) {		
@@ -2143,15 +2202,15 @@ void cha(int mode, struct SYSTEM3 *system3) {
 					file_list[idx].name[MAX_FILE_NAME_LEN - 1] = L'\0';
 
 					for (int i=0;i<MAX_FILE_NAME_LEN-1;i++) {
-						system3=putchar(moji, file_list[idx].name[i],system3,green);
+						console=putchar(moji, file_list[idx].name[i],console,green);
 						if (file_list[idx].name[i]==L'\0') { break; }
 					}	
 					idx++;
-					system3->cons->sp = 0;
-					system3->cons->ent+=12;
+					console->sp = 0;
+					console->ent+=12;
 				}
-				system3->cons->sp=0;
-				system3->cons->ent+=12;
+				console->sp=0;
+				console->ent+=12;
 				file_num = idx;
 				root->Close(root);
 			}
@@ -2162,10 +2221,10 @@ void cha(int mode, struct SYSTEM3 *system3) {
 		else if (!strcmp(L"echo ", command(s1,buf,5))) {
 			unsigned short echo[100];
 			for (int i=0;buf[i+5]!=L'\0';i++) {
-				system3= putchar(moji, buf[i+5], system3, green);
+				console= putchar(moji, buf[i+5], console, green);
 			}	
-			system3->cons->ent += 12;
-			system3->cons->sp = 0;
+			console->ent += 12;
+			console->sp = 0;
 		}
 		else if (!strcmp(L"touch ", command(s1,buf,6))) 
 			touch(buf+6);
@@ -2186,23 +2245,23 @@ void cha(int mode, struct SYSTEM3 *system3) {
 			assert(status, L"file->Read");
 
 			for (int n=0;file_buf[n]!=L'\0';n++) {
-				system3 = putchar(moji,file_buf[n], system3, green);
+				console = putchar(moji,file_buf[n], console, green);
 			}
 
 			file->Close(file);
 			root->Close(root);
-			system3->cons->sp=0;
-			system3->cons->ent+=12;
+			console->sp=0;
+			console->ent+=12;
 		}
 
 		else if (!strcmp(L"proto ",command(s1,buf,6))) {
-			system3->cons->sp=0;
-			system3->cons->ent=0;
+			console->sp=0;
+			console->ent=0;
 			cls();
 			proto(buf+6);
 		}
 		else if (!strcmp(L"le ",command(s1,buf,3))) {
-			system3 = le(buf+3,moji, system3);
+			console = le(buf+3,moji, console);
 		}
 		//else if(!strcmp(L"vse ",command(s1,buf,4))) 
 		//	bse(buf+4);
@@ -2211,55 +2270,13 @@ void cha(int mode, struct SYSTEM3 *system3) {
 			unsigned short err[] = {'e','r','r',' ','i','n','v','i','d',' ', 'c','o','m','m','a','n','d', '\0'};
 			
 			for (int i=0;err[i]!=L'\0';i++) { 
-				print(moji,err[i]-97,system3,green); 
+				console = print(moji,err[i]-97,console,green); 
 			}
-			print(moji,26, system3,black);
-			system3->cons->ent += 12;
-			system3->cons->sp = 0;
+			console = print(moji,26, console,black);
+			console->ent += 12;
+			console->sp = 0;
 		}	
 	}
-}
-
-void startup(struct SYSTEM3 *system3) {
-	/*
-	unsigned long long status;
-	struct EFI_FILE_PROTOCOL *root;
-	struct EFI_FILE_PROTOCOL *file;
-	unsigned long long buf_size = MAX_FILE_BUF;
-	unsigned short file_buf[MAX_FILE_BUF / 2];
-
-	status = SFSP->OpenVolume(SFSP, &root);
-	assert(status, L"SFSP->OpenVolume");
-
-	status = root->Open(root, &file, "set.conf", EFI_FILE_MODE_READ, 0);
-	assert(status, L"root->Open");
-
-	status = file->Read(file, &buf_size, (void *)file_buf);
-	assert(status, L"file->Read");
-
-	while (1) {
-
-		system3->back_color = black;
-		system3->char_color = green;
-		
-		if (idx == 0) {
-			if (strcmp(file_list[idx].name, L"r")) {
-				system3->char_color = red;
-			}
-		}
-
-		idx++;
-	}
-	file_num = idx;
-	for (int n=0;file_buf[n]!=L'\0';n++) {
-		system3 = putchar(moji,file_buf[n], system3, green);
-	}
-
-	file->Close(file);
-	root->Close(root);
-	system3->cons->sp=0;
-	system3->cons->ent+=12;
-*/
 }
 
 void shell(void)
@@ -2268,10 +2285,8 @@ void shell(void)
 	struct RECT r = {10, 10, 100, 200};
 	unsigned char is_exit = FALSE;
 	unsigned short *s1 = L"\0";
-	struct SYSTEM3 sys3, *system3;
-	system3 = &sys3;
 
 	//rogin();
 	int mode = 0;
-	cha(mode, system3);
+	cha(mode);
 }
