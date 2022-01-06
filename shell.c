@@ -233,7 +233,7 @@ struct SYSTEM3*le(unsigned short *file_name, unsigned short moji[][12][8], struc
 	//warning msg
 	for (int o=0;;o++) {
 		if (buf[o]==L'\0') { break; }
-		else c = putchar(moji, buf[o], c ,green);
+		else putchar(moji, buf[o], system3 ,green);
 	}
 
 	//line num
@@ -1986,8 +1986,6 @@ void cha(int mode) {
 	int n = 0;
 	unsigned short *s1 = L"\0";
 
-	struct SYSTEM3 sys3, *system3;
-	system3 = &sys3;
 	system3->cons->sp = 0;
 	system3->cons->ent = 0;	
 
@@ -2222,7 +2220,8 @@ void cha(int mode) {
 	}
 }
 
-void startup() {
+void startup(struct SYSTEM3 *system3) {
+	/*
 	unsigned long long status;
 	struct EFI_FILE_PROTOCOL *root;
 	struct EFI_FILE_PROTOCOL *file;
@@ -2260,7 +2259,7 @@ void startup() {
 	root->Close(root);
 	system3->cons->sp=0;
 	system3->cons->ent+=12;
-
+*/
 }
 
 void shell(void)
@@ -2269,6 +2268,8 @@ void shell(void)
 	struct RECT r = {10, 10, 100, 200};
 	unsigned char is_exit = FALSE;
 	unsigned short *s1 = L"\0";
+	struct SYSTEM3 sys3, *system3;
+	system3 = &sys3;
 
 	//rogin();
 	int mode = 0;
