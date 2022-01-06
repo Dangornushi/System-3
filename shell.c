@@ -2040,12 +2040,12 @@ void cha(int mode, struct SYSTEM3 *system3) {
 		unsigned short put[] = {'r','o','o','t'};
 		int ind = 0;
 		for (;ind<4;) {
-			system3 = print(moji,put[ind]-97, system3,green);
+			print(moji,put[ind]-97, system3,green);
 			ind++;
 		}
 
-		system3 = print(moji,28, system3,green);
-		system3 = print(moji, 26, system3, black);
+		print(moji,28, system3,green);
+		print(moji, 26, system3, black);
 
 		for (n = 0; n < MAX_COMMAND_LEN - 1;) {
 			buf[n] = getc();
@@ -2057,7 +2057,7 @@ void cha(int mode, struct SYSTEM3 *system3) {
 			if (buf[n] == 8) {
 				if (system3->cons->sp > 2) {
 					system3->cons->sp--;
-					system3 = print(moji, 26, system3, black);
+					print(moji, 26, system3, black);
 					system3->cons->sp--;
 					n--;
 					buf[n]=0;
@@ -2085,7 +2085,7 @@ void cha(int mode, struct SYSTEM3 *system3) {
 		else if (!strcmp(L"key",buf)) {
 			while (1) {
 				unsigned short num = getc();
-				system3 = print(moji,num-6, system3,green);
+				print(moji,num-6, system3,green);
 			}	
 		}
 		else if (!strcmp(L"gui", buf)) {
@@ -2212,9 +2212,9 @@ void cha(int mode, struct SYSTEM3 *system3) {
 			unsigned short err[] = {'e','r','r',' ','i','n','v','i','d',' ', 'c','o','m','m','a','n','d', '\0'};
 			
 			for (int i=0;err[i]!=L'\0';i++) { 
-				system3 = print(moji,err[i]-97,system3,green); 
+				print(moji,err[i]-97,system3,green); 
 			}
-			system3 = print(moji,26, system3,black);
+			print(moji,26, system3,black);
 			system3->cons->ent += 12;
 			system3->cons->sp = 0;
 		}	
