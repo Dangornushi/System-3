@@ -250,7 +250,7 @@ struct SYSTEM3*le(unsigned short *file_name, unsigned short moji[][12][8], struc
 			ch=L'\0';
 		}
 		else {	
-			c = putchar(moji,ch,c,green);
+			putchar(moji,ch,system3,green);
 			num = ch;
 			num++;
 			
