@@ -62,7 +62,6 @@ void cls(void) {
 					draw_pixel(l,i,black);
 				}
 				if (l > 999) {
-					puts(L"");
 					l=0;
 					break;
 				}
