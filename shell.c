@@ -11,10 +11,6 @@
 #define K_SPACE 26
 
 
-struct CONSOLE {
-	unsigned int sp;
-	unsigned int ent;	
-};
 
 int to_int(unsigned short *str);
 
@@ -896,7 +892,7 @@ void draw_tag(int w, unsigned short word[], unsigned short moji[][12][8]) {
 	
 } 
 
-void cha(int mode) {
+void cha(int mode, struct CONSOLE *console) {
 	cls();
 	int w = 8;
 	int h = 12;
@@ -1605,12 +1601,7 @@ void cha(int mode) {
 	unsigned int ent = 0;
 	int n = 0;
 	unsigned short *s1 = L"\0";
- 
-	struct CONSOLE c, *console;
-	console = &c;
-	console->sp = 0;
-	console->ent = 0;	
-
+	
 	while (1) {	
 		unsigned short put[] = {'p','a','s','s'};
 		int ind = 0;
@@ -1840,6 +1831,12 @@ void cha(int mode) {
 	}
 }
 
+struct CONSOLE *startup(struct CONSOLE *cons) {
+	cons->bug_color = black;
+	cons->char_color = green;
+	return cons;
+}
+
 void shell(void)
 {
 	unsigned short com[MAX_COMMAND_LEN];
@@ -1849,5 +1846,9 @@ void shell(void)
 
 	//rogin();
 	int mode = 0;
-	cha(mode);
+	struct CONSOLE c, *cons;
+	cons = &c;
+	cons->sp = 0;
+	cons->ent = 0;
+	cha(mode, cons);
 }
