@@ -1832,7 +1832,7 @@ void cha(int mode, struct CONSOLE *console) {
 }
 
 struct CONSOLE *startup(struct CONSOLE *cons) {
-	cons->bug_color = black;
+	cons->back_color = black;
 	cons->char_color = green;
 	return cons;
 }
