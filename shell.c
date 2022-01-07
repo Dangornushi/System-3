@@ -26,21 +26,21 @@ struct CONSOLE *print(unsigned short moji[][12][8], unsigned int arfa, struct CO
 
 /*
 	else if (file_list[idx].name[i] > 60 && file_list[idx].name[i] < 96) {
-		sp = print(moji,file_list[idx].name[i]-65,sp,ent,green); }
-	else if (file_list[idx].name[i] < 96) { sp = print(moji,file_list[idx].name[i]-9,sp,ent,green); }
-	else { sp = print(moji,file_list[idx].name[i]-97,sp,ent,green);}
+		sp = print(moji,file_list[idx].name[i]-65,sp,ent,console->char_color); }
+	else if (file_list[idx].name[i] < 96) { sp = print(moji,file_list[idx].name[i]-9,sp,ent,console->char_color); }
+	else { sp = print(moji,file_list[idx].name[i]-97,sp,ent,console->char_color);}
 
 			if (ch==L'\0') { break; }
 			else if (ch==L' ') { sp = print(moji,26,sp,ent,black);}
-			else if (ch > 60 && ch < 96) {	sp = print(moji,ch-65,sp,ent,green); }
-			else if (ch < 96) { sp = print(moji,ch-6,sp,ent,green); }
-			else { sp = print(moji,ch-97,sp,ent,green);}
+			else if (ch > 60 && ch < 96) {	sp = print(moji,ch-65,sp,ent,console->char_color); }
+			else if (ch < 96) { sp = print(moji,ch-6,sp,ent,console->char_color); }
+			else { sp = print(moji,ch-97,sp,ent,console->char_color);}
 
 			if (ch==L'\0') { break; }
 			else if (ch==L' ') { sp = print(moji,26,sp,ent,black);}
-			else if (ch > 60 && ch < 96) {	sp = print(moji,ch-65,sp,ent,green); }
-			else if (ch < 96) { sp = print(moji,ch-6,sp,ent,green); }
-			else { sp = print(moji,ch-97,sp,ent,green);}
+			else if (ch > 60 && ch < 96) {	sp = print(moji,ch-65,sp,ent,console->char_color); }
+			else if (ch < 96) { sp = print(moji,ch-6,sp,ent,console->char_color); }
+			else { sp = print(moji,ch-97,sp,ent,console->char_color);}
 			inp[i++] = ch;
 */
 
@@ -254,7 +254,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	//warning msg
 	for (int o=0;;o++) {
 		if (buf[o]==L'\0') { break; }
-		else c = putchar(moji, buf[o], c ,green);
+		else c = putchar(moji, buf[o], c ,console->char_color);
 	}
 
 	//line num
@@ -271,7 +271,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			ch=L'\0';
 		}
 		else {	
-			c = putchar(moji,ch,c,green);
+			c = putchar(moji,ch,c,console->char_color);
 			num = ch;
 			num++;
 			
@@ -313,7 +313,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	root->Close(root);
 	
 	for (int x=0;inp[x]!=L'\0';x++) {
-		c = putchar(moji,inp[x],c,green);
+		c = putchar(moji,inp[x],c,console->char_color);
 	}
 	
 	c->sp-=2;
@@ -323,9 +323,9 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	while (TRUE) {
 		c = putchar(moji,K_SPACE,c,black);
 		c->sp--;
-		c = putchar(moji,inp[i-1],c,green);
+		c = putchar(moji,inp[i-1],c,console->char_color);
 	
-		c = print(moji,K_SPACE,c,green);
+		c = print(moji,K_SPACE,c,console->char_color);
 		
 		c = putchar(moji,K_SPACE,c,black);
 		c->sp-=2;
@@ -347,7 +347,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 		}
 	
 		else {	
-			c = putchar(moji,ch,c,green);
+			c = putchar(moji,ch,c,console->char_color);
 			c->sp--;
 			inp[i] = ch;
 			i++;
@@ -744,7 +744,7 @@ void edit_mode(unsigned short* file_name, unsigned short moji[][12][8]) {
 			ent_c=0;
 		}
 		else { 
-			sp = putchar(moji,file_0[i],sp,ent,green);
+			sp = putchar(moji,file_0[i],sp,ent,console->char_color);
 			file_buf[i]=file_0[i];
 			ent_c++;
 		}
@@ -762,25 +762,25 @@ void edit_mode(unsigned short* file_name, unsigned short moji[][12][8]) {
 		putchar(moji,K_SPACE,1,456,black);
 		putchar(moji,*inp,1,456,white);
 		putchar(moji,K_SPACE,10,456,black);
-		putchar(moji,file_buf[n+1],10,456,green);
+		putchar(moji,file_buf[n+1],10,456,console->char_color);
 
 		*inp = getc();
 
 		sp--;
 		sp = putchar(moji,K_SPACE,sp,ent,black);
 		sp--;
-		sp = putchar(moji,file_buf[n-1],sp,ent,green);
+		sp = putchar(moji,file_buf[n-1],sp,ent,console->char_color);
 
-		sp = print(moji,K_SPACE,sp,ent,green);
+		sp = print(moji,K_SPACE,sp,ent,console->char_color);
 		
 		sp = putchar(moji,K_SPACE,sp,ent,black);
 		sp--;
-		sp = putchar(moji,file_buf[n+1],sp,ent,green);	
+		sp = putchar(moji,file_buf[n+1],sp,ent,console->char_color);	
 
 		sp--;
 
 		if (!strcmp(inp,L"i")) {
-			sp = print(moji,K_SPACE,sp,ent,green);
+			sp = print(moji,K_SPACE,sp,ent,console->char_color);
 			sp--;
 			while (1) {
 				ch = getc();
@@ -799,17 +799,17 @@ void edit_mode(unsigned short* file_name, unsigned short moji[][12][8]) {
 					n--;
 					ch=0;
 					sp-=2;
-					sp = print(moji,K_SPACE,sp,ent,green);
+					sp = print(moji,K_SPACE,sp,ent,console->char_color);
 //					sp--;
 				}
 				else {	
 					sp--;
 					sp = print(moji,K_SPACE,sp,ent,black);
 					sp--;
-					sp = putchar(moji,ch,sp,ent,green);
+					sp = putchar(moji,ch,sp,ent,console->char_color);
 					file_buf[n] = ch;
 					n++;
-					sp = print(moji,K_SPACE,sp,ent,green);
+					sp = print(moji,K_SPACE,sp,ent,console->char_color);
 //					sp--;
 				}
 			}
@@ -1643,7 +1643,7 @@ void cha(int mode, struct CONSOLE *console) {
 	unsigned short cha[] = {'s','y','s','t','e','m','3','\n','m','a','d','e',' ','b','y',' ','d','a','n','g','o','m','u','s','h','i','\n','\0'};
 
 	for (int i=0;cha[i]!=L'\0';i++) {
-		console = putchar(moji, cha[i], console, green);
+		console = putchar(moji, cha[i], console, console->char_color);
 	}
 	
 	while (1) {
@@ -1652,12 +1652,12 @@ void cha(int mode, struct CONSOLE *console) {
 		unsigned short put[] = {'r','o','o','t'};
 		int ind = 0;
 		for (;ind<4;) {
-			console = print(moji,put[ind]-97, console,green);
+			console = print(moji,put[ind]-97, console,console->char_color);
 			ind++;
 		}
 
-		console = print(moji,28, console,green);
-		console = print(moji, 26, console, black);
+		console = print(moji,28, console,console->char_color);
+		console = print(moji, 26, console, console->back_color);
 
 		for (n = 0; n < MAX_COMMAND_LEN - 1;) {
 			buf[n] = getc();
@@ -1669,7 +1669,7 @@ void cha(int mode, struct CONSOLE *console) {
 			if (buf[n] == 8) {
 				if (console->sp > 2) {
 					console->sp--;
-					console = print(moji, 26, console, black);
+					console = print(moji, 26, console, console->back_color);
 					console->sp--;
 					n--;
 					buf[n]=0;
@@ -1678,7 +1678,7 @@ void cha(int mode, struct CONSOLE *console) {
 			}
 			else {	
 				if (buf[n]==L'\0') { break; }
-				else console=putchar(moji,buf[n],console,green);
+				else console=putchar(moji,buf[n],console,console->char_color);
 				n++;
 			}
 		}
@@ -1699,7 +1699,7 @@ void cha(int mode, struct CONSOLE *console) {
 		else if (!strcmp(L"key",buf)) {
 			while (1) {
 				unsigned short num = getc();
-				console = print(moji,num-6, console,green);
+				console = print(moji,num-6, console,console->char_color);
 			}	
 		}
 		else if (!strcmp(L"cls", buf)) {
@@ -1754,7 +1754,7 @@ void cha(int mode, struct CONSOLE *console) {
 					file_list[idx].name[MAX_FILE_NAME_LEN - 1] = L'\0';
 
 					for (int i=0;i<MAX_FILE_NAME_LEN-1;i++) {
-						console=putchar(moji, file_list[idx].name[i],console,green);
+						console=putchar(moji, file_list[idx].name[i],console,console->char_color);
 						if (file_list[idx].name[i]==L'\0') { break; }
 					}	
 					idx++;
@@ -1773,7 +1773,7 @@ void cha(int mode, struct CONSOLE *console) {
 		else if (!strcmp(L"echo ", command(s1,buf,5))) {
 			unsigned short echo[100];
 			for (int i=0;buf[i+5]!=L'\0';i++) {
-				console= putchar(moji, buf[i+5], console, green);
+				console= putchar(moji, buf[i+5], console, console->char_color);
 			}	
 			console->ent += 12;
 			console->sp = 0;
@@ -1797,7 +1797,7 @@ void cha(int mode, struct CONSOLE *console) {
 			assert(status, L"file->Read");
 
 			for (int n=0;file_buf[n]!=L'\0';n++) {
-				console = putchar(moji,file_buf[n], console, green);
+				console = putchar(moji,file_buf[n], console, console->char_color);
 			}
 
 			file->Close(file);
@@ -1822,7 +1822,7 @@ void cha(int mode, struct CONSOLE *console) {
 			unsigned short err[] = {'e','r','r',' ','i','n','v','i','d',' ', 'c','o','m','m','a','n','d', '\0'};
 			
 			for (int i=0;err[i]!=L'\0';i++) { 
-				console = print(moji,err[i]-97,console,green); 
+				console = print(moji,err[i]-97,console,console->char_color); 
 			}
 			console = print(moji,26, console,black);
 			console->ent += 12;
