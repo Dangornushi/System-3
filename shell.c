@@ -1601,7 +1601,7 @@ void cha(int mode, struct CONSOLE *console) {
 	unsigned int ent = 0;
 	int n = 0;
 	unsigned short *s1 = L"\0";
-	
+
 	while (1) {	
 		unsigned short put[] = {'p','a','s','s'};
 		int ind = 0;
@@ -1850,5 +1850,6 @@ void shell(void)
 	cons = &c;
 	cons->sp = 0;
 	cons->ent = 0;
+	cons = startup(cons);
 	cha(mode, cons);
 }
