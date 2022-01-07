@@ -254,7 +254,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	//warning msg
 	for (int o=0;;o++) {
 		if (buf[o]==L'\0') { break; }
-		else c = putchar(moji, buf[o], c ,console->char_color);
+		else c = putchar(moji, buf[o], c ,c->char_color);
 	}
 
 	//line num
@@ -313,7 +313,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	root->Close(root);
 	
 	for (int x=0;inp[x]!=L'\0';x++) {
-		c = putchar(moji,inp[x],c,console->char_color);
+		c = putchar(moji,inp[x],c,c->char_color);
 	}
 	
 	c->sp-=2;
@@ -323,9 +323,9 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	while (TRUE) {
 		c = putchar(moji,K_SPACE,c,black);
 		c->sp--;
-		c = putchar(moji,inp[i-1],c,console->char_color);
+		c = putchar(moji,inp[i-1],c,c->char_color);
 	
-		c = print(moji,K_SPACE,c,console->char_color);
+		c = print(moji,K_SPACE,c,c->char_color);
 		
 		c = putchar(moji,K_SPACE,c,black);
 		c->sp-=2;
@@ -347,7 +347,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 		}
 	
 		else {	
-			c = putchar(moji,ch,c,console->char_color);
+			c = putchar(moji,ch,c,c->char_color);
 			c->sp--;
 			inp[i] = ch;
 			i++;
