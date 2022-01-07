@@ -271,7 +271,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			ch=L'\0';
 		}
 		else {	
-			c = putchar(moji,ch,c,console->char_color);
+			c = putchar(moji,ch,c,c->char_color);
 			num = ch;
 			num++;
 			
