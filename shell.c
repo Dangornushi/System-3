@@ -49,7 +49,7 @@ struct CONSOLE *print(unsigned short moji[][12][8], unsigned int arfa, struct CO
 	if (cha==L'\n') {c->sp=0;c->ent+=12;}
 	else if (cha==8) { c->sp--;c = print(moji,K_SPACE,c,black);c->sp--;}
 	else if (cha==L' ') { c = print(moji,K_SPACE,c,black);}
-	else if (cha==K_SPACE) { c = print(moji,K_SPACE,c,black);
+	else if (cha==K_SPACE) { c = print(moji,K_SPACE,c,black); }
 	else if (cha > 60 && cha < 96) {c = print(moji,cha-65,c,color); }
 	else if (cha < 58) { c = print(moji,cha-6,c,color); }
 	else if (cha < 96) { c = print(moji,cha-9,c,color); }
