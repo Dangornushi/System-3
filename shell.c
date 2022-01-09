@@ -20,31 +20,11 @@ struct CONSOLE *print(unsigned short moji[][12][8], unsigned int arfa, struct CO
 			if(moji[arfa][i][j]!=0){draw_pixel(j+c->sp*8,i+c->ent,color);}
 		}
 	}
-	c->sp++;
+	c->sp+=2;
 	return c;
 }
 
-/*
-	else if (file_list[idx].name[i] > 60 && file_list[idx].name[i] < 96) {
-		sp = print(moji,file_list[idx].name[i]-65,sp,ent,console->char_color); }
-	else if (file_list[idx].name[i] < 96) { sp = print(moji,file_list[idx].name[i]-9,sp,ent,console->char_color); }
-	else { sp = print(moji,file_list[idx].name[i]-97,sp,ent,console->char_color);}
-
-			if (ch==L'\0') { break; }
-			else if (ch==L' ') { sp = print(moji,26,sp,ent,black);}
-			else if (ch > 60 && ch < 96) {	sp = print(moji,ch-65,sp,ent,console->char_color); }
-			else if (ch < 96) { sp = print(moji,ch-6,sp,ent,console->char_color); }
-			else { sp = print(moji,ch-97,sp,ent,console->char_color);}
-
-			if (ch==L'\0') { break; }
-			else if (ch==L' ') { sp = print(moji,26,sp,ent,black);}
-			else if (ch > 60 && ch < 96) {	sp = print(moji,ch-65,sp,ent,console->char_color); }
-			else if (ch < 96) { sp = print(moji,ch-6,sp,ent,console->char_color); }
-			else { sp = print(moji,ch-97,sp,ent,console->char_color);}
-			inp[i++] = ch;
-*/
-
- struct CONSOLE *putchar(unsigned short moji[][12][8], unsigned short cha, struct CONSOLE *c, struct EFI_GRAPHICS_OUTPUT_BLT_PIXEL color ) {	
+struct CONSOLE *putchar(unsigned short moji[][12][8], unsigned short cha, struct CONSOLE *c, struct EFI_GRAPHICS_OUTPUT_BLT_PIXEL color ) {	
 	if (cha==L'\r') {}
 	else if (cha==L'\n') {c->sp=0;c->ent+=12;}
 	else if (cha==8) { c->sp--;c = print(moji,K_SPACE,c,black);c->sp--;}
