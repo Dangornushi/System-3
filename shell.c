@@ -245,9 +245,9 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			break;
 		}
 		if (ch == 8) {
-			c->sp--;
+			c->sp-=9;
 			c = print(moji,26,c,black);
-			c->sp--;
+			c->sp-=9;
 			ch=L'\0';
 		}
 		else {	
@@ -302,14 +302,14 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	
 	while (TRUE) {
 		c = putchar(moji,K_SPACE,c,black);
-		c->sp-=8;
+		c->sp-=9;
 		c = putchar(moji,inp[i-1],c,c->char_color);
 	
-		c = print(moji,K_SPACE,c,c->char_color);
+		c = print(moji,51,c,c->char_color);
 		
-		c = putchar(moji,K_SPACE,c,black);
-		c->sp-=16;
-	
+		c = putchar(moji,51,c,black);
+		c->sp-=18;
+
 		ch = getc();
 	
 		if (ch == L'\r') {
