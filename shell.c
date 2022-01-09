@@ -1803,7 +1803,7 @@ void cha(int mode, struct CONSOLE *console) {
 			unsigned short err[] = {'e','r','r',' ','i','n','v','i','d',' ', 'c','o','m','m','a','n','d', '\0'};
 			
 			for (int i=0;err[i]!=L'\0';i++) { 
-				console = putchar(moji,err[i]-97,console,console->char_color); 
+				console = putchar(moji,err[i],console,console->char_color); 
 			}
 			console = print(moji,26, console,black);
 			console->ent += 13;
