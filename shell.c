@@ -30,10 +30,10 @@ struct CONSOLE *putchar(unsigned short moji[][12][8], unsigned short cha, struct
 	else if (cha==8) { c->sp-=9;c = print(moji,K_SPACE,c,black);c->sp-=9;}
 	else if (cha==L' ') { c = print(moji,K_SPACE,c,black);}
 	else if (cha==K_SPACE) { c = print(moji,K_SPACE,c,black); }
-	else if (cha > 60 && cha < 96) {c = print(moji,cha-65,c,color); }
+	else if (cha > 60 && cha < 96) {c = print(moji,cha-65,c,color); }//大文字
 	else if (cha < 58) { c = print(moji,cha-6,c,color); }
 	else if (cha < 96) { c = print(moji,cha-9,c,color); }
-	else { c = print(moji,cha-97,c,color);}
+	else { c = print(moji,cha-65,c,color);}//小文字
 	return c;
 }
 
@@ -887,6 +887,7 @@ void cha(int mode, struct CONSOLE *console) {
 			{0,1,1,1,1,1,1,0}, 
 			{0,1,0,0,0,0,1,0}, 
 			{0,1,0,0,0,0,1,0}, 
+			{0,1,0,0,0,0,1,0}, 
 			{0,1,0,0,0,0,1,0},
 			{1,1,1,0,0,1,1,1}, },
 		{//B
@@ -1215,6 +1216,22 @@ void cha(int mode, struct CONSOLE *console) {
 			{1,1,0,0,0,0,0,0}, 
 			{1,1,1,1,1,1,1,1}, 
 			{0,0,0,0,0,0,0,0}, },
+		
+		{//a
+			{0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0},
+			{0,0,1,1,1,0,0,0},
+			{0,1,0,0,0,1,0,0},
+			{0,0,0,0,0,0,1,0},
+			{0,0,1,1,1,0,1,0},
+			{0,1,0,0,0,1,1,0},
+			{0,1,0,0,0,1,1,0},
+			{0,0,1,1,1,0,1,1},
+		}
+
 		{//SPACE
 			{1,1,1,1,1,1,1,1}, 
 			{1,1,1,1,1,1,1,1}, 
