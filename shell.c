@@ -26,7 +26,7 @@ struct CONSOLE *print(unsigned short moji[][12][8], unsigned int arfa, struct CO
 
 struct CONSOLE *putchar(unsigned short moji[][12][8], unsigned short cha, struct CONSOLE *c, struct EFI_GRAPHICS_OUTPUT_BLT_PIXEL color ) {	
 	if (cha==L'\r') {}
-	else if (cha==L'\n') {c->sp=0;c->ent+=12;}
+	else if (cha==L'\n') {c->sp=0;c->ent+=13;}
 	else if (cha==8) { c->sp-=9;c = print(moji,K_SPACE,c,black);c->sp--;}
 	else if (cha==L' ') { c = print(moji,K_SPACE,c,black);}
 	else if (cha==K_SPACE) { c = print(moji,K_SPACE,c,black); }
@@ -223,7 +223,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	int idx = 0;
 	int file_num;
 	int sp = c->sp=0;
-	int ent = c->ent+=12;
+	int ent = c->ent+=13;
 
 	int k = 0;
 	int number = 0;
@@ -260,7 +260,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	}
 
 	c->sp = 0;
-	c->ent+=12;
+	c->ent+=13;
 
 	//line bunkatu
 	
@@ -314,7 +314,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	
 		if (ch == L'\r') {
 			c->sp=0;
-			c->ent+=12;
+			c->ent+=13;
 			break;
 		}
 	
@@ -336,7 +336,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	}
 
 	c->sp = 0;
-	c->ent+=12;
+	c->ent+=13;
 
 	inp[i] = L'\0';
 
@@ -370,7 +370,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	root->Close(root);
 
 	c->sp = 0;
-	c->ent = ent+=12;
+	c->ent = ent+=13;
 
 	return c;
 }
@@ -1594,7 +1594,7 @@ void cha(int mode, struct CONSOLE *console) {
 			while (1) { 
 				buf[n] = getc();
 				if (buf[n] == L'\r') {
-					console->ent += 12;
+					console->ent += 13;
 					console->sp = 0;	
 					buf[n] = L'\0';
 					break;
@@ -1643,7 +1643,7 @@ void cha(int mode, struct CONSOLE *console) {
 		for (n = 0; n < MAX_COMMAND_LEN - 1;) {
 			buf[n] = getc();
 			if (buf[n] == L'\r') {
-				console->ent += 12;
+				console->ent += 13;
 				console->sp = 0;
 				break;
 			}
@@ -1740,10 +1740,10 @@ void cha(int mode, struct CONSOLE *console) {
 					}	
 					idx++;
 					console->sp = 0;
-					console->ent+=12;
+					console->ent+=13;
 				}
 				console->sp=0;
-				console->ent+=12;
+				console->ent+=13;
 				file_num = idx;
 				root->Close(root);
 			}
@@ -1756,7 +1756,7 @@ void cha(int mode, struct CONSOLE *console) {
 			for (int i=0;buf[i+5]!=L'\0';i++) {
 				console= putchar(moji, buf[i+5], console, console->char_color);
 			}	
-			console->ent += 12;
+			console->ent += 13;
 			console->sp = 0;
 		}
 		else if (!strcmp(L"touch ", command(s1,buf,6))) 
@@ -1784,7 +1784,7 @@ void cha(int mode, struct CONSOLE *console) {
 			file->Close(file);
 			root->Close(root);
 			console->sp=0;
-			console->ent+=12;
+			console->ent+=13;
 		}
 
 		else if (!strcmp(L"proto ",command(s1,buf,6))) {
@@ -1806,7 +1806,7 @@ void cha(int mode, struct CONSOLE *console) {
 				console = print(moji,err[i]-97,console,console->char_color); 
 			}
 			console = print(moji,26, console,black);
-			console->ent += 12;
+			console->ent += 13;
 			console->sp = 0;
 		}	
 	}
