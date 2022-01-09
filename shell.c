@@ -302,13 +302,13 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	
 	while (TRUE) {
 		c = putchar(moji,K_SPACE,c,black);
-		c->sp-=9;
+		c->sp-=8;
 		c = putchar(moji,inp[i-1],c,c->char_color);
 	
 		c = print(moji,K_SPACE,c,c->char_color);
 		
 		c = putchar(moji,K_SPACE,c,black);
-		c->sp-=18;
+		c->sp-=16;
 	
 		ch = getc();
 	
@@ -1401,8 +1401,8 @@ void cha(int mode, struct CONSOLE *console) {
 			{0,0,0,0,0,0,0,0},
 			{0,0,0,0,0,0,0,0},
 			{0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0},
 			{1,0,1,0,1,0,0,0},
+			{0,1,0,1,0,1,0,0},
 			{0,1,0,1,0,1,0,0},
 			{0,1,0,1,0,1,0,0},
 			{0,1,0,1,0,1,1,0},
