@@ -27,7 +27,7 @@ struct CONSOLE *print(unsigned short moji[][12][8], unsigned int arfa, struct CO
 struct CONSOLE *putchar(unsigned short moji[][12][8], unsigned short cha, struct CONSOLE *c, struct EFI_GRAPHICS_OUTPUT_BLT_PIXEL color ) {	
 	if (cha==L'\r') {}
 	else if (cha==L'\n') {c->sp=0;c->ent+=13;}
-	else if (cha==8) { c->sp-=9;c = print(moji,K_SPACE,c,black);c->sp--;}
+	else if (cha==8) { c->sp-=9;c = print(moji,K_SPACE,c,black);c->sp-=9;}
 	else if (cha==L' ') { c = print(moji,K_SPACE,c,black);}
 	else if (cha==K_SPACE) { c = print(moji,K_SPACE,c,black); }
 	else if (cha > 60 && cha < 96) {c = print(moji,cha-65,c,color); }
