@@ -319,9 +319,9 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 		}
 	
 		if (ch == 8) {
-			c->sp-=9;
-			c = print(moji,26,c,black);
-			c->sp-=18;
+			c->sp-=8;
+			c = print(moji,51,c,black);
+			c->sp-=16;
 			i--;
 			ch=0;
 		}
