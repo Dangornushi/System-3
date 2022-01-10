@@ -2043,7 +2043,7 @@ void cha(int mode, struct CONSOLE *console) {
 			if (buf[n] == 8) {
 				if (console->sp > 2) {
 					console->sp-=9;
-					console = print(moji, 51, console, console->back_color);
+					console = print(moji, 52, console, console->back_color);
 					console->sp-=9;
 					n--;
 					buf[n]=0;
@@ -2211,8 +2211,7 @@ struct CONSOLE *startup(struct CONSOLE *cons) {
 	return cons;
 }
 
-void shell(void)
-{
+void shell(void) {
 	unsigned short com[MAX_COMMAND_LEN];
 	struct RECT r = {10, 10, 100, 200};
 	unsigned char is_exit = FALSE;
