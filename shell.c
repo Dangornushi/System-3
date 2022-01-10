@@ -1673,18 +1673,21 @@ void cha(int mode, struct CONSOLE *console) {
 			{0,0,0,1,1,0,0,0},
 			{0,0,0,0,0,0,0,0}, },
 		{//31
-			{0,0,0,0,0,0,0,0},	
-			{0,0,0,0,0,0,0,0},	
-			{0,0,0,0,0,0,0,0},	
-			{0,0,0,1,1,0,0,0},	
-			{0,0,1,1,1,1,0,0},	
-			{0,1,1,1,1,1,1,0},	
-			{0,1,1,1,1,1,1,0},	
-			{0,0,1,1,1,1,0,0},	
-			{0,0,0,1,1,0,0,0},	
-			{0,0,0,0,0,0,0,0},	
-			{0,0,0,0,0,0,0,0},	
-			{0,0,0,0,0,0,0,0}, },
+			
+			{0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,1},
+			{0,1,1,0,0,0,0,1},
+			{1,0,0,1,0,0,1,1},
+			{1,0,0,1,0,1,1,0},
+			{0,1,1,0,1,1,0,0},
+			{0,0,0,1,1,0,0,0},
+			{0,0,1,1,0,0,0,0},
+			{0,1,1,0,0,1,1,0},
+			{1,1,0,0,1,0,0,1},	
+			{1,0,0,0,1,0,0,1},	
+			{1,0,0,0,0,1,1,0},	
+
+			},
 		{
 			{0,0,0,0,0,0,0,0},
 			{0,1,0,0,0,0,0,0},
@@ -1992,7 +1995,7 @@ void cha(int mode, struct CONSOLE *console) {
 				if (buf[n] == 8) {
 					if (sp > 2) {
 						console->sp--;
-						console = print(moji,26,console,black);
+						console = print(moji,51,console,black);
 						console->sp--;
 						n--;
 						buf[n]=0;
@@ -2027,7 +2030,7 @@ void cha(int mode, struct CONSOLE *console) {
 			ind++;
 		}
 
-		console = print(moji,28, console,console->char_color);
+		console = print(moji,53, console,console->char_color);
 		console = print(moji, 51, console, console->back_color);
 
 		for (n = 0; n < MAX_COMMAND_LEN - 1;) {
@@ -2054,7 +2057,7 @@ void cha(int mode, struct CONSOLE *console) {
 			}
 		}
 		buf[n] = L'\0';
- 
+
 		if (!strcmp(L"rogo", buf)) {
 		}
 		else if (!strcmp(L"edit ", command(s1,buf,5))) {
