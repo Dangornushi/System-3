@@ -31,7 +31,7 @@ struct CONSOLE *putchar(unsigned short moji[][12][8], unsigned short cha, struct
 	else if (cha==L' ') { c = print(moji,K_SPACE,c,black);}
 	else if (cha==K_SPACE) { c = print(moji,K_SPACE,c,black); }
 	else if (cha > 60 && cha < 96) {c = print(moji,cha-65,c,color); }//大文字
-	else if (cha < 58) { c = print(moji,cha,c,color); }
+	else if (cha < 58) { c = print(moji,cha+5,c,color); }
 	else if (cha < 96) { c = print(moji,cha-9,c,color); }
 	else { c = print(moji,cha-71,c,color);}//小文字
 	return c;
@@ -2028,7 +2028,7 @@ void cha(int mode, struct CONSOLE *console) {
 		}
 
 		console = print(moji,28, console,console->char_color);
-		console = print(moji, 26, console, console->back_color);
+		console = print(moji, 51, console, console->back_color);
 
 		for (n = 0; n < MAX_COMMAND_LEN - 1;) {
 			buf[n] = getc();
@@ -2040,7 +2040,7 @@ void cha(int mode, struct CONSOLE *console) {
 			if (buf[n] == 8) {
 				if (console->sp > 2) {
 					console->sp-=9;
-					console = print(moji, 26, console, console->back_color);
+					console = print(moji, 51, console, console->back_color);
 					console->sp-=9;
 					n--;
 					buf[n]=0;
