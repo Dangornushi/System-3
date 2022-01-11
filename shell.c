@@ -2058,9 +2058,7 @@ void cha(int mode, struct CONSOLE *console) {
 		}
 		buf[n] = L'\0';
 
-		if (!strcmp(L"rogo", buf)) {
-		}
-		else if (!strcmp(L"edit ", command(s1,buf,5))) {
+		if (!strcmp(L"edit ", command(s1,buf,5))) {
 			cls();
 			edit_mode(buf+5,moji);
 			cls();
