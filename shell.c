@@ -277,7 +277,10 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	int n2 = 0;
 	int return_c = 0;
 	
-	for (;read_buf[n]!=L'\0';n++, n2++) {
+	for (int i=0;file_buf[i]!=L'\r';i++) {c=putchar(moji,file_buf[i],c,c->char_color);}
+
+	/*for (;read_buf[n]!=L'\0';n++, n2++) {
+		inp[n2] = read_buf[n]; 
 		if (read_buf[n]==L'\r') { 
 			n2 = 0;	
 			if (return_c == number) {
@@ -286,8 +289,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			}
 			return_c++; 
 		}
-		inp[n2] = read_buf[n]; 
-	}
+	}*/
 	
 	file->Close(file);
 	root->Close(root);
