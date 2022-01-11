@@ -217,6 +217,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	unsigned long long buf_size = MAX_FILE_BUF;
 	unsigned short file_buf[MAX_FILE_BUF];
 	unsigned short read_buf[MAX_FILE_BUF];
+	unsigned short file_data[MAX_FILE_BUF];
 
 	int i = 0;
 	unsigned short *ch;
@@ -231,7 +232,6 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	unsigned short inp[256];
 	unsigned short buf[] = {'n','u','m','b','e','r',' ','o','f',' ','l','i','n','e','s','>','\0'};
 	unsigned short *num = L'\0';
-	unsigned short *file_data = 0;
 
 	//warning msg
 	for (int o=0;;o++) {
@@ -276,8 +276,10 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			assert(status, L"file->Read");
 
 			for (int n=0;file_buf[n]!=L'\0';n++) {
+				if (file_buf==L'\n') {enter_counter++;}
 				if (enter_counter==number) {
-					file_data += file_buf[n];
+					puts("OK");
+					file_data[n] = file_buf[n];
 				}
 				if (enter_counter > number) {break;}
 			}
