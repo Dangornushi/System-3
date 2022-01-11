@@ -280,8 +280,8 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 
 			file->Close(file);
 			root->Close(root);
-			console->sp=0;
-			console->ent+=13;
+			c->sp=0;
+			c->ent+=13;
 
 	/*
 	status = SFSP->OpenVolume(SFSP, &root);
