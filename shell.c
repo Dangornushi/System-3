@@ -236,7 +236,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 
 
     while (TRUE) {
-		ch = getc()
+		ch = getc();
 		if (ch == L'\r') {
 			if (!strncmp(command,L'q')) { break; }
 		}
