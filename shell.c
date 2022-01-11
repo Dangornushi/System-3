@@ -275,7 +275,6 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			status = file->Read(file, &buf_size, (void *)file_buf);
 			assert(status, L"file->Read");
 
-			int i = 0;
 			for (int n=0;file_buf[n]!=L'\0';n++) {
 				if (file_buf==L'\n') {enter_counter++;}
 				if (enter_counter==number) {
