@@ -275,7 +275,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 
 			for (int n=0;file_buf[n]!=L'\0';n++) {
 				if (file_buf[n]==L'\n') {break;}
-				console = putchar(moji,file_buf[n], console, console->char_color);
+				c = putchar(moji,file_buf[n], c, c->char_color);
 			}
 
 			file->Close(file);
