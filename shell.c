@@ -279,7 +279,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 				if (enter_counter==num) {
 					file_data += file_buf[n];
 				}
-				if (enter_counter > num) {break;}
+				if (enter_counter > number) {break;}
 			}
 			file_data += L'\0';
 
