@@ -278,7 +278,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	int return_c = 0;
 	
 	for (int i=0;file_buf[i]!=L'\0';i++) {
-		c=putchar(moji,file_buf[i],c,c->char_color);
+		c=putchar(moji,&file_buf[i],c,c->char_color);
 	}
 
 	/*for (;read_buf[n]!=L'\0';n++, n2++) {
