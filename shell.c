@@ -241,6 +241,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			ch[tmp] = getc();
 			if (ch[tmp] == L'\r') {
 				command[i] = L'\0';
+				break;
 			}
 			if (ch[tmp] == 8) {
 				c->sp-=9;
@@ -255,7 +256,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 				i++;
 			}
 		}
-		if (!strcmp(command, L"q")) { puts("OK");return c; }
+		if (!strcmp(command, L"q")) { puts(L"OK");return c; }
 	}
 /*
 	//warning msg
