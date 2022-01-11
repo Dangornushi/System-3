@@ -218,7 +218,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	unsigned short file_buf[MAX_FILE_BUF];
 	unsigned short read_buf[MAX_FILE_BUF];
 	unsigned short file_data[MAX_FILE_BUF];
-	unsigned short command[MAX_FILE_BUF];
+	unsigned short com[MAX_FILE_BUF];
 	unsigned short ch[MAX_COMMAND_LEN];
 
 	int i = 0;
@@ -242,7 +242,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			if (ch[tmp] == L'\r') {
 				c->sp=0;
 				c->ent += 13;
-				command[i] = L'\0';
+				com[i] = L'\0';
 				break;
 			}
 			if (ch[tmp] == 8) {
@@ -254,11 +254,11 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			}
 			else {	
 				c = putchar(moji,ch[tmp],c,c->char_color);
-				command[i] = ch[tmp];
+				com[i] = ch[tmp];
 				i++;
 			}
 		}
-		if (!strcmp(command, L"q")) { return c; }
+		if (!strcmp(com, L"q")) { return c; }
 		if (!strcmp(L"w",command(s1,buf,1))) { 
 			number = to_int(&buf+1)-2;
 		}
