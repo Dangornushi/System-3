@@ -11,7 +11,7 @@
 #define K_SPACE 51
 
 
-
+unsigned short *command(unsigned short *s1, unsigned short *s2, int n);
 int to_int(unsigned short *str);
 
 struct CONSOLE *print(unsigned short moji[][12][8], unsigned int arfa, struct CONSOLE *c, struct EFI_GRAPHICS_OUTPUT_BLT_PIXEL color ) {
