@@ -259,8 +259,8 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			}
 		}
 		if (!strcmp(com, L"q")) { return c; }
-		if (!strcmp(L"w",command(s1,buf,1))) { 
-			number = to_int(&buf+1)-2;
+		if (!strcmp(L"w",command(s1,com,1))) { 
+			number = to_int(&com+1)-2;
 		}
 
 	}
