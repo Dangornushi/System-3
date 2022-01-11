@@ -255,7 +255,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 				i++;
 			}
 		}
-		if (!strcmp(command, L"q")) { return c; }
+		if (!strcmp(command, L"q")) { puts("OK");return c; }
 	}
 /*
 	//warning msg
@@ -2249,9 +2249,8 @@ void cha(int mode, struct CONSOLE *console) {
 			cls();
 			proto(buf+6);
 		}
-		else if (!strcmp(L"le ",command(s1,buf,3))) {
+		else if (!strcmp(L"le ",command(s1,buf,3))) 
 			console = le(buf+3,moji, console);
-		}
 		//else if(!strcmp(L"vse ",command(s1,buf,4))) 
 		//	bse(buf+4);
 		else {
