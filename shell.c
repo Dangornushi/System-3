@@ -264,6 +264,26 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 
 	//line bunkatu
 	
+			status = SFSP->OpenVolume(SFSP, &root);
+			assert(status, L"SFSP->OpenVolume");
+
+			status = root->Open(root, &file, buf+4, EFI_FILE_MODE_READ, 0);
+			assert(status, L"root->Open");
+
+			status = file->Read(file, &buf_size, (void *)file_buf);
+			assert(status, L"file->Read");
+
+			for (int n=0;file_buf[n]!=L'\0';n++) {
+				if (file_buf[n]==L'\n') {break;}
+				console = putchar(moji,file_buf[n], console, console->char_color);
+			}
+
+			file->Close(file);
+			root->Close(root);
+			console->sp=0;
+			console->ent+=13;
+
+	/*
 	status = SFSP->OpenVolume(SFSP, &root);
 	assert(status, L"SFSP->OpenVolume");
 
@@ -278,10 +298,10 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	int return_c = 0;
 	
 	for (int i=0;file_buf[i]!=L'\0';i++) {
-		c=putchar(moji,&file_buf[i],c,c->char_color);
+		c=putchar(moji,file_buf[i],c,c->char_color);
 	}
 
-	/*for (;read_buf[n]!=L'\0';n++, n2++) {
+	for (;read_buf[n]!=L'\0';n++, n2++) {
 		inp[n2] = read_buf[n]; 
 		if (read_buf[n]==L'\r') { 
 			n2 = 0;	
@@ -291,7 +311,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			}
 			return_c++; 
 		}
-	}*/
+	}
 	
 	file->Close(file);
 	root->Close(root);
@@ -377,6 +397,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	c->ent = ent+=13;
 
 	return c;
+	*/
 }
 
 void cat(unsigned short *file_name) {}
