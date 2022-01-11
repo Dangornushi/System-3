@@ -276,11 +276,12 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			assert(status, L"file->Read");
 
 			for (int n=0;file_buf[n]!=L'\0';n++) {
-				file_data += file_buf[n];
-				if (enter_counter==num+1) {break;}
-				else if (file_buf[n]==L'\n') {enter_counter++;file_data=0;}
+				if (enter_counter==num) {
+					file_data += file_buf[n];
+				}
+				if (enter_counter > num) {break;}
 			}
-			file_data = L'\0';
+			file_data += L'\0';
 
 			for (int i=0;file_data[i]!=L'\0';i++) 
 				c = putchar(moji,file_data[i], c, c->char_color);
