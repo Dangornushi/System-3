@@ -224,12 +224,14 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	int file_num;
 	int sp = c->sp=0;
 	int ent = c->ent+=13;
+	int enter_counter = 0;
 
 	int k = 0;
 	int number = 0;
 	unsigned short inp[256];
 	unsigned short buf[] = {'n','u','m','b','e','r',' ','o','f',' ','l','i','n','e','s','>','\0'};
 	unsigned short *num = L'\0';
+	unsigned short *file_data = 0;
 
 	//warning msg
 	for (int o=0;;o++) {
@@ -274,9 +276,14 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			assert(status, L"file->Read");
 
 			for (int n=0;file_buf[n]!=L'\0';n++) {
-				if (file_buf[n]==L'\n') {break;}
-				c = putchar(moji,file_buf[n], c, c->char_color);
+				if (file_buf[n]==L'\n') {entr_counter++;file_data=0;}
+				if (entr_counter==num) {break;}
+				file_data++ = file_buf[n];
 			}
+			file_data = L'\0';
+
+			for (int i=0;file_data[i]!=L'\0';i++) 
+				c = putchar(moji,file_data[i], c, c->char_color);
 
 			file->Close(file);
 			root->Close(root);
