@@ -267,7 +267,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			status = SFSP->OpenVolume(SFSP, &root);
 			assert(status, L"SFSP->OpenVolume");
 
-			status = root->Open(root, &file, buf+4, EFI_FILE_MODE_READ, 0);
+			status = root->Open(root, &file, file_name, EFI_FILE_MODE_READ, 0);
 			assert(status, L"root->Open");
 
 			status = file->Read(file, &buf_size, (void *)file_buf);
