@@ -236,24 +236,26 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	unsigned short *num = L'\0';
 
 
-    while (TRUE) {
-		ch[tmp] = getc();
-		if (ch[tmp] == L'\r') {
-			command[i] = L'\0';
-			if (!strcmp(command, L"q")) { break; }
+	while (1) {
+		while (TRUE) {
+			ch[tmp] = getc();
+			if (ch[tmp] == L'\r') {
+				command[i] = L'\0';
+			}
+			if (ch[tmp] == 8) {
+				c->sp-=9;
+				c = print(moji,26,c,black);
+				c->sp-=9;
+				ch[tmp]=0;
+				i--;
+			}
+			else {	
+				c = putchar(moji,ch[tmp],c,c->char_color);
+				command[i] = ch[tmp];
+				i++;
+			}
 		}
-		if (ch[tmp] == 8) {
-			c->sp-=9;
-			c = print(moji,26,c,black);
-			c->sp-=9;
-			ch[tmp]=0;
-			i--;
-		}
-		else {	
-			c = putchar(moji,ch[tmp],c,c->char_color);
-			command[i] = ch[tmp];
-			i++;
-		}
+		if (!strcmp(command, L"q")) { break; }
 	}
 /*
 	//warning msg
