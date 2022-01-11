@@ -255,7 +255,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 				i++;
 			}
 		}
-		if (!strcmp(command, L"q")) { break; }
+		if (!strcmp(command, L"q")) { return c; }
 	}
 /*
 	//warning msg
