@@ -239,7 +239,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
     while (TRUE) {
 		ch[tmp] = getc();
 		if (ch[tmp] == L'\r') {
-			command[i] = L'\0;'
+			command[i] = L'\0';
 			if (!strcmp(command, L"q")) { break; }
 		}
 		if (ch[tmp] == 8) {
