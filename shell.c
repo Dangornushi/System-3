@@ -234,12 +234,14 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	unsigned short inp[256];
 	unsigned short buf[] = {'n','u','m','b','e','r',' ','o','f',' ','l','i','n','e','s','>','\0'};
 	unsigned short *num = L'\0';
-
+	unsigned short *s1 = 0;
 
 	while (1) {
 		while (TRUE) {
 			ch[tmp] = getc();
 			if (ch[tmp] == L'\r') {
+				c->sp=0;
+				c->ent += 13;
 				command[i] = L'\0';
 				break;
 			}
@@ -256,7 +258,11 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 				i++;
 			}
 		}
-		if (!strcmp(command, L"q")) { puts(L"OK");return c; }
+		if (!strcmp(command, L"q")) { return c; }
+		if (!strcmp(L"w",command(s1,buf,1))) { 
+			number = to_int(&buf+1)-2;
+		}
+
 	}
 /*
 	//warning msg
