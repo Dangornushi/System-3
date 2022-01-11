@@ -276,12 +276,12 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			assert(status, L"file->Read");
 
 			for (int n=0;file_buf[n]!=L'\0';n++) {
-				if (file_buf[n]==L'\r') {puts(L"OK");enter_counter++;}
+				if (enter_counter > number) {break;}
+				if (file_buf[i]==L'\r') {puts(L"OK");enter_counter++;}
 				if (enter_counter==number) {
 					file_data[i] = file_buf[n];
 					i++;
 				}
-				if (enter_counter > number) {break;}
 			}
 			file_data[i] += L'\0';
 
