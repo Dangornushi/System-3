@@ -259,7 +259,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 				i++;
 			}
 		}
-		if (!strcmp(com, L"l")) {
+		if (!strcmp(L"l",com)) {
 			while (1) {
 				ch = getc();
 				if (ch == L'\r') {
@@ -282,7 +282,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			c->sp = 0;
 			c->ent+=13;
 		}
-		if (!strcmp(com, L"q")) { return c; }
+		if (!strcmp(L"q", com)) { return c; }
 		else {}
 
 	}
