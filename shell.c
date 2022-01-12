@@ -306,11 +306,11 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			for (;read_buf[n]!=L'\0';n++, n2++) {
 				inp[n2] = read_buf[n]; 
 				if (read_buf[n]==L'\r') { 
+					n2 = 0;	
 					if (return_c == number) {
 						inp[n2] = L'\0';
 						break;
 					}
-					n2 = 0;	
 					return_c++; 
 				}
 			}
