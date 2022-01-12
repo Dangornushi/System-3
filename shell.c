@@ -218,7 +218,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	unsigned short file_buf[MAX_FILE_BUF];
 	unsigned short read_buf[MAX_FILE_BUF];
 	unsigned short file_data[MAX_FILE_BUF];
-	unsigned short *ch;
+	unsigned short *chi = 0;
 
 	int i = 0;
 	int tmp = 0;
@@ -233,7 +233,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	int number = 0;
 	unsigned short inp[256];
 	unsigned short buf[] = {'n','u','m','b','e','r',' ','o','f',' ','l','i','n','e','s','>','\0'};
-	unsigned short *num = L'\0';
+	unsigned short *num = 0;
 	unsigned short *s1 = 0;
 
 	while (1) {
@@ -243,7 +243,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			if (ch[tmp] == L'\r') {
 				c->sp=0;
 				c->ent += 13;
-				//com[i] = L'\0';
+				com[i] = L'\0';
 				break;
 			}
 			if (ch[tmp] == 8) {
@@ -268,7 +268,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 				}
 				if (ch == 8) {
 					c->sp-=9;
-					c = print(moji,26,c,black);
+					c = print(moji,51,c,black);
 					c->sp-=9;
 					ch=L'\0';
 				}
