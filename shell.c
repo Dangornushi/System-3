@@ -229,6 +229,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	int enter_counter = 0;
 
 	int k = 0;
+	int mode = 0;
 	int number = 0;
 	unsigned short inp[256];
 	unsigned short buf[] = {'n','u','m','b','e','r',' ','o','f',' ','l','i','n','e','s','>','\0'};
@@ -258,9 +259,40 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 				i++;
 			}
 		}
+		if (!strcmp(com, L"l")) {
+			while (TRUE) {
+				ch = getc();
+				if (ch == L'\r') {
+					number = to_int(&num)-2;
+					break;
+				}
+				if (ch == 8) {
+					c->sp-=9;
+					c = print(moji,26,c,black);
+					c->sp-=9;
+					ch=L'\0';
+				}
+				else {	
+					c = putchar(moji,ch,c,c->char_color);
+					num = ch;
+					num++;			
+				}
+			}
+
+			c->sp = 0;
+			c->ent+=13;
+		}
 		if (!strcmp(com, L"q")) { return c; }
-		else if (!strcmp(L"w ",command(s1,com,2))) { 
-			number = to_int(&com+2);
+
+		else {
+			switch (mode) {
+			case 1: {
+				number = 
+				break;
+			}
+			default:
+				break;
+			}
 		}
 
 	}
