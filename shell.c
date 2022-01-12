@@ -238,6 +238,8 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 
 	while (1) {
 		unsigned short com[MAX_FILE_BUF];
+		tmp=0;
+
 		for (;tmp<MAX_COMMAND_LEN-1;tmp++) {
 			ch[tmp] = getc();
 			if (ch[tmp] == L'\r') {
@@ -260,10 +262,12 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			}
 		}
 		if (!strcmp(L"l",com)) {
+			puts(L"L");
 			while (1) {
 				ch = getc();
 				if (ch == L'\r') {
 					number = to_int(&num)-2;
+					puts(L"num");
 					break;
 				}
 				if (ch == 8) {
@@ -282,8 +286,8 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			c->sp = 0;
 			c->ent+=13;
 		}
-		if (!strcmp(L"q", com)) { return c; }
-		else {}
+		if (!strcmp(L"q", com)) { puts(L"Q");return c; }
+		else {puts(L"else");}
 
 	}
 /*
