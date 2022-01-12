@@ -240,10 +240,9 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 		unsigned short com[MAX_FILE_BUF];
 		while (TRUE) {
 			ch[tmp] = getc();
-			if (ch[tmp] == L'\r') {
+			if (ch[tmp] == L'\n') {
 				c->sp=0;
 				c->ent += 13;
-				com[i] = L'\0';
 				break;
 			}
 			if (ch[tmp] == 8) {
