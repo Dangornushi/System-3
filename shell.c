@@ -283,6 +283,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			c->ent+=13;
 		}
 		if (!strcmp(com, L"q")) { return c; }
+		else {}
 
 	}
 /*
