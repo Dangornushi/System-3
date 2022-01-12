@@ -218,7 +218,6 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	unsigned short file_buf[MAX_FILE_BUF];
 	unsigned short read_buf[MAX_FILE_BUF];
 	unsigned short file_data[MAX_FILE_BUF];
-	unsigned short com[MAX_FILE_BUF];
 	unsigned short ch[MAX_COMMAND_LEN];
 
 	int i = 0;
@@ -237,7 +236,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	unsigned short *s1 = 0;
 
 	while (1) {
-		&com = 0;
+		unsigned short com[MAX_FILE_BUF];
 		while (TRUE) {
 			ch[tmp] = getc();
 			if (ch[tmp] == L'\r') {
