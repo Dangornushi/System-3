@@ -374,7 +374,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 					break;
 				}
 			
-				if (ch == 8) {
+				if (ch == 8 && c->sp > 0) {
 					c->sp-=9;
 					c = print(moji,K_SPACE,c,black);
 					c->sp-=18;
