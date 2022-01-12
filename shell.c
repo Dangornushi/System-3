@@ -237,6 +237,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	unsigned short *s1 = 0;
 
 	while (1) {
+		com = 0;
 		while (TRUE) {
 			ch[tmp] = getc();
 			if (ch[tmp] == L'\r') {
