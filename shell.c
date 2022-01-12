@@ -215,8 +215,6 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	struct EFI_FILE_PROTOCOL *root;
 	struct EFI_FILE_PROTOCOL *file;
 	unsigned long long buf_size = MAX_FILE_BUF;
-	unsigned short file_buf[MAX_FILE_BUF];
-	unsigned short read_buf[MAX_FILE_BUF];
 	unsigned short file_data[MAX_FILE_BUF];
 	unsigned short *ch = 0;
 
@@ -286,6 +284,8 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			c->ent+=13;
 		}
 		if (!strcmp(L"p", com)) {
+			unsigned short read_buf[MAX_FILE_BUF];
+	
 			status = SFSP->OpenVolume(SFSP, &root);
 			assert(status, L"SFSP->OpenVolume");
 
@@ -322,6 +322,8 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			return c; 
 		}
 		if (!strcmp(L"w", com)) {
+			unsigned short read_buf[MAX_FILE_BUF];
+	
 			status = SFSP->OpenVolume(SFSP, &root);
 			assert(status, L"SFSP->OpenVolume");
 			status = root->Open(root, &file, file_name, EFI_FILE_MODE_READ, 0);
@@ -360,8 +362,8 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 				c = putchar(moji,K_SPACE,c,black);
 				c->sp-=9;
 				c = putchar(moji,inp[i-1],c,c->char_color);
-				c = print(moji,51,c,c->char_color);
-				c = putchar(moji,51,c,black);
+				c = print(moji,K_SPACE,c,c->char_color);
+				c = putchar(moji,K_SPACE,c,black);
 				c->sp-=18;
 
 				ch = getc();
@@ -374,7 +376,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			
 				if (ch == 8) {
 					c->sp-=8;
-					c = print(moji,51,c,black);
+					c = print(moji,K_SPACE,c,black);
 					c->sp-=16;
 					i--;
 					ch=0;
@@ -388,6 +390,8 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 				}
 
 			}
+			unsigned short file_buf[MAX_FILE_BUF];
+
 			c->sp = 0;
 			c->ent+=13;
 			inp[i] = L'\0';
