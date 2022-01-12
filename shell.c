@@ -236,9 +236,9 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	unsigned short *num = 0;
 	unsigned short *s1 = 0;
 
-	while (TRUE) {
+	while (1) {
 		unsigned short com[MAX_FILE_BUF];
-		while (TRUE) {
+		while (1) {
 			ch[tmp] = getc();
 			if (ch[tmp] == L'\r') {
 				c->sp=0;
@@ -260,7 +260,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			}
 		}
 		if (!strcmp(com, L"l")) {
-			while (TRUE) {
+			while (1) {
 				ch = getc();
 				if (ch == L'\r') {
 					number = to_int(&num)-2;
