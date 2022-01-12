@@ -284,17 +284,6 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 		}
 		if (!strcmp(com, L"q")) { return c; }
 
-		else {
-			switch (mode) {
-			case 1: {
-				number = 
-				break;
-			}
-			default:
-				break;
-			}
-		}
-
 	}
 /*
 	//warning msg
