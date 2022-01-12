@@ -8,7 +8,7 @@
 #define WIDTH_PER_CH	8
 #define HEIGHT_PER_CH	20
 #define MAX_COMMAND_LEN	100
-#define K_SPACE 51
+#define K_SPACE 52
 
 
 unsigned short *command(unsigned short *s1, unsigned short *s2, int n);
@@ -375,9 +375,9 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 				}
 			
 				if (ch == 8) {
-					c->sp-=8;
+					c->sp-=9;
 					c = print(moji,K_SPACE,c,black);
-					c->sp-=16;
+					c->sp-=18;
 					i--;
 					ch=0;
 				}
