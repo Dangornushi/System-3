@@ -218,7 +218,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	unsigned short file_buf[MAX_FILE_BUF];
 	unsigned short read_buf[MAX_FILE_BUF];
 	unsigned short file_data[MAX_FILE_BUF];
-	unsigned short *chi = 0;
+	unsigned short *ch = 0;
 
 	int i = 0;
 	int tmp = 0;
