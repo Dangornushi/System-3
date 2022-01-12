@@ -236,7 +236,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	unsigned short *num = 0;
 	unsigned short *s1 = 0;
 
-	while (1) {
+	while (TRUE) {
 		unsigned short com[MAX_FILE_BUF];
 		while (TRUE) {
 			ch[tmp] = getc();
