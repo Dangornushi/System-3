@@ -235,6 +235,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	unsigned short buf[] = {'n','u','m','b','e','r',' ','o','f',' ','l','i','n','e','s','>','\0'};
 	unsigned short *num = 0;
 	unsigned short *s1 = 0;
+	
 
 	while (1) {
 		unsigned short com[MAX_FILE_BUF];
@@ -263,12 +264,10 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 		}
 		i=0;
 		if (!strcmp(L"l",com)) {
-			puts(L"L");
 			while (1) {
 				ch = getc();
 				if (ch == L'\r') {
 					number = to_int(&num)-2;
-					puts(L"num");
 					break;
 				}
 				if (ch == 8) {
@@ -283,11 +282,43 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 					num++;			
 				}
 			}
-
 			c->sp = 0;
 			c->ent+=13;
 		}
-		if (!strcmp(L"q", com)) { puts(L"Q");return c; }
+		if (!strcmp(L"p", com)) {
+			status = SFSP->OpenVolume(SFSP, &root);
+			assert(status, L"SFSP->OpenVolume");
+
+			status = root->Open(root, &file, file_name, EFI_FILE_MODE_READ, 0);
+			assert(status, L"root->Open");
+	
+			status = file->Read(file, &buf_size, (void *)read_buf);
+			assert(status, L"file->Read");
+
+			int n = 0;
+			int n2 = 0;
+			int return_c = 0;
+	
+			for (int i=0;file_buf[i]!=L'\0';i++) {
+				c=putchar(moji,file_buf[i],c,c->char_color);
+			}
+
+			for (;read_buf[n]!=L'\0';n++, n2++) {
+				inp[n2] = read_buf[n]; 
+				if (read_buf[n]==L'\r') { 
+					n2 = 0;	
+					if (return_c == number) {
+						inp[n2] = L'\0';
+						break;
+					}
+					return_c++; 
+				}
+			}
+
+			file->Close(file);
+			root->Close(root);
+		}
+		if (!strcmp(L"q", com)) { return c; }
 		else {puts(L"else");}
 
 	}
