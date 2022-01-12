@@ -328,38 +328,34 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			assert(status, L"root->Open");
 			status = file->Read(file, &buf_size, (void *)read_buf);
 			assert(status, L"file->Read");
-	
+
 			int n = 0;
 			int n2 = 0;
 			int return_c = 0;
-	
-			for (int i=0;file_buf[i]!=L'\0';i++) {
-				c=putchar(moji,file_buf[i],c,c->char_color);
-			}
 
 			for (;read_buf[n]!=L'\0';n++, n2++) {
-				inp[n2] = read_buf[n]; 
 				if (read_buf[n]==L'\r') { 
-					n2 = 0;	
 					if (return_c == number) {
 						inp[n2] = L'\0';
 						break;
 					}
+					n2 = 0;	
 					return_c++; 
 				}
+				inp[n2] = read_buf[n]; 
 			}
-			
-			file->Close(file);
-			root->Close(root);
-			
+
 			for (int x=0;inp[x]!=L'\0';x++) {
 				c = putchar(moji,inp[x],c,c->char_color);
 			}
+
+			file->Close(file);
+			root->Close(root);
 			
 			c->sp-=2;
 			
 			i = n2;
-			
+
 			while (TRUE) {
 				c = putchar(moji,K_SPACE,c,black);
 				c->sp-=9;
