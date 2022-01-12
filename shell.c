@@ -261,6 +261,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 				i++;
 			}
 		}
+		i=0;
 		if (!strcmp(L"l",com)) {
 			puts(L"L");
 			while (1) {
