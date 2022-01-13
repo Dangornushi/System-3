@@ -404,6 +404,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 					}
 				}
 			}
+			puts(L"OK");
 
 			status = SFSP->OpenVolume(SFSP, &root);
 			assert(status, L"SFSP->OpenVolume");
