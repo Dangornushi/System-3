@@ -421,7 +421,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			root->Close(root);
 
 			c->sp = 0;
-			c->ent = ent+=13;
+			c->ent +=13;
 
 		}
 		else {}
