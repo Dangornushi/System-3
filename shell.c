@@ -420,6 +420,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			file->Close(file);
 			root->Close(root);
 
+			return c;
 		}
 		else {}
 
