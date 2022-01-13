@@ -354,7 +354,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			file->Close(file);
 			root->Close(root);
 			
-			c->sp-=2;
+			c->sp-=1;
 			
 			i = n2;
 
