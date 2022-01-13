@@ -356,7 +356,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			
 			c->sp-=2;
 			
-			i = n2+1;
+			i = n2-1;
 
 			while (TRUE) {
 				c = putchar(moji,K_SPACE,c,black);
