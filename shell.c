@@ -375,16 +375,16 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 				}
 			
 				if (ch == 8 && c->sp > 0) {
-					c->sp-=9;
+					c->sp-=8;
 					c = print(moji,K_SPACE,c,black);
-					c->sp-=18;
+					c->sp-=16;
 					i--;
 					ch=0;
 				}
 			
 				else {	
 					c = putchar(moji,ch,c,c->char_color);
-					c->sp-=8;
+					c->sp-=9;
 					inp[i] = ch;
 					i++;
 				}
