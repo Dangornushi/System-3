@@ -395,7 +395,8 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			c->sp = 0;
 			c->ent+=13;
 			inp[i] = L'\0';
-			for (int i = 0;i<MAX_FILE_BUF;i++) {
+			i = 0;
+			for (;i<MAX_FILE_BUF;i++) {
 				if (i != number) {}
 				else {
 					for (int s=0;inp[s]!=L'\0';s++) { 
