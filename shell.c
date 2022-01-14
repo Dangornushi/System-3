@@ -384,7 +384,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			
 				else {	
 					c = putchar(moji,ch,c,c->char_color);
-					c->sp-=9;
+					c->sp-=8;
 					inp[i] = ch;
 					i++;
 				}
