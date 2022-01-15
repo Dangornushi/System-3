@@ -324,6 +324,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 		}
 		if (!strcmp(L"w", com)) {
 			unsigned short read_buf[MAX_FILE_BUF];
+			buf_size = MAX_FILE_BUF;		
 	
 			status = SFSP->OpenVolume(SFSP, &root);
 			assert(status, L"SFSP->OpenVolume");
@@ -412,7 +413,6 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 				}
 			}
 
-			buf_size = MAX_FILE_BUF;		
 			file_buf[i]= L'\0';
 
 			status = SFSP->OpenVolume(SFSP, &root);
@@ -423,6 +423,8 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			assert(status, L"root->Open");
 			status = file->Write(file, &buf_size, (void *)file_buf);
 			assert(status, L"file->Write");
+
+			buf_size = MAX_FILE_BUF;		
 			
 			file->Flush(file);
 			file->Close(file);
