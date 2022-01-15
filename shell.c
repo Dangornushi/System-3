@@ -216,6 +216,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	struct EFI_FILE_PROTOCOL *file;
 	unsigned long long buf_size = MAX_FILE_BUF;
 	unsigned short file_data[MAX_FILE_BUF];
+	unsigned short file_buf[MAX_FILE_BUF];
 	unsigned short *ch = 0;
 
 	int i = 0;
@@ -395,7 +396,6 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 				}
 
 			}
-			unsigned short file_buf[MAX_FILE_BUF];
 
 			inp[i] = L'\0';
 
@@ -420,7 +420,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 						EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE | \
 						EFI_FILE_MODE_CREATE, 0);
 			assert(status, L"root->Open");
-			status = file->Write(file, &buf_size, (void *)file_buf);
+			status = file->Write(file, &i, (void *)file_buf);
 			assert(status, L"file->Write");
 			
 			file->Flush(file);
@@ -2427,8 +2427,9 @@ void cha(int mode, struct CONSOLE *console) {
 			cls();
 			proto(buf+6);
 		}
-		else if (!strcmp(L"le ",command(s1,buf,3))) 
+		else if (!strcmp(L"le ",command(s1,buf,3))) {
 			console = le(buf+3,moji, console);
+		}
 		//else if(!strcmp(L"vse ",command(s1,buf,4))) 
 		//	bse(buf+4);
 		else {
