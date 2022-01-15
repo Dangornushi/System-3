@@ -381,8 +381,8 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 					c->sp-=9;
 					c = print(moji,K_SPACE,c,black);
 					c->sp-=18;
-					inp[i] = 0
 					i--;
+					inp[i] = 0
 					ch=0;
 				}
 			
