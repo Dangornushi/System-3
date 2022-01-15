@@ -219,7 +219,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	unsigned short file_buf[MAX_FILE_BUF];
 	unsigned short *ch = 0;
 
-	int i = 0;
+	unsigned long long i = 0;
 	int tmp = 0;
 	int idx = 0;
 	int file_num;
