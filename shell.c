@@ -214,12 +214,12 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	unsigned long long status;
 	struct EFI_FILE_PROTOCOL *root;
 	struct EFI_FILE_PROTOCOL *file;
-	unsigned long long buf_size = MAX_FILE_BUF;
+	unsigned long long buf_size = MAX_FILE_BUF/2;
 	unsigned short file_data[MAX_FILE_BUF];
 	unsigned short file_buf[MAX_FILE_BUF];
 	unsigned short *ch = 0;
 
-	unsigned long long i = 0;
+	unsigned i = 0;
 	int tmp = 0;
 	int idx = 0;
 	int file_num;
@@ -420,7 +420,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 						EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE | \
 						EFI_FILE_MODE_CREATE, 0);
 			assert(status, L"root->Open");
-			status = file->Write(file, &i, (void *)file_buf);
+			status = file->Write(file, &buf_size, (void *)file_buf);
 			assert(status, L"file->Write");
 			
 			file->Flush(file);
