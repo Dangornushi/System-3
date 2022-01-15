@@ -374,7 +374,6 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 				if (ch == L'\r') {
 					c->sp=0;
 					c->ent+=13;
-					inp[i] = L'\0';
 					break;
 				}
 			
@@ -398,15 +397,19 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			}
 			unsigned short file_buf[MAX_FILE_BUF];
 
-			int s = 0;
-			for (;s<i;s++) {
-				file_buf[s] = inp[s];
-				//if (i != number) {}
-				//else {
-					//for (int s=0;inp[s]!=L'\0';s++) { 
-						//i++;
-					//}
-				//}
+			inp[i] = L'\0';
+
+			i = 0;
+
+			for (int i = 0;i<MAX_FILE_BUF;i++) {
+				if (i != number) {}
+
+				else {
+					for (int s=0;inp[s]!=L'\0';s++) { 
+						file_buf[i] = inp[s];
+						i++;
+					}
+				}
 			}
 
 			file_buf[i]= L'\0';
