@@ -361,7 +361,10 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			while (TRUE) {
 				c = putchar(moji,K_SPACE,c,black);
 				c->sp-=9;
-				c = putchar(moji,inp[i],c,c->char_color);
+				if (i>0)
+					c = putchar(moji,inp[i-1],c,c->char_color);
+				else 
+					c = putchar(moji,K_SPACE,c,c->char_color);
 				c = print(moji,K_SPACE,c,c->char_color);
 				c = putchar(moji,K_SPACE,c,black);
 				c->sp-=18;
@@ -385,15 +388,13 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 				else {	
 					c = putchar(moji,ch,c,c->char_color);
 					c->sp-=9;
-					inp[i+1] = ch;
+					inp[i] = ch;
 					i++;
 				}
 
 			}
 			unsigned short file_buf[MAX_FILE_BUF];
 
-			c->sp = 0;
-			c->ent+=13;
 			inp[i] = L'\0';
 			i = 0;
 			for (;i<MAX_FILE_BUF;i++) {
@@ -420,6 +421,9 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			file->Flush(file);
 			file->Close(file);
 			root->Close(root);
+
+			c->sp = 0;
+			c->ent+=13;
 
 			return c;
 		}
