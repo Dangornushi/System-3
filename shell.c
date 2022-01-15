@@ -214,7 +214,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	unsigned long long status;
 	struct EFI_FILE_PROTOCOL *root;
 	struct EFI_FILE_PROTOCOL *file;
-	unsigned long long buf_size = MAX_FILE_BUF/2;
+	unsigned long long buf_size = MAX_FILE_BUF;
 	unsigned short file_data[MAX_FILE_BUF];
 	unsigned short file_buf[MAX_FILE_BUF];
 	unsigned short *ch = 0;
@@ -412,6 +412,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 				}
 			}
 
+			buf_size = MAX_FILE_BUF;		
 			file_buf[i]= L'\0';
 
 			status = SFSP->OpenVolume(SFSP, &root);
