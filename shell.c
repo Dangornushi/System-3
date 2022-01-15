@@ -384,7 +384,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 					c->sp-=18;
 					if (i>=1) {
 						i--;
-						inp[i] = 0;
+						inp[i] = L'\0';
 					}
 					ch=0;
 				}
