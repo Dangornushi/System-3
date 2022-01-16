@@ -434,7 +434,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 
 			return c;
 		}
-		if (!strcmp(L"new", com)) {
+		if (!strcmp(L"an", com)) {
 
 			int i = 0;
 			unsigned short p;
@@ -471,190 +471,31 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			file->Close(file);
 			root->Close(root);
 		}
-		else {}
+		if (!strcmp(L"h", com)) {	
+			unsigned long long status;
+			struct EFI_FILE_PROTOCOL *root;
+			struct EFI_FILE_PROTOCOL *file;
+			unsigned long long buf_size = MAX_FILE_BUF;
+			unsigned short file_buf[MAX_FILE_BUF / 2];
 
-	}
-/*
-	//warning msg
-	for (int o=0;;o++) {
-		if (buf[o]==L'\0') { break; }
-		else c = putchar(moji, buf[o], c ,c->char_color);
-	}
-
-	//line num
-	while (TRUE) {
-		ch = getc();
-		if (ch == L'\r') {
-			number = to_int(&num)-2;
-			break;
-		}
-		if (ch == 8) {
-			c->sp-=9;
-			c = print(moji,26,c,black);
-			c->sp-=9;
-			ch=L'\0';
-		}
-		else {	
-			c = putchar(moji,ch,c,c->char_color);
-			num = ch;
-			num++;
-			
-		}
-
-	}
-
-	c->sp = 0;
-	c->ent+=13;
-
-	//line bunkatu
-	
 			status = SFSP->OpenVolume(SFSP, &root);
 			assert(status, L"SFSP->OpenVolume");
 
-			status = root->Open(root, &file, file_name, EFI_FILE_MODE_READ, 0);
+			status = root->Open(root, &file, L".help", EFI_FILE_MODE_READ, 0);
 			assert(status, L"root->Open");
 
 			status = file->Read(file, &buf_size, (void *)file_buf);
 			assert(status, L"file->Read");
 
 			for (int n=0;file_buf[n]!=L'\0';n++) {
-				if (enter_counter > number) {
-					break;
-				}
-				else if (file_buf[n]==L'\n') {
-					enter_counter++;	
-					file_data[i] = L'\0';
-					i=0;
-				}
-				else if (enter_counter==number) {
-					file_data[i] = file_buf[n];
-					i++;
-				}
+				console = putchar(moji,file_buf[n], console, console->char_color);
 			}
-
-			for (int i=0;file_data[i]!=L'\0';i++) 
-				c = putchar(moji,file_data[i], c, c->char_color);
 
 			file->Close(file);
 			root->Close(root);
-			c->sp=0;
-			c->ent+=13;
-
-	/*
-	status = SFSP->OpenVolume(SFSP, &root);
-	assert(status, L"SFSP->OpenVolume");
-
-	status = root->Open(root, &file, file_name, EFI_FILE_MODE_READ, 0);
-	assert(status, L"root->Open");
-	
-	status = file->Read(file, &buf_size, (void *)read_buf);
-	assert(status, L"file->Read");
-	
-	int n = 0;
-	int n2 = 0;
-	int return_c = 0;
-	
-	for (int i=0;file_buf[i]!=L'\0';i++) {
-		c=putchar(moji,file_buf[i],c,c->char_color);
-	}
-
-	for (;read_buf[n]!=L'\0';n++, n2++) {
-		inp[n2] = read_buf[n]; 
-		if (read_buf[n]==L'\r') { 
-			n2 = 0;	
-			if (return_c == number) {
-				inp[n2] = L'\0';
-				break;
-			}
-			return_c++; 
 		}
+		else {}
 	}
-	
-	file->Close(file);
-	root->Close(root);
-	
-	for (int x=0;inp[x]!=L'\0';x++) {
-		c = putchar(moji,inp[x],c,c->char_color);
-	}
-	
-	c->sp-=2;
-	
-	i = n2;
-	
-	while (TRUE) {
-		c = putchar(moji,K_SPACE,c,black);
-		c->sp-=9;
-		c = putchar(moji,inp[i-1],c,c->char_color);
-	
-		c = print(moji,51,c,c->char_color);
-		
-		c = putchar(moji,51,c,black);
-		c->sp-=18;
-
-		ch = getc();
-	
-		if (ch == L'\r') {
-			c->sp=0;
-			c->ent+=13;
-			break;
-		}
-	
-		if (ch == 8) {
-			c->sp-=8;
-			c = print(moji,51,c,black);
-			c->sp-=16;
-			i--;
-			ch=0;
-		}
-	
-		else {	
-			c = putchar(moji,ch,c,c->char_color);
-			c->sp-=9;
-			inp[i] = ch;
-			i++;
-		}
-
-	}
-
-	c->sp = 0;
-	c->ent+=13;
-
-	inp[i] = L'\0';
-
-	i = 0;
-
-	for (int i = 0;i<MAX_FILE_BUF;i++) {
-		if (i != number) {}
-
-		else {
-			for (int s=0;inp[s]!=L'\0';s++) { 
-				file_buf[i] = inp[s];
-				i++;
-			}
-		}
-	}
-
-	status = SFSP->OpenVolume(SFSP, &root);
-	assert(status, L"SFSP->OpenVolume");
-
-	status = root->Open(root, &file, file_name,
-			    EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE | \
-			    EFI_FILE_MODE_CREATE, 0);
-	assert(status, L"root->Open");
-
-	status = file->Write(file, &buf_size, (void *)file_buf);
-	assert(status, L"file->Write");
-
-	file->Flush(file);
-
-	file->Close(file);
-	root->Close(root);
-
-	c->sp = 0;
-	c->ent = ent+=13;
-
-	return c;
-	*/
 }
 
 void cat(unsigned short *file_name) {}
