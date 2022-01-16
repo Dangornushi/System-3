@@ -6,7 +6,7 @@ struct CONSOLE {
     struct EFI_GRAPHICS_OUTPUT_BLT_PIXEL char_color;
 	unsigned int sp;
 	unsigned int ent;	
-    unsigned short *com_his[50][256];
+    unsigned short com_his[50][256];
     int comHis_c;
 };
 
