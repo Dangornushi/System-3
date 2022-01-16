@@ -469,7 +469,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			root->Close(root);
 		}
 		if (!strcmp(L"new", com)) {
-			int idx = ls()
+			int idx = ls();
 			for (int i = 0; i < MAX_FILE_NAME_LEN; i++) {
 				file_list[idx].name[i] = *file_name++;
 				if (file_list[idx].name[i] == L'\0')
