@@ -92,11 +92,8 @@ void dialogue_get_filename(int idx)
 void touch(unsigned short *file_name) {
 	int idx = ls();
 	
-
-
 	for (int i = 0; i < MAX_FILE_NAME_LEN; i++) {
 		file_list[idx].name[i] = *file_name++;
-		putc(file_list[idx].name[i]);
 		if (file_list[idx].name[i] == L'\0')
 			break;
 	}
@@ -470,6 +467,16 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 
 			file->Close(file);
 			root->Close(root);
+		}
+		if (!strcmp(L"new", com)) {
+			int idx = ls()
+			for (int i = 0; i < MAX_FILE_NAME_LEN; i++) {
+				file_list[idx].name[i] = *file_name++;
+				if (file_list[idx].name[i] == L'\0')
+					break;
+			}
+			c->sp = 0;
+			c->ent+=13;
 		}
 		if (!strcmp(L"h", com)) {	
 			unsigned long long status;
