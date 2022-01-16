@@ -6,6 +6,8 @@ struct CONSOLE {
     struct EFI_GRAPHICS_OUTPUT_BLT_PIXEL char_color;
 	unsigned int sp;
 	unsigned int ent;	
+    unsigned short com_his[50][MAX_COMMAND_LEN];
+    int comHis_c;
 };
 
 void dialogue_get_filename(int idx);

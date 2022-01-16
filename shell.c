@@ -2120,6 +2120,9 @@ void cha(int mode, struct CONSOLE *console) {
 					console->ent += 13;
 					console->sp = 0;	
 					buf[n] = L'\0';
+					for (int tmp=0;tmp<n;tmp++)
+						console->com_his[console->comhis_c++] = buf[n];
+					console->comhis_c++;
 					break;
 				}
 				if (buf[n] == 8) {
@@ -2351,6 +2354,7 @@ void shell(void) {
 	cons = &c;
 	cons->sp = 0;
 	cons->ent = 0;
+	cons->comHis_c = 0;
 	cons = startup(cons);
 	cha(mode, cons);
 }
