@@ -434,6 +434,43 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 
 			return c;
 		}
+		if (!strcmp(L"new", com)) {
+
+			int i = 0;
+			unsigned short p;
+
+			while (TRUE) {
+				p = getc();
+
+				if (p == SC_ESC)
+					break;
+
+				putc(p);
+				file_buf[i++] = p;
+
+				if (p == L'\r') {
+					putc(L'\n');
+					file_buf[i++] = L'\n';
+				}
+			}
+			file_buf[i] = L'\0';
+
+			status = SFSP->OpenVolume(SFSP, &root);
+			assert(status, L"SFSP->OpenVolume");
+
+			status = root->Open(root, &file, file_name,
+						EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE | \
+						EFI_FILE_MODE_CREATE, 0);
+			assert(status, L"root->Open");
+
+			status = file->Write(file, &buf_size, (void *)file_buf);
+			assert(status, L"file->Write");
+
+			file->Flush(file);
+
+			file->Close(file);
+			root->Close(root);
+		}
 		else {}
 
 	}
