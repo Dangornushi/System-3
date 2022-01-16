@@ -400,20 +400,20 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 
 			inp[i] = L'\0';
 
-			i = 0;
+			int c = 0;
 
-			for (int i = 0;i<buf_size;i++) {
-				if (i != number) {}
+			for (;c<buf_size;c++) {
+				if (c != number) {}
 
 				else {
 					for (int s=0;inp[s]!=L'\0';s++) { 
-						file_buf[i] = inp[s];
-						i++;
+						file_buf[c] = inp[s];
+						c++;
 					}
 				}
 			}
 
-			file_buf[i]= L'\0';
+			file_buf[c]= L'\0';
 
 			status = SFSP->OpenVolume(SFSP, &root);
 			assert(status, L"SFSP->OpenVolume");
