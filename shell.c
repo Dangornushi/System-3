@@ -2116,9 +2116,6 @@ void cha(int mode, struct CONSOLE *console) {
 			console = print(moji,28,console,white);
 			while (1) { 
 				buf[n] = getc();
-				if (buf[n] == 38) {
-					puts(L"UP!");
-				}
 				if (buf[n] == L'\r') {
 					console->ent += 13;
 					console->sp = 0;	
@@ -2171,6 +2168,9 @@ void cha(int mode, struct CONSOLE *console) {
 
 		for (n = 0; n < MAX_COMMAND_LEN - 1;) {
 			buf[n] = getc();
+			if (buf[n] == 38) {
+				puts(L"UP!");
+			}
 			if (buf[n] == L'\r') {
 				console->ent += 13;
 				console->sp = 0;
