@@ -238,7 +238,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 
 	while (1) {
 		unsigned short com[MAX_FILE_BUF];
-		buf_size = MAX_FILE_BUFi;		
+		buf_size = MAX_FILE_BUF;		
 		tmp=0;
 
 		for (;tmp<MAX_COMMAND_LEN-1;tmp++) {
