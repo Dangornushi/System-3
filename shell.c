@@ -2098,9 +2098,6 @@ void cha(int mode, struct CONSOLE *console) {
 					console->ent += 13;
 					console->sp = 0;	
 					buf[n] = L'\0';
-					for (int tmp=0;tmp<n;tmp++)
-						console->com_his[console->comHis_c++][n] = buf[n];
-					console->comHis_c++;
 					break;
 				}
 				if (buf[n] == 8) {
@@ -2150,6 +2147,9 @@ void cha(int mode, struct CONSOLE *console) {
 			if (buf[n] == L'\r') {
 				console->ent += 13;
 				console->sp = 0;
+				for (int tmp=0;tmp<n;tmp++)
+					console->com_his[console->comHis_c++][n] = buf[n];
+				console->comHis_c++;
 				break;
 			}
 			if (buf[n] == 8) {
