@@ -2186,7 +2186,7 @@ void cha(int mode, struct CONSOLE *console) {
 			else {	
 				if (buf[n] == L'%') {
 					n = 0;
-					buf = L'\0';
+					&buf = L'\0';
 					for (;n<console->comHis_c;n++) {
 						buf[n] = console->com_his[1][n];
 						console=putchr(moji,buf[n],console,console->char_color);
@@ -2197,7 +2197,7 @@ void cha(int mode, struct CONSOLE *console) {
 			}
 		}
 		buf[n] = L'\0';
-
+				
 		if (!strcmp(L"edit ", command(s1,buf,5))) {
 			cls();
 			edit_mode(buf+5,moji);
@@ -2333,7 +2333,7 @@ void cha(int mode, struct CONSOLE *console) {
 
 			unsigned short err[] = {'e','r','r',' ','i','n','v','i','d',' ', 'c','o','m','m','a','n','d', '\0'};
 			
-			for (int i=0;err[i]!=L'\0';i++) { 
+			for (int { 
 				console = putchar(moji,err[i],console,console->char_color); 
 			}
 			console = print(moji,26, console,black);
