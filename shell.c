@@ -2189,7 +2189,7 @@ void cha(int mode, struct CONSOLE *console) {
 					buf = 0;
 					for (;n<console->comhis_c;n++) {
 						buf[n] = concole->com_his[1][n];
-						console=putchr(moji,buf[n],console,console->char_color)
+						console=putchr(moji,buf[n],console,console->char_color);
 					}
 				}
 				else console=putchar(moji,buf[n],console,console->char_color);
