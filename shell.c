@@ -2175,6 +2175,7 @@ void cha(int mode, struct CONSOLE *console) {
 				}
 				else console=putchar(moji,buf[n],console,console->char_color);
 				n++;
+				upAndown=0;
 			}
 		}
 		buf[n] = L'\0';
