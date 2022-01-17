@@ -832,16 +832,12 @@ void edit_mode(unsigned short* file_name, unsigned short moji[][12][8]) {
 	unsigned short *MODE = L"mode> \0";
 	unsigned short ch;	
 	unsigned short *inp = 0;
-
 	status = SFSP->OpenVolume(SFSP, &root);
 	assert(status, L"SFSP->OpenVolume");
-
 	status = root->Open(root, &file, file_name, EFI_FILE_MODE_READ, 0);
 	assert(status, L"root->Open");
-
 	status = file->Read(file, &buf_size, (void *)file_0);
 	assert(status, L"file->Read");
-
 	for (;L'\0'!=file_0[i];i++) {
 		if (file_0[i]==L'\r'){
 			ent += 12;
@@ -859,9 +855,7 @@ void edit_mode(unsigned short* file_name, unsigned short moji[][12][8]) {
 			ent_c++;
 		}
 	}
-
 	n=i;
-
 	file->Close(file);
 	root->Close(root);
 	
@@ -873,22 +867,17 @@ void edit_mode(unsigned short* file_name, unsigned short moji[][12][8]) {
 		putchar(moji,*inp,1,456,white);
 		putchar(moji,K_SPACE,10,456,black);
 		putchar(moji,file_buf[n+1],10,456,console->char_color);
-
 		*inp = getc();
-
 		sp--;
 		sp = putchar(moji,K_SPACE,sp,ent,black);
 		sp--;
 		sp = putchar(moji,file_buf[n-1],sp,ent,console->char_color);
-
 		sp = print(moji,K_SPACE,sp,ent,console->char_color);
 		
 		sp = putchar(moji,K_SPACE,sp,ent,black);
 		sp--;
 		sp = putchar(moji,file_buf[n+1],sp,ent,console->char_color);	
-
 		sp--;
-
 		if (!strcmp(inp,L"i")) {
 			sp = print(moji,K_SPACE,sp,ent,console->char_color);
 			sp--;
@@ -926,23 +915,17 @@ void edit_mode(unsigned short* file_name, unsigned short moji[][12][8]) {
 		}
 		if (!strcmp(inp,L"c")) {
 			file_buf[n] = L'\0';
-
 			status = SFSP->OpenVolume(SFSP, &root);
 			assert(status, L"SFSP->OpenVolume");
-
 			status = root->Open(root, &file, file_name,
 			    EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE | \
 			    EFI_FILE_MODE_CREATE, 0);
 			assert(status, L"root->Open");
-
 			status = file->Write(file, &buf_size, (void *)file_buf);
 			assert(status, L"file->Write");
-
 			file->Flush(file);
-
 			file->Close(file);
 			root->Close(root);
-
 //			le(file_name,moji, console);
 			
 			edit_mode(file_name, moji);
@@ -958,20 +941,15 @@ void edit_mode(unsigned short* file_name, unsigned short moji[][12][8]) {
 		if (!strcmp(inp,L"l")) {n++;}//ents_c++;n+=ents[ents_c];}
 		if (!strcmp(inp,L"w")) {
 			file_buf[n] = L'\0';
-
 			status = SFSP->OpenVolume(SFSP, &root);
 			assert(status, L"SFSP->OpenVolume");
-
 			status = root->Open(root, &file, file_name,
 			    EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE | \
 			    EFI_FILE_MODE_CREATE, 0);
 			assert(status, L"root->Open");
-
 			status = file->Write(file, &buf_size, (void *)file_buf);
 			assert(status, L"file->Write");
-
 			file->Flush(file);
-
 			file->Close(file);
 			root->Close(root);
 		}
@@ -2197,7 +2175,7 @@ void cha(int mode, struct CONSOLE *console) {
 			}
 		}
 		buf[n] = L'\0';
-				
+
 		if (!strcmp(L"edit ", command(s1,buf,5))) {
 			cls();
 			edit_mode(buf+5,moji);
@@ -2333,7 +2311,7 @@ void cha(int mode, struct CONSOLE *console) {
 
 			unsigned short err[] = {'e','r','r',' ','i','n','v','i','d',' ', 'c','o','m','m','a','n','d', '\0'};
 			
-			for (int { 
+			for (int i=0;err[i]!=L'\0';i++) { 
 				console = putchar(moji,err[i],console,console->char_color); 
 			}
 			console = print(moji,26, console,black);
