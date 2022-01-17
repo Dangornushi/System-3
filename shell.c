@@ -2143,6 +2143,7 @@ void cha(int mode, struct CONSOLE *console) {
 
 		console = print(moji,53, console,console->char_color);
 		console = print(moji, 51, console, console->back_color);
+		int upAndown = 0;
 
 		for (n = 0; n < MAX_COMMAND_LEN - 1;) {
 			buf[n] = getc();
@@ -2166,8 +2167,9 @@ void cha(int mode, struct CONSOLE *console) {
 					n = 0;
 					buf[0] = L'\0';
 					for (;n<console->comHis_c;n++) {
-						buf[n] = console->com_his[0][n];
+						buf[n] = console->com_his[upAndown][n];
 						console=print(moji,buf[n],console,console->char_color);
+						upAndown++;
 					}
 				}
 				else console=putchar(moji,buf[n],console,console->char_color);
