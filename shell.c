@@ -2148,7 +2148,7 @@ void cha(int mode, struct CONSOLE *console) {
 				console->ent += 13;
 				console->sp = 0;
 				for (int tmp=0;tmp<n;tmp++)
-					console->com_his[console->comHis_c++][n] = buf[n];
+					console->com_his[console->comHis_c++][tmp] = buf[tmp];
 				console->comHis_c++;
 				break;
 			}
