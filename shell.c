@@ -2168,9 +2168,6 @@ void cha(int mode, struct CONSOLE *console) {
 
 		for (n = 0; n < MAX_COMMAND_LEN - 1;) {
 			buf[n] = getc();
-			for (int tmp=0;tmp<buf[n];tmp++) {
-				puts(L"O");
-			}			
 			if (buf[n] == 38) {puts(L"OK");}
 			if (buf[n] == L'\r') {
 				console->ent += 13;
