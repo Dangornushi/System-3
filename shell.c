@@ -2147,9 +2147,11 @@ void cha(int mode, struct CONSOLE *console) {
 			if (buf[n] == L'\r') {
 				console->ent += 13;
 				console->sp = 0;
-				for (int tmp=0;tmp<n;tmp++)
-					console->com_his[console->comHis_c][tmp] = buf[tmp];
-				console->comHis_c++;;
+				int tmp = 0;
+				for (;tmp<n;tmp++)
+					console->com_his[console->comHis_c][tmp] = buf[tmp];	
+				console->com_his[console->comHis_c][tmp] = L'\0';
+				console->comHis_c++;
 				break;
 			}
 			if (buf[n] == 8) {
@@ -2165,9 +2167,9 @@ void cha(int mode, struct CONSOLE *console) {
 			else {	
 				if (buf[n] == L'%') {
 					n=0;
-					for (;n<console->comHis_c;n++) {
+					for (;console->com_his[upAndown][n] != L'\0';n++) {
 						buf[n] = console->com_his[upAndown][n];
-						console=print(moji,buf[n],console,console->char_color);
+						console=putchar(moji,buf[n],console,console->char_color);
 					}
 					upAndown++;
 				}
