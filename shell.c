@@ -2184,7 +2184,7 @@ void cha(int mode, struct CONSOLE *console) {
 				else {}
 			}
 			else {	
-				if (buf[n] == 0xFFFFFFE0 && buf[n] == 0x48) {
+				if (buf[n] == L'%') {
 					puts(L"OK");
 				}
 				else console=putchar(moji,buf[n],console,console->char_color);
