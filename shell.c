@@ -2186,9 +2186,9 @@ void cha(int mode, struct CONSOLE *console) {
 			else {	
 				if (buf[n] == L'%') {
 					n = 0;
-					buf = 0;
+					buf = L'\0';
 					for (;n<console->comhis_c;n++) {
-						buf[n] = concole->com_his[1][n];
+						buf[n] = console->com_his[1][n];
 						console=putchr(moji,buf[n],console,console->char_color);
 					}
 				}
