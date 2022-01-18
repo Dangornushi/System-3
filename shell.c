@@ -2145,6 +2145,7 @@ void cha(int mode, struct CONSOLE *console) {
 		for (n = 0; n < MAX_COMMAND_LEN - 1;) {
 			buf[n] = getc();
 			if (buf[n] == L'\r') {
+				upAndown=0;
 				console->ent += 13;
 				console->sp = 0;
 				int tmp = 0;
@@ -2178,7 +2179,6 @@ void cha(int mode, struct CONSOLE *console) {
 				}
 				else console=putchar(moji,buf[n],console,console->char_color);
 				n++;
-				upAndown=0;
 			}
 		}
 		buf[n] = L'\0';
