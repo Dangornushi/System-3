@@ -2170,7 +2170,7 @@ void cha(int mode, struct CONSOLE *console) {
 					n=0;
 					console->sp=0;
 					for (int tmp=0;tmp<50;tmp++) { console=putchar(moji,52,console, console->back_color); }
-					console->sp=40;
+					console->sp=0;
 					int ind = 0;
 					for (;ind<4;) {
 						console = print(moji,put[ind]-97, console,console->char_color);
@@ -2185,9 +2185,9 @@ void cha(int mode, struct CONSOLE *console) {
 
 				if (buf[n] == L'$') {
 					n=0;
-					console->sp=40;
+					console->sp=0;
 					for (int tmp=0;tmp<50;tmp++) { console=putchar(moji,52,console, console->back_color); }
-					console->sp=40;
+					console->sp=0;
 					int ind = 0;
 					for (;ind<4;) {
 						console = print(moji,put[ind]-97, console,console->char_color);
