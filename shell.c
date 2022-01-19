@@ -2171,11 +2171,11 @@ void cha(int mode, struct CONSOLE *console) {
 					console->sp=0;
 					for (int tmp=0;tmp<50;tmp++) { console=putchar(moji,52,console, console->back_color); }
 					console->sp=0;
-					int ind = 0;
-					for (;ind<4;) {
-						console = print(moji,put[ind]-97, console,console->char_color);
-						ind++;
+					int tmp = 0;
+					for (;tmp<4;tmp++) {
+						console = print(moji,put[tmp]-97, console,console->char_color);
 					}
+					console->sp+=9;
 					for (;console->com_his[console->comHis_c-1-upAndown][n] != L'\0';n++) {
 						buf[n] = console->com_his[console->comHis_c-1-upAndown][n];
 						console=putchar(moji,buf[n],console,console->char_color);
@@ -2188,11 +2188,10 @@ void cha(int mode, struct CONSOLE *console) {
 					console->sp=0;
 					for (int tmp=0;tmp<50;tmp++) { console=putchar(moji,52,console, console->back_color); }
 					console->sp=0;
-					int ind = 0;
-					for (;ind<4;) {
-						console = print(moji,put[ind]-97, console,console->char_color);
-						ind++;
+					for (;tmp<4;tmp++) {
+						console = print(moji,put[tmp]-97, console,console->char_color);
 					}
+					console->sp+=9;
 					for (;console->com_his[console->comHis_c-1-upAndown][n] != L'\0';n++) {
 						buf[n] = console->com_his[console->comHis_c-1-upAndown][n];
 						console=putchar(moji,buf[n],console,console->char_color);
