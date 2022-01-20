@@ -2149,8 +2149,9 @@ void cha(int mode, struct CONSOLE *console) {
 				console->ent += 13;
 				console->sp = 0;
 				int tmp = 0;
-				for (;buf[tmp]!=L'\0';tmp++)
+				for (;buf[tmp]!=L'\0';tmp++) {
 					console->com_his[console->comHis_c][tmp] = buf[tmp];	
+				}
 				console->com_his[console->comHis_c][tmp] = L'\0';
 				console->comHis_c++;
 				break;
@@ -2176,8 +2177,8 @@ void cha(int mode, struct CONSOLE *console) {
 						console = print(moji,put[tmp]-97, console,console->char_color);
 					}
 					console->sp+=9;
-					for (;console->com_his[console->comHis_c-upAndown][n] != L'\0';n++) {
-						buf[n] = console->com_his[console->comHis_c-upAndown][n];
+					for (;console->com_his[console->comHis_c-1-upAndown][n] != L'\0';n++) {
+						buf[n] = console->com_his[console->comHis_c-1-upAndown][n];
 						console=putchar(moji,buf[n],console,console->char_color);
 					}
 					n=0;
