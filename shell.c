@@ -2167,8 +2167,7 @@ void cha(int mode, struct CONSOLE *console) {
 				}
 				else {}
 			}
-			else {	
-				if (buf[n] == L'%') {
+			if (buf[n] == L'%') {
 					n=0;
 					console->sp=0;
 					for (int tmp=0;tmp<50;tmp++) { console=putchar(moji,52,console, console->back_color); }
@@ -2183,9 +2182,8 @@ void cha(int mode, struct CONSOLE *console) {
 						console=putchar(moji,buf[n],console,console->char_color);
 					}
 					upAndown++;
-				}
-
-				if (buf[n] == L'$') {
+			}
+			if (buf[n] == L'$') {
 					n=0;
 					console->sp=0;
 					for (int tmp=0;tmp<50;tmp++) { console=putchar(moji,52,console, console->back_color); }
@@ -2199,13 +2197,12 @@ void cha(int mode, struct CONSOLE *console) {
 						console=putchar(moji,buf[n],console,console->char_color);
 					}
 					upAndown--;
-				}
+			}
 					
 
-				else {
+			else {
 					console=putchar(moji,buf[n],console,console->char_color);
 					n++;
-				}
 			}
 		}
 		buf[n] = L'\0';
