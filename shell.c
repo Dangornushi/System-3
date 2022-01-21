@@ -2185,6 +2185,7 @@ void cha(int mode, struct CONSOLE *console) {
 					n--;
 					console->sp-=9;
 					console=putchar(moji,K_SPACE,console,console->back_color);
+					console->sp-=9;
 					upAndown++;
 			}
 			if (buf[n] == L'$') {
