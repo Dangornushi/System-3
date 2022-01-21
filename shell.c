@@ -2164,6 +2164,7 @@ void cha(int mode, struct CONSOLE *console) {
 					console->sp-=9;
 					n--;
 					buf[n]=0;
+					n++;
 				}
 				else {}
 			}
@@ -2202,8 +2203,10 @@ void cha(int mode, struct CONSOLE *console) {
 				}
 					
 
-				else console=putchar(moji,buf[n],console,console->char_color);
-			}
+				else {
+					console=putchar(moji,buf[n],console,console->char_color);
+					n++;
+				}
 		}
 		buf[n] = L'\0';
 
