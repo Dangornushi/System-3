@@ -2182,7 +2182,6 @@ void cha(int mode, struct CONSOLE *console) {
 						buf[n] = console->com_his[console->comHis_c-1-upAndown][n];
 						console=putchar(moji,buf[n],console,console->char_color);
 					}
-					n=0;
 					upAndown++;
 				}
 
@@ -2199,7 +2198,6 @@ void cha(int mode, struct CONSOLE *console) {
 						buf[n] = console->com_his[console->comHis_c-1-upAndown][n];
 						console=putchar(moji,buf[n],console,console->char_color);
 					}
-					n = 0;
 					upAndown--;
 				}
 					
