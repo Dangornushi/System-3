@@ -2164,7 +2164,6 @@ void cha(int mode, struct CONSOLE *console) {
 					console->sp-=9;
 					n--;
 					buf[n]=0;
-					n++;
 				}
 				else {}
 			}
