@@ -2179,8 +2179,8 @@ void cha(int mode, struct CONSOLE *console) {
 					}
 					console->sp+=9;
 					for (;console->com_his[console->comHis_c-1-upAndown][n] != L'\0';n++) {
+						console=putchar(moji,console->com_his[console->comHis_c-1-upAndown][n],console,console->char_color);
 						buf[n] = console->com_his[console->comHis_c-1-upAndown][n];
-						console=putchar(moji,buf[n],console,console->char_color);
 					}
 					n--;
 					upAndown++;
