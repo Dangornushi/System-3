@@ -2150,10 +2150,11 @@ void cha(int mode, struct CONSOLE *console) {
 				console->sp = 0;
 				buf[n] = L'\0';
 				int tmp = 0;
-				for (;buf[tmp]!=L'\0';tmp++) {
+				//for (;buf[tmp]!=L'\0';tmp++) {
+				for (;tmp<n;tmp++) {
 					console->com_his[console->comHis_c][tmp] = buf[tmp];	
 				}
-				//console->com_his[console->comHis_c][tmp] = L'\0';
+				console->com_his[console->comHis_c][tmp] = L'\0';
 				console->comHis_c++;
 				break;
 			}
