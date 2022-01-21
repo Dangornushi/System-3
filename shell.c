@@ -2183,6 +2183,8 @@ void cha(int mode, struct CONSOLE *console) {
 						buf[n] = console->com_his[console->comHis_c-1-upAndown][n];
 					}
 					n--;
+					console->sp-=9;
+					console=putchar(moji,K_SPACE,console,console->back_color);
 					upAndown++;
 			}
 			if (buf[n] == L'$') {
