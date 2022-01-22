@@ -639,14 +639,14 @@ struct CONSOLE *proc(unsigned short *file_name, struct CONSOLE* c) {
 	status = SFSP->OpenVolume(SFSP, &root);
 	assert(status, L"SFSP->OpenVolume");
 
-	status = root->Open(root, &file, buf+4, EFI_FILE_MODE_READ, 0);
+	status = root->Open(root, &file, file_name, EFI_FILE_MODE_READ, 0);
 	assert(status, L"root->Open");
 
 	status = file->Read(file, &buf_size, (void *)file_buf);
 	assert(status, L"file->Read");
 
 	for (int n=0;file_buf[n]!=L'\0';n++) {
-			console = putchar(moji,file_buf[n], console, console->char_color);
+			c = putchar(moji,file_buf[n], c, c->char_color);
 	}
 
 	file->Close(file);
