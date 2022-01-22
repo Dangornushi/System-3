@@ -2133,12 +2133,11 @@ void cha(int mode, struct CONSOLE *console) {
 
 		unsigned short put[] = {'r','o','o','t', '>'};
 		int ind = 0;
-		for (;ind<4;) {
+		for (;ind<5;) {
 			console = print(moji,put[ind]-97, console,console->char_color);
 			ind++;
 		}
 
-		console = print(moji,53, console,console->char_color);
 		console = print(moji, 51, console, console->back_color);
 		int upAndown = 0;
 
