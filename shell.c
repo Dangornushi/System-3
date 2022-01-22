@@ -629,6 +629,32 @@ void proto(unsigned short *file_name) {
 	cls();
 }
 
+void proc(unsigned short *file_name, struct CONSOLE c) {
+	unsigned long long status;
+	struct EFI_FILE_PROTOCOL *root;
+	struct EFI_FILE_PROTOCOL *file;
+	unsigned long long buf_size = MAX_FILE_BUF;
+	unsigned short file_buf[MAX_FILE_BUF / 2];
+
+	status = SFSP->OpenVolume(SFSP, &root);
+	assert(status, L"SFSP->OpenVolume");
+
+	status = root->Open(root, &file, buf+4, EFI_FILE_MODE_READ, 0);
+	assert(status, L"root->Open");
+
+	status = file->Read(file, &buf_size, (void *)file_buf);
+	assert(status, L"file->Read");
+
+	for (int n=0;file_buf[n]!=L'\0';n++) {
+			console = putchar(moji,file_buf[n], console, console->char_color);
+	}
+
+	file->Close(file);
+	root->Close(root);
+	console->sp=0;
+	console->ent+=13;
+}
+
 void bse(unsigned short *file_name) {
 	ST->ConOut->ClearScreen(ST->ConOut);	
 
@@ -2173,7 +2199,7 @@ void cha(int mode, struct CONSOLE *console) {
 					for (int tmp=0;tmp<50;tmp++) { console=putchar(moji,52,console, console->back_color); }
 					console->sp=0;
 					int tmp = 0;
-					for (;tmp<4;tmp++) {
+					for (;tmp<5;tmp++) {
 						console = putchar(moji,put[tmp], console,console->char_color);
 					}
 					console->sp+=9;
@@ -2192,7 +2218,7 @@ void cha(int mode, struct CONSOLE *console) {
 					console->sp=0;
 					for (int tmp=0;tmp<50;tmp++) { console=putchar(moji,52,console, console->back_color); }
 					console->sp=0;
-					for (int tmp = 0;tmp<4;tmp++) {
+					for (int tmp = 0;tmp<5;tmp++) {
 						console = putchar(moji,put[tmp], console,console->char_color);
 					}
 					console->sp+=9;
@@ -2337,6 +2363,11 @@ void cha(int mode, struct CONSOLE *console) {
 			console->ent=0;
 			cls();
 			proto(buf+6);
+		}
+		else if (!strcmp("proc ",command(s1,buf,6))) {
+			proc(buf+5,console);
+			console->sp=0;
+			console->ent+=13;
 		}
 		else if (!strcmp(L"le ",command(s1,buf,3))) {
 			console = le(buf+3,moji, console);
