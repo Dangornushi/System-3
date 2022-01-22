@@ -651,8 +651,8 @@ struct CONSOLE *proc(unsigned short *file_name, unsigned short moji[][12][8], st
 
 	file->Close(file);
 	root->Close(root);
-	console->sp=0;
-	console->ent+=13;
+	c->sp=0;
+	c->ent+=13;
 
 	return c;
 }
