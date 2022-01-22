@@ -629,7 +629,7 @@ void proto(unsigned short *file_name) {
 	cls();
 }
 
-struct CONSOLE *proc(unsigned short *file_name, struct CONSOLE* c) {
+struct CONSOLE *proc(unsigned short *file_name, unsigned short moji[][12][8], struct CONSOLE *c) {
 	unsigned long long status;
 	struct EFI_FILE_PROTOCOL *root;
 	struct EFI_FILE_PROTOCOL *file;
@@ -2367,7 +2367,7 @@ void cha(int mode, struct CONSOLE *console) {
 			proto(buf+6);
 		}
 		else if (!strcmp("proc ",command(s1,buf,6))) {
-			console = proc(buf+5,console);
+			console = proc(buf+5,moji,console);
 			console->sp=0;
 			console->ent+=13;
 		}
