@@ -2131,7 +2131,7 @@ void cha(int mode, struct CONSOLE *console) {
 	while (1) {
 		unsigned int n;
 
-		unsigned short put[] = {'r','o','o','t', '>'};
+		unsigned short put[] = {'r','o','o','t', '!'};
 		int ind = 0;
 		for (;ind<5;) {
 			console = putchar(moji,put[ind], console,console->char_color);
