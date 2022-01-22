@@ -2189,6 +2189,7 @@ void cha(int mode, struct CONSOLE *console) {
 				//if (console->sp > 18) {
 					console->sp-=9;
 					console = putchar(moji, 52, console, console->back_color);
+					puts(L"OK");
 					console->sp-=9;
 					n--;
 					buf[n]=0;
