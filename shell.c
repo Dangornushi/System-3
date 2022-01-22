@@ -2188,7 +2188,7 @@ void cha(int mode, struct CONSOLE *console) {
 			if (buf[n] == 8) {
 				//if (console->sp > 18) {
 					console->sp-=9;
-					console = print(moji, 52, console, console->back_color);
+					console = putchar(moji, 52, console, console->back_color);
 					console->sp-=9;
 					n--;
 					buf[n]=0;
