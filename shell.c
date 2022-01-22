@@ -646,7 +646,7 @@ struct CONSOLE *proc(unsigned short *file_name, unsigned short moji[][12][8], st
 	assert(status, L"file->Read");
 
 	for (int n=0;file_buf[n]!=L'\0';n++) {
-			c = putchar(moji,file_buf[n], c, c->char_color);
+		c = putchar(moji,file_buf[n], c, c->char_color);
 	}
 
 	file->Close(file);
@@ -702,8 +702,8 @@ void bse(unsigned short *file_name) {
 			assert(status, L"SFSP->OpenVolume");
 
 			status = root->Open(root, &file, file_name,
-			    EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE | \
-			    EFI_FILE_MODE_CREATE, 0);
+				EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE | \
+				EFI_FILE_MODE_CREATE, 0);
 			assert(status, L"root->Open");
 
 			status = file->Write(file, &buf_size, (void *)file_buf);
