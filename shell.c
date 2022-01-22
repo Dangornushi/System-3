@@ -2190,7 +2190,7 @@ void cha(int mode, struct CONSOLE *console) {
 					console->sp-=9;
 					console = putchar(moji, 52, console, console->back_color);
 					puts(L"OK");
-					console->sp-=9;
+					console->sp-=18;
 					n--;
 					buf[n]=0;
 					n--;
