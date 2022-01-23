@@ -109,8 +109,7 @@ void pstat(void)
 	SPP->Reset(SPP, FALSE);
 
 	while (1) {
-		ST->BootServices->WaitForEvent(1, &(SPP->WaitForInput),
-					       &waitidx);
+		ST->BootServices->WaitForEvent(1, &(SPP->WaitForInput), &waitidx);
 		status = SPP->GetState(SPP, &s);
 		if (!status) {
 			puth(s.RelativeMovementX, 8);
@@ -2368,7 +2367,7 @@ void cha(int mode, struct CONSOLE *console) {
 			cls();
 			proto(buf+6);
 		}
-		else if (!strcmp("proc ",command(s1,buf,6))) {
+		else if (!strcmp("proc ",command(s1,buf,5))) {
 			console = proc(buf+5,moji,console);
 			console->sp=0;
 			console->ent+=13;
