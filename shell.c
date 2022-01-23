@@ -323,25 +323,33 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 		if (!strcmp(L"w", com)) {
 			unsigned short read_buf[MAX_FILE_BUF];
 	
-			unsigned long long status;
-			struct EFI_FILE_PROTOCOL *root;
-			struct EFI_FILE_PROTOCOL *file;
-			unsigned long long buf_size = MAX_FILE_BUF;
-			unsigned short file_buf[MAX_FILE_BUF / 2];
-
 			status = SFSP->OpenVolume(SFSP, &root);
 			assert(status, L"SFSP->OpenVolume");
 
 			status = root->Open(root, &file, file_name, EFI_FILE_MODE_READ, 0);
 			assert(status, L"root->Open");
-
-			status = file->Read(file, &buf_size, (void *)file_buf);
+	
+			status = file->Read(file, &buf_size, (void *)read_buf);
 			assert(status, L"file->Read");
 
 			int n = 0;
+			int n2 = 0;
+			int return_c = 0;
 
-			for (;file_buf[n]!=L'\0';n++) {
-				c = putchar(moji,file_buf[n], c, c->char_color);
+			for (;read_buf[n]!=L'\0';n++, n2++) {
+				if (read_buf[n]==L'\r') { 
+					if (return_c == number) {
+						inp[n2] = L'\0';
+						break;
+					}
+					n2 = 0;	
+					return_c++; 
+				}
+				inp[n2] = read_buf[n]; 
+			}
+			
+			for (int x=0;inp[x]!=L'\0';x++) {
+				c = putchar(moji,inp[x],c,c->char_color);
 			}
 
 			file->Close(file);
