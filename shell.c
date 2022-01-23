@@ -404,8 +404,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 
 			//	else {
 					for (int s=0;inp[s]!=L'\0';s++) { 
-						file_buf[co] = inp[s];
-						co++;
+						file_buf[s] = inp[s];
 					}
 			//	}
 		//	}
