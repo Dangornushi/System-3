@@ -400,14 +400,14 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			int co = 0;
 
 			for (;co<buf_size;co++) {
-				if (co != number) {}
+		//		if (co != number) {}
 
-				else {
+			//	else {
 					for (int s=0;inp[s]!=L'\0';s++) { 
 						file_buf[co] = inp[s];
 						co++;
 					}
-				}
+			//	}
 			}
 
 			file_buf[co]= L'\0';
