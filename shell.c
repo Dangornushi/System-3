@@ -2367,7 +2367,7 @@ void cha(int mode, struct CONSOLE *console) {
 			cls();
 			proto(buf+6);
 		}
-		else if (!strcmp("proc ",command(s1,buf,5))) {
+		else if (!strcmp(L"proc ",command(s1,buf,5))) {
 			console = proc(buf+5,moji,console);
 			console->sp=0;
 			console->ent+=13;
