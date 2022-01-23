@@ -338,7 +338,9 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			status = file->Read(file, &buf_size, (void *)file_buf);
 			assert(status, L"file->Read");
 
-			for (int n=0;file_buf[n]!=L'\0';n++) {
+			int n = 0;
+
+			for (;file_buf[n]!=L'\0';n++) {
 				c = putchar(moji,file_buf[n], c, c->char_color);
 			}
 
