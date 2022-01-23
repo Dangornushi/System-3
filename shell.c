@@ -399,7 +399,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 
 			int co = 0;
 
-			for (;co<buf_size;co++) {
+			//for (;co<buf_size;co++) {
 		//		if (co != number) {}
 
 			//	else {
@@ -408,7 +408,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 						co++;
 					}
 			//	}
-			}
+		//	}
 
 			file_buf[co]= L'\0';
 
