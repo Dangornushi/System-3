@@ -477,6 +477,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 
 			for (;read_buf[tmp] != L'\0';tmp++) {}
 			read_buf[tmp] = L'\r';
+			read_buf[tmp+1] = L'\n';
 
 
 			status = SFSP->OpenVolume(SFSP, &root);
