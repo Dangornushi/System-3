@@ -335,9 +335,10 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			int n2 = 0;
 			int return_c = 0;
 
-			for (;read_buf[n]!=L'\0';n++, n2++) {
+			for (;read_buf[n]!=L'\0';n++) {
 				inp[n2] = read_buf[n]; 
-				if (read_buf[n]==L'\n') { 
+				n2++;
+				if (inp[n2]==L'\n') { 
 					if (return_c == number) {
 						break;
 					}
