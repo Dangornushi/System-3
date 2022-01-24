@@ -399,15 +399,9 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			inp[i] = L'\0';
 
 			int s = 0;
-			//for (;co<buf_size;co++) {
-		//		if (co != number) {}
-
-			//	else {
-					for (;inp[s]!=L'\0';s++) { 
-						file_buf[s] = inp[s];
-					}
-			//	}
-		//	}
+			for (;inp[s]!=L'\0';s++) { 
+				file_buf[s] = inp[s];
+			}
 
 			file_buf[s]= L'\0';
 
@@ -466,6 +460,40 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 
 			file->Close(file);
 			root->Close(root);
+		}
+		if (!strcmp(L"add r", com)) {
+			unsigned short read_buf[MAX_FILE_BUF];
+		
+			status = SFSP->OpenVolume(SFSP, &root);
+			assert(status, L"SFSP->OpenVolume");
+
+			status = root->Open(root, &file, file_name, EFI_FILE_MODE_READ, 0);
+			assert(status, L"root->Open");
+		
+			status = file->Read(file, &buf_size, (void *)read_buf);
+			assert(status, L"file->Read");
+
+			int tmp = 0;
+
+			for (;read_buf[tmp] != L'\0';tmp++) {}
+			read_buf[tmp] = L'\r';
+
+
+			status = SFSP->OpenVolume(SFSP, &root);
+			assert(status, L"SFSP->OpenVolume");
+			status = root->Open(root, &file, file_name,
+						EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE | \
+						EFI_FILE_MODE_CREATE, 0);
+			assert(status, L"root->Open");
+			status = file->Write(file, &buf_size, (void *)read_buf);
+			assert(status, L"file->Write");
+
+			file->Flush(file);
+			file->Close(file);
+			root->Close(root);
+
+			c->sp=0;
+			c->ent+=13;
 		}
 		if (!strcmp(L"new", com)) {
 			int idx = ls();
@@ -568,7 +596,23 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512]) {
 			if (!strcmp(L"mov ",op)) {
 				memory[to_int(left)] = to_int(right);
 			}
+
+			if (!strcmp(L"add ", op)) {
+				memory[to_int(left)] = memory[to_int(left)] + memory[to_int(right)];
+			}
+
+			if (!strcmp(L"min ", op)) {
+				memory[to_int(left)] = memory[to_int(left)] - memory[to_int(right)];
+			}
+
+			if (!strcmp(L"mul ", op)) { 
+				memory[to_int(left)] = memory[to_int(left)] * memory[to_int(right)];
+			}
 			
+			if (!strcmp(L"div ", op)) { 
+				memory[to_int(left)] = memory[to_int(left)] / memory[to_int(right)];
+			}
+
 			if (!strcmp(L"msg ",op)) {		
 				putc(memory[to_int(left)]/10+48);
 				int f_place = memory[to_int(left)]-((memory[to_int(left)]/10)*10);
