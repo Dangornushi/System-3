@@ -511,8 +511,6 @@ int get(void)
 
 void proto_run(unsigned short code[128],int j, unsigned short memory[512]) {	
 	unsigned short line[128];
-	unsigned short left[50];
-	unsigned short right[50];
 
 	int l = 0;
 
@@ -527,6 +525,10 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512]) {
 
 			line[l] = L'\0';
 			strncpy(op,line,4);
+			
+			unsigned short left[50];
+			unsigned short right[50];
+
 			for (int n = 4; line[n] != L'\0';n++) {
 				if (line[n] == L' ') { 
 					space = 1;
