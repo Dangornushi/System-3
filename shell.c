@@ -548,9 +548,10 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512]) {
 			if (!strcmp(L"min ", op)) {
 				int tmp = memory[to_int(left)] - memory[to_int(right)];
 				memory[to_int(left)] = tmp;
-				for (int tmp= 0;tmp < to_int(right);tmp++) {
-					puts(L"a");
-				}
+				puts(right);
+				//for (int tmp= 0;tmp < to_int(right);tmp++) {
+				//	puts(L"a");
+				//}
 
 			}
 
