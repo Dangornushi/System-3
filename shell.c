@@ -558,7 +558,9 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512]) {
 			}
 
 			if (!strcmp(L"msg ",op)) {		
-				putc(memory[to_int(left)]/10+48);
+				for (int tmp= 0;tmp < memory[to_int(left)]/10+48;tmp++) {
+					puts(L"OK");
+				}
 				int f_place = memory[to_int(left)]-((memory[to_int(left)]/10)*10);
 				putc(f_place+48);
 			}
