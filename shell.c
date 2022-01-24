@@ -549,6 +549,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512]) {
 				int tmp = memory[to_int(left)] - memory[to_int(right)];
 				memory[to_int(left)] = tmp;
 				puts(right);
+				puts(L"\n");
 				//for (int tmp= 0;tmp < to_int(right);tmp++) {
 				//	puts(L"a");
 				//}
@@ -736,8 +737,13 @@ void proto_inter() {
 		}
 		else  {
 			for (;*command!=L'\0';j++) {
-				unsigned short data = *command++;
-				code_data[j] = data;
+				if (*command==8) {
+					j-=2;
+				}
+				else {
+					unsigned short data = *command++;
+					code_data[j] = data;
+				}
 			}
 			code_data[j] = L'\n';
 			j++;
