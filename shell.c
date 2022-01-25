@@ -531,7 +531,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512]) {
 
 			for (int n = 4; line[n] != L'\0';n++) {
 				if (line[n] == L' ') { 
-					let[m] = L'\0';
+					left[m] = L'\0';
 					space = 1;
 					m = 0;
 				}
