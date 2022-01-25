@@ -550,7 +550,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512]) {
 			if (!strcmp(L"min ", op)) {
 				int m = 0;
 
-				for (int n = 4; line[n] != L'\0';n++) {
+				for (int n = 4; line[n+1] != L'\0';n++) {
 					if (line[n] == L' ') { 
 						space = 1;
 						m = 0;
@@ -564,7 +564,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512]) {
 				puts(L":");
 				puts(right);
 				puts(L"/");
-				puts(line);
+				puts(line)
 				puts(L"\r\n");
 
 			}
