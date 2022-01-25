@@ -555,7 +555,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512]) {
 
 			if (!strcmp(L"min ", op)) {
 				int m = 0;
-
+				memory[to_int(left)] = memory[to_int(left)] + memory[to_int(right)];
 			}
 
 			if (!strcmp(L"mul ", op)) { 
