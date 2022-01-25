@@ -548,7 +548,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512]) {
 
 			if (!strcmp(L"mov ",op)) {
 				memory[to_int(left)] = r;
-				puts(left);
+				puts(right);
 				puts(L"\n");
 			}
 
