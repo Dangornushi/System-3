@@ -517,6 +517,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512]) {
 	for (int k=0;k<j;k++,l++) {
 		if (code[k] != L'\n') {
 			line[l] = code[k];
+			l=0;
 		}
 		else {	
 			unsigned short* op = 0;
@@ -548,7 +549,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512]) {
 			}
 
 			if (!strcmp(L"min ", op)) {
-				memory[to_int(left)] = memory[to_int(left)] - memory[to_int(right)];
+				//memory[to_int(left)] = memory[to_int(left)] - memory[to_int(right)];
 				puts(left);
 				puts(L":");
 				puts(right);
