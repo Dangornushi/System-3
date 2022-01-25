@@ -513,6 +513,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512]) {
 	unsigned short line[128];
 
 	int l = 0;
+	int space = 0;
 
 	for (int k=0;k<j;k++,l++) {
 		if (code[k] != L'\n') {
@@ -521,7 +522,6 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512]) {
 		}
 		else {	
 			unsigned short* op = 0;
-			int space = 0;
 			int m = 0;
 
 			line[l] = L'\0';
