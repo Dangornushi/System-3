@@ -542,6 +542,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512]) {
 				}
 			}
 
+			right[m] = L'\0';
 			space = 0;
 
 			int r = to_int(right);
