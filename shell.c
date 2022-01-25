@@ -514,6 +514,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512]) {
 
 	int l = 0;
 	int space = 0;
+	int r = 0;
 
 	for (int k=0;k<j;k++,l++) {
 		if (code[k] != L'\n') {
@@ -542,7 +543,8 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512]) {
 				}
 			}
 			space = 0;
-			right[m] = L'\0';
+
+			r = to_int(right);
 
 			if (!strcmp(L"mov ",op)) {
 				memory[to_int(left)] = to_int(right);
@@ -553,9 +555,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512]) {
 			}
 
 			if (!strcmp(L"min ", op)) {
-				puts(right);
-				puts(L"\n");
-				memory[to_int(left)] -= memory[to_int(right)];
+				memory[to_int(left)] -= memory[r];
 			}
 
 			if (!strcmp(L"mul ", op)) { 
