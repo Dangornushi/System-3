@@ -523,7 +523,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512]) {
 			unsigned short* op = 0;
 			int m = 0;
 
-			line[l] = L'\0';
+			line[l-1] = L'\0';
 			strncpy(op,line,4);
 			
 			unsigned short left[50];
