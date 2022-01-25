@@ -563,6 +563,8 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512]) {
 				puts(left);
 				puts(L":");
 				puts(right);
+				puts(L"/");
+				puts(line);
 				puts(L"\r\n");
 
 			}
