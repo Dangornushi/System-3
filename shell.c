@@ -557,7 +557,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512]) {
 						continue;
 					}
 					if (space == 0) left[m] = line[n]; 
-					if (space == 1) right[m] = line[n+1];
+					if (space == 1) right[m] = line[n-1];
 					m++;
 				}
 				puts(left);
