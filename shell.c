@@ -2336,7 +2336,7 @@ void cha(int mode, struct CONSOLE *console) {
 				root->Close(root);
 			}
 		else if (!strcmp(L"proto",buf))
-			proto_inter(console);
+			proto_inter(console,moji);
 		else if(!strcmp(L"qube",buf)) 
 			qube();
 		else if (!strcmp(L"echo ", command(s1,buf,5))) {
