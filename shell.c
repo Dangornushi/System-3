@@ -509,7 +509,7 @@ int get(void)
 	else { return 1; }
 }
 
-void proto_run(unsigned short code[128],int j, unsigned short memory[512], struct CONSOLE *c) {	
+void proto_run(unsigned short code[128],int j, unsigned short memory[512], struct CONSOLE *c, unsigned short moji[][12][8] ) {	
 	unsigned short line[128];
 
 	int l = 0;
@@ -579,7 +579,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 						index++;
 						add -= (index*10)+10;
 					}
-					console = 
+					console = putchar(moji, tmp+add,c,c->char_color);
 					char_num[index] = tmp+add;
 				}
 			}
@@ -731,7 +731,7 @@ void bse(unsigned short *file_name) {
 	puts(L"\r\n");
 }
 
-void proto_inter(struct CONSOLE *c) {
+void proto_inter(struct CONSOLE *c, unsigned short moji[][12][8]) {
 	unsigned char is_exit = FALSE;
 	unsigned short code_data[128];
 	unsigned short *command = 0;
@@ -743,7 +743,7 @@ void proto_inter(struct CONSOLE *c) {
 		if (gets(command, MAX_COMMAND_LEN) <= 0)
 			continue;
 		else if (!strcmp(L"run",command)) {
-			proto_run(code_data, j,memory,c);	
+			proto_run(code_data, j,memory,c,moji);	
 			puts(L"\r\n");
 			continue;
 		}
