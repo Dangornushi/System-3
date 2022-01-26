@@ -516,7 +516,6 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 	int space = 0;
 
 	for (int k=0;k<j;k++,l++) {
-		unsigned short* op = 0;
 		if (code[k] != L'\n') {
 			line[l] = code[k];
 		}
@@ -524,6 +523,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 			int m = 0;
 
 			line[l] = L'\0';
+		unsigned short* op = 0;
 			strncpy(op,line,4);
 			
 			unsigned short left[50];
@@ -546,12 +546,12 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 			space = 0;
 
 			int r = to_int(right);
-			int l = to_int(left);
+			int le = to_int(left);
 
 			puts(op);
 
 			if (!strcmp(L"mov ",op)) {
-				memory[l] = r;
+				memory[le] = r;
 			}
 
 			else if (!strcmp(L"add ", op)) {
@@ -571,8 +571,6 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 			}
 
 			else if (!strcmp(L"msg ",op)) {		
-				puts(L"OK");
-				/*
 				int number=0;
 				unsigned short char_num[50];
 				int index = 0;
@@ -584,8 +582,10 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 						index++;
 						add -= (index*10)+40;
 					}
+					c = putchar(moji,tmp, c, c->char_color);
+					
 					char_num[index] = tmp+add;
-				}*/
+				}
 				//puts(char_num);
 			}
 
