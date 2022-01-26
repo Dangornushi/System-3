@@ -574,12 +574,14 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				int index = 0;
 				int add = 48;
 
+				puts(L"OK");
+
 				for (int tmp=0;tmp<memory[l];tmp++) {
 					if (tmp>9) {
 						index++;
-						add -= (index*10)+10;
+						add -= (index*10)+40;
 					}
-					char_num[index] = tmp+30;
+					char_num[index] = tmp+add;
 				}
 				puts(char_num);
 			}
