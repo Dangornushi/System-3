@@ -525,6 +525,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 
 			line[l] = L'\0';
 			strncpy(op,line,4);
+			op+=L'\0';
 			puts(L"OK");
 			
 			unsigned short left[50];
