@@ -553,23 +553,23 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				memory[to_int(left)] = r;
 			}
 
-			if (!strcmp(L"add ", op)) {
+			else if (!strcmp(L"add ", op)) {
 				memory[to_int(left)] = memory[to_int(left)] + memory[to_int(right)];
 			}
 
-			if (!strcmp(L"min ", op)) {
+			else if (!strcmp(L"min ", op)) {
 				memory[to_int(left)] -= memory[r];
 			}
 
-			if (!strcmp(L"mul ", op)) { 
+			else if (!strcmp(L"mul ", op)) { 
 				memory[to_int(left)] = memory[to_int(left)] * memory[to_int(right)];
 			}
 			
-			if (!strcmp(L"div ", op)) { 
+			else if (!strcmp(L"div ", op)) { 
 				memory[to_int(left)] = memory[to_int(left)] / memory[to_int(right)];
 			}
 
-			if (!strcmp(L"msg ",op)) {		
+			else if (!strcmp(L"msg ",op)) {		
 				puts(L"OK");
 				/*
 				int number=0;
@@ -589,17 +589,17 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 			}
 
 
-			if (!strcmp(L"put ",op)) {		
+			else if (!strcmp(L"put ",op)) {		
 				putc(memory[to_int(left)]+65);
 			}
 
-			if (!strcmp(L"jmp ",op)) {
+			else if (!strcmp(L"jmp ",op)) {
 				if (k!=to_int(right)) { 
 					k = to_int(left);		
 				}
 			}
 
-			if (!strcmp(L"gec ",op)) {
+			else if (!strcmp(L"gec ",op)) {
 				unsigned short ch;
 				unsigned short num;
 				int index = to_int(left);
