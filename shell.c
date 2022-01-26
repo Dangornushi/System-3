@@ -580,11 +580,11 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				for (int tmp=0;tmp<memory[le];tmp++) {
 					if (tmp>9) {
 						index++;
-						add -= (index*10)+40;
+						add -= (index*10)+30;
 					}
 					char_num[index] = tmp+add;
 				}
-				for (int tmp=0;tmp<index+1;tmp++) {
+				for (int tmp=0;tmp<index;tmp++) {
 					c = putchar(moji, char_num, c, c->char_color);
 				}
 				//puts(char_num);
