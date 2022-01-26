@@ -574,7 +574,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				int number=0;
 				unsigned short char_num[50];
 				int index = 0;
-				int add = 31;
+				int add = 38;
 
 				for (int tmp=0;tmp<memory[le];tmp++) {
 					if (tmp>9) {
