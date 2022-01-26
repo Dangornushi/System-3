@@ -525,7 +525,6 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 
 			line[l] = L'\0';
 			strncpy(op,line,4);
-			op+=L'\0';
 			
 			unsigned short left[50];
 			unsigned short right[50];
@@ -549,9 +548,10 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 			int r = to_int(right);
 			int l = to_int(left);
 
+			puts(op);
+
 			if (!strcmp(L"mov ",op)) {
-			puts(L"OK");
-				memory[to_int(left)] = r;
+				memory[l] = r;
 			}
 
 			else if (!strcmp(L"add ", op)) {
