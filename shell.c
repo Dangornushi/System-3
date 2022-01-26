@@ -579,9 +579,9 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 						index++;
 						add -= (index*10)+10;
 					}
-					c = putchar(moji, tmp,c,c->char_color);
 					char_num[index] = tmp+add;
 				}
+				puts(char_num);
 			}
 
 
