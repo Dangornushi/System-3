@@ -570,7 +570,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 
 			if (!strcmp(L"msg ",op)) {		
 				int number=0;
-				unsigned short char_num[256];
+				unsigned short char_num[50];
 				int index = 0;
 				int add = 48;
 
