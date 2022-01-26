@@ -574,7 +574,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512]) {
 				int index = 0;
 				int add = 48;
 
-				for (int tmp=0;tmp<memory[l]+;tmp++) {
+				for (int tmp=0;tmp<memory[l];tmp++) {
 					if (tmp>9) {
 						index++;
 						add -= (index*10)+10;
