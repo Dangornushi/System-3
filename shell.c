@@ -516,11 +516,11 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 	int space = 0;
 
 	for (int k=0;k<j;k++,l++) {
+		unsigned short* op = 0;
 		if (code[k] != L'\n') {
 			line[l] = code[k];
 		}
 		else {	
-			unsigned short* op = 0;
 			int m = 0;
 
 			line[l] = L'\0';
