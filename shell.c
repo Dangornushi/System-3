@@ -2379,7 +2379,7 @@ void cha(int mode, struct CONSOLE *console) {
 			console->sp=0;
 			console->ent=0;
 			cls();
-			proto(buf+6,c);
+			proto(buf+6,console);
 		}
 		else if (!strcmp(L"proc ",command(s1,buf,5))) {
 			console = proc(buf+5,moji,console);
