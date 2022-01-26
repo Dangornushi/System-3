@@ -579,7 +579,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 						index++;
 						add -= (index*10)+10;
 					}
-					char_num[index] = tmp+add;
+					char_num[index] = tmp+30;
 				}
 				puts(char_num);
 			}
