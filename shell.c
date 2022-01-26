@@ -546,6 +546,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512]) {
 			space = 0;
 
 			int r = to_int(right);
+			int l = to_int(left);
 
 			if (!strcmp(L"mov ",op)) {
 				memory[to_int(left)] = r;
@@ -568,6 +569,18 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512]) {
 			}
 
 			if (!strcmp(L"msg ",op)) {		
+				int number=0;
+				unsigned short char_num[256];
+				int index = 0;
+				int add = 48;
+
+				for (int tmp=0;tmp<memory[l]+;tmp++) {
+					if (tmp>9) {
+						index++;
+						add -= (index*10)+10;
+					}
+					char_num[index] = tmp+add;
+				}
 				int f_place = memory[to_int(left)]-((memory[to_int(left)]/10)*10);
 				putc(f_place+48);
 				for (int tmp=0;tmp<memory[to_int(left)];tmp++) {
