@@ -509,7 +509,7 @@ int get(void)
 	else { return 1; }
 }
 
-void proto_run(unsigned short code[128],int j, unsigned short memory[512]) {	
+void proto_run(unsigned short code[128],int j, unsigned short memory[512], struct CONSOLE *c) {	
 	unsigned short line[128];
 
 	int l = 0;
@@ -579,12 +579,8 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512]) {
 						index++;
 						add -= (index*10)+10;
 					}
+					console = 
 					char_num[index] = tmp+add;
-				}
-				int f_place = memory[to_int(left)]-((memory[to_int(left)]/10)*10);
-				putc(f_place+48);
-				for (int tmp=0;tmp<memory[to_int(left)];tmp++) {
-					puts(L"\r\nO");
 				}
 			}
 
@@ -617,7 +613,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512]) {
 	}
 }
 
-void proto(unsigned short *file_name) {
+void proto(unsigned short *file_name, struct CONSOLE *c) {
 	unsigned long long status;
 	struct EFI_FILE_PROTOCOL *root;
 	struct EFI_FILE_PROTOCOL *file;
@@ -633,7 +629,7 @@ void proto(unsigned short *file_name) {
 	status = file->Read(file, &buf_size, (void *)file_buf);
 	assert(status, L"file->Read");
 	unsigned short memory[512];
-	proto_run(file_buf,sizeof(file_buf),memory);
+	proto_run(file_buf,sizeof(file_buf),memory,c);
 
 	file->Close(file);
 	root->Close(root);
@@ -735,7 +731,7 @@ void bse(unsigned short *file_name) {
 	puts(L"\r\n");
 }
 
-void proto_inter() {
+void proto_inter(struct CONSOLE *c) {
 	unsigned char is_exit = FALSE;
 	unsigned short code_data[128];
 	unsigned short *command = 0;
@@ -747,7 +743,7 @@ void proto_inter() {
 		if (gets(command, MAX_COMMAND_LEN) <= 0)
 			continue;
 		else if (!strcmp(L"run",command)) {
-			proto_run(code_data, j,memory);	
+			proto_run(code_data, j,memory,c);	
 			puts(L"\r\n");
 			continue;
 		}
@@ -2340,7 +2336,7 @@ void cha(int mode, struct CONSOLE *console) {
 				root->Close(root);
 			}
 		else if (!strcmp(L"proto",buf))
-			proto_inter();
+			proto_inter(c);
 		else if(!strcmp(L"qube",buf)) 
 			qube();
 		else if (!strcmp(L"echo ", command(s1,buf,5))) {
@@ -2383,7 +2379,7 @@ void cha(int mode, struct CONSOLE *console) {
 			console->sp=0;
 			console->ent=0;
 			cls();
-			proto(buf+6);
+			proto(buf+6,c);
 		}
 		else if (!strcmp(L"proc ",command(s1,buf,5))) {
 			console = proc(buf+5,moji,console);
