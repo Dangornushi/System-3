@@ -573,7 +573,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				unsigned short char_num[50];
 				int index = 0;
 
-				int add = 44;
+				int add = 46;
 				int tmp2 = 0;
 
 				for (int tmp=0;tmp<memory[le];tmp++,tmp2++) {
