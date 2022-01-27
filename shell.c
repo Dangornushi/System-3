@@ -31,7 +31,7 @@ struct CONSOLE *putchar(unsigned short moji[][12][8], unsigned short cha, struct
 	else if (cha==L' ') { c = print(moji,K_SPACE,c,black);}
 	else if (cha==K_SPACE) { c = print(moji,K_SPACE,c,black); }
 	else if (cha > 60 && cha < 96) {c = print(moji,cha-65,c,color); }//大文字
-	else if (cha < 59) { c = print(moji,cha+20,c,color); }
+	else if (cha < 58) { c = print(moji,cha+20,c,color); }
 	else if (cha < 96) { c = print(moji,cha-9,c,color); }
 	else { c = print(moji,cha-71,c,color);}//小文字
 	return c;
@@ -578,7 +578,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				for (int tmp=0;tmp<memory[le];tmp++) {
 					if (tmp>9) {
 						index++;
-						tmp=0;
+						tmp=1;
 					}
 					char_num[index] = tmp+add;
 					c = putchar(moji, tmp+add, c, c->char_color);
