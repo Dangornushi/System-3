@@ -581,7 +581,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 						char_num[index] = L"1";
 						index++;
 						char_num[index] = L"0";
-						tmp2=0;
+						tmp2=-1;
 					}
 					else {
 						char_num[index] = tmp2+add;
@@ -591,7 +591,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				for (int tmp=0;char_num[tmp]!=L'\0';tmp++) {
 					c = putchar(moji, char_num[tmp], c, c->char_color);
 				}
-				//puts(char_num);
+				puts(char_num);
 			}
 
 
