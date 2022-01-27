@@ -573,7 +573,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				unsigned short char_num[50];
 				int index = 0;
 
-				int add = 40;
+				int add = 44;
 				int tmp2 = 0;
 
 				for (int tmp=0;tmp<memory[le];tmp++,tmp2++) {
@@ -581,7 +581,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 						char_num[index] = L'1';
 						index++;
 						char_num[index] = L'0';
-						tmp2=8;
+						tmp2=0;
 					}
 					else {
 						char_num[index] = tmp2+add;
