@@ -582,6 +582,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 						index++;
 						char_num[index] = L'0';
 						tmp2=0;
+						puts(L"ent");
 					}
 					else {
 						puts(L"OK");
