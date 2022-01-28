@@ -584,7 +584,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 						if (enter>=9) { 
 							enter = -1;
 							lank++;
-						i	char_num[lank] = L'0';
+							char_num[lank] = L'0';
 						}
 						enter++;
 						tmp2=0;
