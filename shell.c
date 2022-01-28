@@ -576,16 +576,18 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				int add = 48;
 				int tmp2 = 0;
 				int enter = 0;
+				int lank = 0;
 
 				for (int tmp=0;tmp<memory[le];tmp++,tmp2++) {
 					if (tmp2>=9) {
 						char_num[0] = enter+1+add;
 						if (enter>=9) { 
-							for (int tmp=0;tmp<enter;tmp++) {
+							for (int tmp=0;tmp<lank;tmp++) {
 								char_num[tmp] = L'0';
 							}
 							index = tmp-1;
 							enter = -1;
+							lank++;
 						}
 						else {
 							char_num[1] = L'0';
