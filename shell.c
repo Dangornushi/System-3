@@ -589,12 +589,11 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 						else {
 							char_num[1] = L'0';
 						}
-						index++;
 						enter++;
 						tmp2=0;
 					}
 					else {
-						char_num[index] = L'1';
+						char_num[lank] = L'1';
 					}
 				}
 				*char_num+= L'\0';
