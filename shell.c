@@ -593,7 +593,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 						tmp2=0;
 					}
 					else {
-						char_num[lank] = L'1';
+						char_num[lank] = tmp2+add;
 					}
 				}
 				*char_num+= L'\0';
