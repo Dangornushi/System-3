@@ -577,25 +577,28 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				int tmp2 = 0;
 				int enter = 0;
 				int lank = 0;
-				int len = 0;
+				unsigned short number[10] = {
+					L'0',
+					L'1',
+					L'2',
+					L'3',
+					L'4',
+					L'5',
+					L'6',
+					L'7',
+					L'8',
+					L'9',
+				}
 
 				for (;memory[len]!=L'\0';len++){}
 
 				for (int tmp=0;tmp<memory[le];tmp++,tmp2++) {
 					if (tmp2>=9) {
-						char_num[0] = enter+1+add;
-						//char_num[lank] = add;
-						if (enter>9+enter/10) {
-							enter = 0;
-							lank++;
-							char_num[lank] = add;
-							putc(add);
-						}
+						char_mum[lank] = number[enter];
 						enter++;
-						tmp2=-2;
 					}
 					else {
-						char_num[lank] = tmp2+1+add;
+						char_num[lank] = number[tmp2];
 					}
 				}
 				*char_num+= L'\0';
