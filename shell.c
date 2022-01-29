@@ -590,12 +590,15 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				};
 
 				for (;tmp<memory[le];tmp++,tmp2++) {
+					puts(L"1");
 					if (tmp2>=9) {
+					puts(L"2");
 						char_num[0] = number[enter];
 						lank++;
 						enter++;
 					}
 					else {
+					puts(L"3");
 						char_num[lank] = number[tmp2];
 					}
 				}
