@@ -589,7 +589,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 						}
 						lank++;
 						enter++;
-						tmp2=-1;
+						tmp2=0;
 					}
 					else {
 						char_num[lank] = tmp2+1+add;
