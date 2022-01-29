@@ -603,8 +603,8 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 						lank++;
 						char_num[0] = number[lank];
 
-						for (int i=1;i<tc;i++) {
-							char_num[i] = L'0';
+						for (int i=0;i<tc;i++) {
+							char_num[i+1] = L'0';
 						}
 					}
 					else {
