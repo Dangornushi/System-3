@@ -586,7 +586,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 					L'7',
 					L'8',
 					L'9',
-				},
+				};
 
 				for (int tmp=0;tmp<memory[le];tmp++) {
 					if (tmp2>=9) {
