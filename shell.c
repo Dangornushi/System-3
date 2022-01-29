@@ -586,12 +586,12 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 						char_num[0] = enter+1+add;
 						lank++;
 						char_num[lank] = add;
-						/*if (enter>9) {
+						if (enter>9+enter/10) {
 							enter = 0;
 							lank++;
 							char_num[lank] = add;
 							putc(add);
-						}*/
+						}
 						enter++;
 						tmp2=-2;
 					}
