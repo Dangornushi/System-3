@@ -603,7 +603,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 							char_num[i] = L"0";
 						}
 					}
-					ele {
+					else {
 						memory[lank] = tmp;
 					}
 				}
