@@ -588,16 +588,15 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 					L'9',
 				};
 
-				for (int tmp=0;tmp<memory[le];tmp++) {
+				for (int tmp=0;tmp<memory[le];tmp++,tmp2++) {
 					if (tmp2>=9) {
-						char_num[lank] = number[enter];
+						char_num[0] = number[enter];
 						lank++;
 						enter++;
 					}
 					else {
 						char_num[lank] = number[tmp2];
 					}
-					tmp2++;
 				}
 				*char_num+= L'\0';
 				for (int tmp=0;char_num[tmp]!=L'\0';tmp++) {
