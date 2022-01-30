@@ -603,7 +603,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 						}
 
 						tmp2 = 0;
-						char_num[lank-1] = number[lank];
+						char_num[lank] = number[lank];
 
 						lank++;
 						add_h*=10;
