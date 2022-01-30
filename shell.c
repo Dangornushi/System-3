@@ -607,7 +607,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 						lank++;
 						add_h= add_h * 10;
 
-						if (add_h==tmp2) {puts(L"OK");}
+						if (add_h-1==tmp2) {puts(L"OK");}
 
 						for (int i=0;i<tc;i++) {
 							char_num[i+1] = L'0';
