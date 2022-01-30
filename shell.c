@@ -606,7 +606,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 							add_h*=10;
 						}
 
-						for (int c=0;c<lank;c++) {puts(number[lank]);}
+						for (int c=0;c<lank;c++) {putc(number[lank]);}
 
 						tmp2 = 0;
 						char_num[0] = number[lank];
