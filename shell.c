@@ -579,7 +579,6 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				int lank = 0;
 				int add_h =10;
 				unsigned short number[10] = {
-					L'0',
 					L'1',
 					L'2',
 					L'3',
@@ -589,6 +588,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 					L'7',
 					L'8',
 					L'9',
+					L'0',
 				};
 
 				for (;tmp<memory[le];tmp++,tmp2++) {
@@ -605,8 +605,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 							add_h*=10;
 						}
 						tmp2 = 0;
-						putc(lank+add);
-						char_num[0] = number[lank+1];
+						char_num[0] = number[lank];
 
 						for (int i=0;i<tc;i++) {
 							char_num[i+1] = L'0';
