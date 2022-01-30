@@ -613,7 +613,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 						}
 					}
 					else {
-						char_num[lank] = number[tmp2];
+						char_num[lank] = number[tmp2-1];
 					}
 				}
 
