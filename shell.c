@@ -593,10 +593,12 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				for (;tmp<memory[le];tmp++,tmp2++) {
 					if (tmp2 > 9) {
 						if (lank>9) {
+							puts(L"1");
 							tc++;
 							lank = 0;
 						}
 						else {
+							puts(L"2");
 							tc = 1;
 						}
 						
