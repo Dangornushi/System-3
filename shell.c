@@ -598,11 +598,10 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 							lank = 0;
 						}
 						else {
-							puts(L"2");
 							tc = 1;
 						}
 						
-						tmp2 = -1;
+						tmp2 = 0;
 						lank++;
 						char_num[0] = number[lank];
 
@@ -612,6 +611,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 					}
 					else {
 						char_num[lank] = number[tmp2];
+						putc(char_num[lank]);
 					}
 				}
 
