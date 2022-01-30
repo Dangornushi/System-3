@@ -600,11 +600,13 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 						else {
 							tc = 1;
 						}
-						
+
 						if (tmp2 == add_h) {
 							lank++;
 							add_h*=10;
 						}
+
+						for (int c=0;c<lank;c++) {puts(L"enter");}
 
 						tmp2 = 0;
 						char_num[0] = number[lank];
