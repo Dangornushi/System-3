@@ -594,13 +594,13 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				for (;tmp<memory[le];tmp++,tmp2++) {
 					if (tmp2 == add_h) {
 						if (lank>9) {
+							puts(L"OK");
 							tc++;
 							lank = 0;
 						}
 						else {
 							tc = 1;
 						}
-
 
 						tmp2 = 0;
 						char_num[lank] = number[lank];
