@@ -600,6 +600,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 						else {
 							tc = 1;
 						}
+						tc++;
 
 						tmp2 = 0;
 						char_num[lank] = number[lank];
