@@ -607,7 +607,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 					}
 				}
 
-				for (int c=0;c<counter;c++) {
+				for (int c=0;c<counter+1;c++) {
 					char_num[c] = number[(data % 10)]; 
 					data /= 10;
 				}
