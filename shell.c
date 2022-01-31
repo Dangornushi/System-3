@@ -511,7 +511,7 @@ int get(void)
 
 int x_power(int data, int loop) {
 	if (loop==0) {data = 10;}
-	for (int i=0;i<loop-1;i++) {
+	for (int i=0;i<loop;i++) {
 		data *= 10;
 	}
 	return data;
