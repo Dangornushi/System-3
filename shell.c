@@ -604,10 +604,11 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 						lank++;
 						add_h= add_h * 10;
 
+						putc(number[tc]);
+
 						for (int i=0;i<tc;i++) {
 							char_num[i+1] = number[9];
 						}
-						puts(char_num);
 					}
 					else {
 						char_num[lank] = number[tmp2-1];
