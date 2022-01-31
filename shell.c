@@ -609,7 +609,11 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				for (int c=counter;c>0;c--,index++) {
 					char_num[index] = number[(memory[le] % x_power(tmp2,c))];
 				}
-					char_num[index] = number[(memory[le] % 10)-1];
+
+				if (number[(memory[le] % 10)-1] == L'0') {
+					char_num[index] = L'0'; 
+				}
+				else char_num[index] = number[(memory[le] % 10)-1];
 
 				*char_num += L'\0';
 				tmp=0;
