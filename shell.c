@@ -607,7 +607,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				}
 
 				for (int c=counter;c>0;c--,index++) {
-					char_num[index] = number[(memory[le] % x_power(tmp2,c))];
+					char_num[index] = number[memory[le] % (x_power(tmp2,c)*10)];
 				}
 				
 				char_num[index] = number[(memory[le] % 10)-1];
