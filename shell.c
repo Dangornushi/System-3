@@ -510,8 +510,8 @@ int get(void)
 }
 
 int x_power(int data, int loop) {
-	//if (loop==0) {data = 10;}
-	for (int i=0;i<loop;i++) {
+	if (loop==0) {data = 10;}
+	for (int i=0;i<loop-1;i++) {
 		data *= 10;
 	}
 	return data;
