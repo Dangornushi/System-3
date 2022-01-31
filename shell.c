@@ -586,8 +586,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				int counter = 0;
 				int lank = 0;
 				int add_h =10;
-				unsigned short number[11] = {
-					L'0',
+				unsigned short number[10] = {
 					L'1',
 					L'2',
 					L'3',
