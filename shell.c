@@ -509,6 +509,13 @@ int get(void)
 	else { return 1; }
 }
 
+int x_power(int data, int loop) {
+	for (int i=0;i<loop-1;i++) {
+		data *= 10;
+	}
+	return data;
+}
+
 void proto_run(unsigned short code[128],int j, unsigned short memory[512], struct CONSOLE *c, unsigned short moji[][12][8] ) {	
 	unsigned short line[128];
 
@@ -523,7 +530,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 			int m = 0;
 
 			line[l] = L'\0';
-		unsigned short* op = 0;
+			unsigned short* op = 0;
 			strncpy(op,line,4);
 			
 			unsigned short left[50];
@@ -591,28 +598,14 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 					L'0',
 				};
 
-				for (;tmp<memory[le];tmp++,tmp2++) {
+				for (;tmp<memory[le];tmp++) {
 					if (tmp == add_h-1) {
-						if (lank==10) {
-							lank = 0;
-						}
-						tc++;
-
-						tmp2 = 0;
-						char_num[lank] = number[lank];
-
-						lank++;
-						add_h= add_h * 10;
-
-						putc(number[tc]);
-
-						for (int i=0;i<tc;i++) {
-							char_num[i+1] = number[9];
-						}
+						counter++;
 					}
-					else {
-						char_num[lank] = number[tmp2-1];
-					}
+				}
+
+				for (int c=counter;c>0;c--) {
+					char_num[c] = (memory[le] % x_power(tmp2,c));
 				}
 
 				*char_num += L'\0';
