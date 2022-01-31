@@ -603,7 +603,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 
 						lank++;
 						add_h= add_h * 10;
-						put(L"OK");
+						puts(L"OK");
 
 						for (int i=0;i<tc;i++) {
 							char_num[i+1] = number[9];
