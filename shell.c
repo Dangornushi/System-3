@@ -596,6 +596,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 						if (lank==10) {
 							lank = 0;
 						}
+						tc++;
 
 						tmp2 = 0;
 						char_num[lank] = number[lank];
@@ -604,9 +605,9 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 						add_h= add_h * 10;
 
 						for (int i=0;i<tc;i++) {
+							putc(number[tc]);
 							char_num[i+1] = number[9];
 						}
-						tc++;
 					}
 					else {
 						char_num[lank] = number[tmp2-1];
