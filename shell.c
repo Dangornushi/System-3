@@ -595,7 +595,6 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 					if (tmp2 == add_h) {
 						if (lank==10) {
 							tc++;
-							lank = 1;
 						}
 						else {
 							tc = 1;
