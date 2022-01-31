@@ -603,10 +603,10 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 
 						lank++;
 						add_h= add_h * 10;
+						put(L"OK");
 
 						for (int i=0;i<tc;i++) {
-							//putc(number[tc]);
-							char_num[i] = number[9];
+							char_num[i+1] = number[9];
 						}
 					}
 					else {
