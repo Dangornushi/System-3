@@ -591,7 +591,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 					L'0',
 				};
 
-				for (;tmp<memory[le];tmp++,tmp2++) {
+				for (;tmp<=memory[le];tmp++,tmp2++) {
 					if (tmp2 == add_h) {
 						if (lank==10) {
 							lank = 0;
