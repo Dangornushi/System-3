@@ -598,7 +598,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 						}
 						tc++;
 
-						tmp2 = 0;
+						tmp2 = 1;
 						char_num[lank] = number[lank];
 
 						lank++;
