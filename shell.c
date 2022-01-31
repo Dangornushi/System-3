@@ -510,6 +510,7 @@ int get(void)
 }
 
 int x_power(int data, int loop) {
+	if (loop==0) {data = 10;}
 	for (int i=0;i<loop-1;i++) {
 		data *= 10;
 	}
@@ -601,6 +602,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				for (;tmp<memory[le];tmp++) {
 					if (tmp == add_h-1) {
 						counter++;
+						add_h*=10;
 					}
 				}
 
