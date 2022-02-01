@@ -2325,7 +2325,7 @@ void cha(int mode, struct CONSOLE *console) {
 		else if (!strcmp(L"edit ", command(s1,buf,5))) {
 			cls();
 			//edit_mode(buf+5,moji);
-			edit();
+			edit(buf+5);
 			cls();
 			console->sp=0;
 			console->ent=0;
