@@ -605,7 +605,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				}
 				int x = counter;
 
-				fro ( int i=0;i<counter;i++,x--) {
+				for ( int i=0;i<counter;i++,x--) {
 					else if (x == 1) {
 						char_num[i] = number[mem];
 					}
