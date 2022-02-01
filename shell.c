@@ -104,7 +104,7 @@ void touch(unsigned short *file_name) {
 
         status = root->Create(root, &file, file_name,
                             EFI_FILE_MODE_CREATE, 0);
-        assert(status, L"root->Create");
+        assert(status, L"root->Open");
 
         status = file->Write(file, &buf_size, (void *)file_buf);
         assert(status, L"file->Write");
@@ -2324,7 +2324,8 @@ void cha(int mode, struct CONSOLE *console) {
 			break;
 		else if (!strcmp(L"edit ", command(s1,buf,5))) {
 			cls();
-			edit_mode(buf+5,moji);
+			//edit_mode(buf+5,moji);
+			edit();
 			cls();
 			console->sp=0;
 			console->ent=0;
