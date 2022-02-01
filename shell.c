@@ -90,14 +90,28 @@ void dialogue_get_filename(int idx)
 }
 
 void touch(unsigned short *file_name) {
-	int idx = ls();
-	
-	for (int i = 0; i < MAX_FILE_NAME_LEN; i++) {
-		file_list[idx].name[i] = *file_name++;
-		if (file_list[idx].name[i] == L'\0')
-			break;
-	}
-	puts(L"\r\n");
+        unsigned long long status;
+        struct EFI_FILE_PROTOCOL *root;
+        struct EFI_FILE_PROTOCOL *file;
+        unsigned long long buf_size = MAX_FILE_BUF;
+        unsigned short file_buf[MAX_FILE_BUF / 2];
+		int i = 0;
+		unsigned short ch;
+        file_buf[i] = L'\0';
+
+        status = SFSP->OpenVolume(SFSP, &root);
+        assert(status, L"SFSP->OpenVolume");
+
+        status = root->Open(root, &file, file_name,
+                            EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE, 0);
+        assert(status, L"root->Open");
+
+        status = file->Write(file, &buf_size, (void *)file_buf);
+        assert(status, L"file->Write");
+		file->Flush(file);
+
+        file->Close(file);
+        root->Close(root);
 }
 
 void pstat(void)
