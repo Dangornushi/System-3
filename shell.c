@@ -90,28 +90,9 @@ void dialogue_get_filename(int idx)
 }
 
 void touch(unsigned short *file_name) {
-        unsigned long long status;
-        struct EFI_FILE_PROTOCOL *root;
-        struct EFI_FILE_PROTOCOL *file;
-        unsigned long long buf_size = MAX_FILE_BUF;
-        unsigned short file_buf[MAX_FILE_BUF / 2];
-		int i = 0;
-		unsigned short ch;
-        file_buf[i] = L'\0';
-
-        status = SFSP->OpenVolume(SFSP, &root);
-        assert(status, L"SFSP->OpenVolume");
-
-        status = root->Open(root, &file, file_name,
-                            EFI_FILE_MODE_CREATE, 0);
-        assert(status, L"root->Open");
-
-        status = file->Write(file, &buf_size, (void *)file_buf);
-        assert(status, L"file->Write");
-		file->Flush(file);
-
-        file->Close(file);
-        root->Close(root);
+	file_num = ls();
+	dialogue_get_filename(file_num);
+	edit(file_list[file_num].name);
 }
 
 void pstat(void)
