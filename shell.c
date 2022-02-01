@@ -579,14 +579,12 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 			else if (!strcmp(L"msg ",op)) {
 				unsigned short char_num[50];
 				int index = 0;
-				int add = 48;
 				int tmp = 0;
-				int tmp2 = 1;
-				int tc = 0;
 				int counter = 0;
-				int lank = 0;
 				int add_h =10;
+				int mem = 0;
 				unsigned short number[10] = {
+					L'0',
 					L'1',
 					L'2',
 					L'3',
@@ -596,7 +594,6 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 					L'7',
 					L'8',
 					L'9',
-					L'0',
 				};
 				int data = memory[le];
 
@@ -606,11 +603,24 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 						add_h*=10;
 					}
 				}
+				int x = counter;
 
-				for (int c=0;c<counter+1;c++) {
-					char_num[c] = number[(data % 10)-1]; 
-					data /= 10;
+				fro ( int i=0;i<counter;i++,x--) {
+					else if (x == 1) {
+						char_num[i] = number[mem];
+					}
+					else {
+						if (x == 2) {
+							mem -= lank;
+						}
+						for (int c=0;c<counter;c++)
+							lank *= 10;
+						lank /= 10;
+						char_num[i] = number[data%lank];
+						lank = 1;
+					}
 				}
+
 				
 				//char_num[index] = number[(memory[le] % 10)-1];
 
