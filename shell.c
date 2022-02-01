@@ -609,10 +609,10 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				unsigned short  value = 4287;
 				int a[ 4 ];
 
-				a[0] = (value % 10); value /= 10;
-				a[1] = (value % 10); value /= 10;
-				a[2] = (value % 10); value /= 10;
-				a[3] = (value % 10); value /= 10;
+				a[0] = number[(value % 10)]; value /= 10;
+				a[1] = number[(value % 10)]; value /= 10;
+				a[2] = number[(value % 10)]; value /= 10;
+				a[3] = number[(value % 10)]; value /= 10;
 				
 				//char_num[index] = number[(memory[le] % 10)-1];
 
@@ -620,7 +620,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 
 				tmp=5;
 				for (;tmp>=0;tmp--) {
-					c = putchar(moji, number[a[tmp]], c, c->char_color);
+					c = putchar(moji, a[tmp], c, c->char_color);
 				}
 			}
 
