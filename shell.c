@@ -90,6 +90,7 @@ void dialogue_get_filename(int idx)
 }
 
 void touch(unsigned short *file_name) {
+	int file_num = 0;
 	file_num = ls();
 	dialogue_get_filename(file_num);
 	edit(file_list[file_num].name);
