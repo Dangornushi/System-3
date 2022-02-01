@@ -606,22 +606,13 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				}
 				int x = counter;
 
-				for ( int i=0;i<counter;i++,x--) {
-					if (x == 1) {
-						char_num[i] = number[mem];
-					}
-					else {
-						for (int c=0;c<counter;c++)
-							lank *= 10;
-						lank /= 10;
-						if (x == 2) {
-							mem -= lank;
-						}
-						char_num[i] = number[data%lank];
-						lank = 1;
-					}
-				}
+				int value = 4287;
+				int a[ 4 ];
 
+				a[0] = (value % 10); value /= 10;　// 1桁目を取り出す
+				a[1] = (value % 10); value /= 10;　// 2桁目を取り出す
+				a[2] = (value % 10); value /= 10;　// 3桁目を取り出す
+				a[3] = (value % 10); value /= 10;　// 4桁目を取り出す
 				
 				//char_num[index] = number[(memory[le] % 10)-1];
 
