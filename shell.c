@@ -583,6 +583,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				int counter = 0;
 				int add_h =10;
 				int mem = 0;
+				int lank = 1;
 				unsigned short number[10] = {
 					L'0',
 					L'1',
@@ -606,7 +607,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				int x = counter;
 
 				for ( int i=0;i<counter;i++,x--) {
-					else if (x == 1) {
+					if (x == 1) {
 						char_num[i] = number[mem];
 					}
 					else {
