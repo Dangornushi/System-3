@@ -609,10 +609,10 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				int value = 4287;
 				int a[ 4 ];
 
-				a[0] = (value % 10); value /= 10;　// 1桁目を取り出す
-				a[1] = (value % 10); value /= 10;　// 2桁目を取り出す
-				a[2] = (value % 10); value /= 10;　// 3桁目を取り出す
-				a[3] = (value % 10); value /= 10;　// 4桁目を取り出す
+				a[0] = (value % 10); value /= 10;
+				a[1] = (value % 10); value /= 10;
+				a[2] = (value % 10); value /= 10;
+				a[3] = (value % 10); value /= 10;
 				
 				//char_num[index] = number[(memory[le] % 10)-1];
 
