@@ -619,7 +619,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				*a += L'\0';
 				tmp=0;
 				for (;a[tmp]!=L'\0';tmp++) {
-					c = putchar(moji, a[tmp], c, c->char_color);
+					c = putchar(moji, number[a[tmp]], c, c->char_color);
 				}
 			}
 
