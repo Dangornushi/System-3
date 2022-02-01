@@ -606,17 +606,16 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				}
 				int x = counter;
 
-				unsigned short  value = 4287;
-				int a[ 4 ];
+				unsigned short  value = memory[le];
+				int a[256];
 
-				a[0] = number[(value % 10)]; value /= 10;
-				a[1] = number[(value % 10)]; value /= 10;
-				a[2] = number[(value % 10)]; value /= 10;
-				a[3] = number[(value % 10)]; value /= 10;
-				
+				for (int i=0;i<counter;i++) {
+					a[i] = number[(value % 10)]; value /= 10;
+				}
+
 				//char_num[index] = number[(memory[le] % 10)-1];
 
-				tmp=3;
+				tmp=counter-1;
 				for (;tmp>=0;tmp--) {
 					c = putchar(moji, a[tmp], c, c->char_color);
 				}
