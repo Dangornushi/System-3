@@ -102,7 +102,7 @@ void touch(unsigned short *file_name) {
         status = SFSP->OpenVolume(SFSP, &root);
         assert(status, L"SFSP->OpenVolume");
 
-        status = root->Create(root, &file, file_name,
+        status = root->Open(root, &file, file_name,
                             EFI_FILE_MODE_CREATE, 0);
         assert(status, L"root->Open");
 
