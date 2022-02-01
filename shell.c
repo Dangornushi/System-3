@@ -608,16 +608,16 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 
 				for ( int i=0;i<counter;i++,x--) {
 					if (x == 1) {
-						char_num[x] = number[mem];
+						char_num[i] = number[mem];
 					}
 					else {
-						if (x == 2) {
-							mem -= lank;
-						}
 						for (int c=0;c<counter;c++)
 							lank *= 10;
 						lank /= 10;
-						char_num[x] = number[data%lank];
+						if (x == 2) {
+							mem -= lank;
+						}
+						char_num[i] = number[data%lank];
 						lank = 1;
 					}
 				}
