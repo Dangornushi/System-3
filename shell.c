@@ -606,7 +606,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				}
 				int x = counter;
 
-				int value = 4287;
+				unsigned short  value = 4287;
 				int a[ 4 ];
 
 				a[0] = (value % 10); value /= 10;
@@ -617,7 +617,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				//char_num[index] = number[(memory[le] % 10)-1];
 
 				*a += L'\0';
-				
+
 				tmp=5;
 				for (;tmp>0;tmp--) {
 					c = putchar(moji, number[a[tmp]], c, c->char_color);
