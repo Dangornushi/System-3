@@ -670,7 +670,6 @@ void proto(unsigned short *file_name, struct CONSOLE *c, unsigned short moji[][1
 	file->Close(file);
 	root->Close(root);
 	while (1) { if (!get()) {break;} }
-	cls();
 }
 
 struct CONSOLE *proc(unsigned short *file_name, unsigned short moji[][12][8], struct CONSOLE *c) {
@@ -2426,7 +2425,6 @@ void cha(int mode, struct CONSOLE *console) {
 		}
 
 		else if (!strcmp(L"proto ",command(s1,buf,6))) {
-			cls();
 			proto(buf+6,console,moji);
 		}
 		else if (!strcmp(L"proc ",command(s1,buf,5))) {
