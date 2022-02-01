@@ -609,7 +609,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				unsigned short  value = memory[le];
 				int a[256];
 
-				for (int i=0;i<counter;i++) {
+				for (int i=0;i<counter+1;i++) {
 					a[i] = number[(value % 10)]; value /= 10;
 				}
 
