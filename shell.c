@@ -616,10 +616,10 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				
 				//char_num[index] = number[(memory[le] % 10)-1];
 
-				*char_num += L'\0';
+				*a += L'\0';
 				tmp=0;
-				for (;char_num[tmp]!=L'\0';tmp++) {
-					c = putchar(moji, char_num[tmp], c, c->char_color);
+				for (;a[tmp]!=L'\0';tmp++) {
+					c = putchar(moji, a[tmp], c, c->char_color);
 				}
 			}
 
