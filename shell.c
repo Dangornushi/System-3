@@ -331,20 +331,21 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 
 				if (ch == SC_ESC)
 					break;
-			
-				c = putchar(moji, ch, c, c->char_color);
-				file_buf[i++] = ch;
-			
+				
 				if (ch == 8) {
 					c->sp-=9;
 					c = putchar(moji, K_SPACE, c, c->back_color);
-					i--;
 				}
 
 				if (ch == L'\r') {
 					c->sp=0;
 					c->ent+=13;
-					file_buf[i++] = L'\n';
+					file_buf[i] = L'\n';
+				}
+				else {
+					c = putchar(moji, ch, c, c->char_color);
+					file_buf[i] = ch;
+					i++;
 				}
 			}
 			file_buf[i] = L'\0';
