@@ -338,7 +338,6 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 				if (ch == 8) {
 					c->sp-=9;
 					c = putchar(moji, K_SPACE, c, c->back_color);
-					c->sp-=9;
 				}
 
 				if (ch == L'\r') {
