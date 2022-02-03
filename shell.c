@@ -497,7 +497,7 @@ int to_int(unsigned short *str) {
 	return num;
 }
 
-unsigned short *to_str(int num, int counter) {
+unsigned short to_str(int num, int counter) {
 	unsigned short number[10] = {
 					L'0',
 					L'1',
@@ -518,7 +518,7 @@ unsigned short *to_str(int num, int counter) {
 		a[i] = number[(num % 10)]; num /= 10;
 	}
 
-	return *a;
+	return a;
 }
 
 int get(void)
@@ -609,10 +609,10 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 					}
 				}
 				
-				int *a = to_str(memory[le], counter--);
+				int a = to_str(memory[le], counter--);
 
 				for (;counter>=0;counter--) {
-					c = putchar(moji, &a[counter], c, c->char_color);
+					c = putchar(moji, a[counter], c, c->char_color);
 				}
 				c->sp = 0;
 				c->ent+=13;
