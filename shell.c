@@ -608,7 +608,6 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				int add_h = 10;
 				int tmp = 0;
 				int counter = 0;
-				int *a = to_str(memory[le], counter);
 
 				for (;tmp<memory[le];tmp++) {
 					if (tmp == add_h-1) {
@@ -617,6 +616,8 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 					}
 				}
 				
+				int *a = to_str(memory[le], counter);
+
 				for (;tmp>=0;tmp--) {
 					c = putchar(moji, &a[tmp], c, c->char_color);
 				}
