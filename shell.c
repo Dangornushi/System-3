@@ -610,7 +610,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 					}
 				}
 				
-				int *a = to_str(memory[le], counteri-1);
+				int *a = to_str(memory[le], counter-1);
 
 				for (;counter>=0;counter--) {
 					c = putchar(moji, &a[counter], c, c->char_color);
