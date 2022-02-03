@@ -613,7 +613,8 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				int *a = to_str(memory[le], counter);
 
 				for (;tmp>=0;tmp--) {
-					c = putchar(moji, a[tmp], c, c->char_color);
+					puts(L"OK");
+					c = putchar(moji, &a[tmp], c, c->char_color);
 				}
 				c->sp = 0;
 				c->ent+=13;
