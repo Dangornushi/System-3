@@ -497,6 +497,38 @@ int to_int(unsigned short *str) {
 	return num;
 }
 
+unsigned short *to_str(int num) {
+	unsigned short char_num[50];
+	int index = 0;
+	int tmp = 0;
+	int counter = 0;
+	int add_h =10;
+	int mem = 0;
+	int lank = 1;
+	unsigned short number[10] = {
+					L'0',
+					L'1',
+					L'2',
+					L'3',
+					L'4',
+					L'5',
+					L'6',
+					L'7',
+					L'8',
+					L'9',
+	};
+
+
+	unsigned short  value = num;
+	int a[256];
+
+	for (int i=0;i<counter+1;i++) {
+		a[i] = number[(value % 10)]; value /= 10;
+	}
+
+	return *number;
+}
+
 int get(void)
 {
 	struct EFI_INPUT_KEY key;
@@ -574,26 +606,9 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 			}
 
 			else if (!strcmp(L"msg ",op)) {
-				unsigned short char_num[50];
-				int index = 0;
+				int counter = 10;
 				int tmp = 0;
-				int counter = 0;
-				int add_h =10;
-				int mem = 0;
-				int lank = 1;
-				unsigned short number[10] = {
-					L'0',
-					L'1',
-					L'2',
-					L'3',
-					L'4',
-					L'5',
-					L'6',
-					L'7',
-					L'8',
-					L'9',
-				};
-				int data = memory[le];
+				int *a = to_str(memory[le]);
 
 				for (;tmp<memory[le];tmp++) {
 					if (tmp == add_h-1) {
@@ -601,16 +616,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 						add_h*=10;
 					}
 				}
-				int x = counter;
-
-				unsigned short  value = memory[le];
-				int a[256];
-
-				for (int i=0;i<counter+1;i++) {
-					a[i] = number[(value % 10)]; value /= 10;
-				}
-
-				tmp=counter;
+				
 				for (;tmp>=0;tmp--) {
 					c = putchar(moji, a[tmp], c, c->char_color);
 				}
@@ -618,12 +624,12 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				c->ent+=13;
 			}
 
-
 			else if (!strcmp(L"put ",op)) {		
 				putc(memory[to_int(left)]+65);
 			}
 
 			else if (!strcmp(L"jmp ",op)) {
+				
 				if (k!=to_int(right)) { 
 					k = to_int(left);		
 				}
