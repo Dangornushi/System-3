@@ -512,11 +512,10 @@ unsigned short *to_str(int num, int counter) {
 	};
 
 
-	int value = num;
 	int a[256];
 
 	for (int i=0;i<counter+1;i++) {
-		a[i] = number[(value % 10)]; value /= 10;
+		a[i] = number[(num % 10)]; num /= 10;
 	}
 
 	return *a;
