@@ -512,7 +512,7 @@ unsigned short *to_str(int num, int counter) {
 	};
 
 
-	unsigned short  value = num;
+	int value = num;
 	int a[256];
 
 	for (int i=0;i<counter+1;i++) {
