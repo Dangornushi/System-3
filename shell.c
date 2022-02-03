@@ -514,7 +514,7 @@ unsigned short *to_str(int num, int counter) {
 
 	int a[256];
 
-	for (int i=0;i<counter+1;i++) {
+	for (int i=0;i<counter;i++) {
 		a[i] = number[(num % 10)]; num /= 10;
 	}
 
