@@ -497,11 +497,10 @@ int to_int(unsigned short *str) {
 	return num;
 }
 
-unsigned short *to_str(int num) {
+unsigned short *to_str(int num, int counter) {
 	unsigned short char_num[50];
 	int index = 0;
 	int tmp = 0;
-	int counter = 0;
 	int add_h =10;
 	int mem = 0;
 	int lank = 1;
@@ -609,7 +608,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				int add_h = 10;
 				int tmp = 0;
 				int counter = 0;
-				int *a = to_str(memory[le]);
+				int *a = to_str(memory[le], counter);
 
 				for (;tmp<memory[le];tmp++) {
 					if (tmp == add_h-1) {
