@@ -599,7 +599,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 			}
 
 			else if (!strcmp(L"msg ",op)) {
-				int add_h = 0;
+				int add_h = 1;
 				int tmp = 0;
 				int counter = 0;
 
