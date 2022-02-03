@@ -498,12 +498,6 @@ int to_int(unsigned short *str) {
 }
 
 unsigned short *to_str(int num, int counter) {
-	unsigned short char_num[50];
-	int index = 0;
-	int tmp = 0;
-	int add_h =10;
-	int mem = 0;
-	int lank = 1;
 	unsigned short number[10] = {
 					L'0',
 					L'1',
@@ -525,7 +519,7 @@ unsigned short *to_str(int num, int counter) {
 		a[i] = number[(value % 10)]; value /= 10;
 	}
 
-	return *number;
+	return *a;
 }
 
 int get(void)
