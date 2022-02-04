@@ -614,7 +614,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				for (;tmp>=0;tmp--) {
 					c = putchar(moji, a[tmp], c, c->char_color);
 				}
-				c->sp -= 9;
+				c->sp -= 9*counter;
 			}
 
 			else if (!strcmp(L"put ",op)) {		
