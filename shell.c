@@ -35,7 +35,7 @@ struct CONSOLE *putchar(unsigned short moji[][12][8], unsigned short cha, struct
 	else if (cha < 96) { c = print(moji,cha-9,c,color); }
 	else { c = print(moji,cha-71,c,color);}//小文字
 
-	if (c->sp > 500) {
+	if (c->sp > 700) {
 		puts(L"OK");
 		c->sp = 0;
 		c->ent+=13;
@@ -620,7 +620,6 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				for (;tmp>=0;tmp--) {
 					c = putchar(moji, a[tmp], c, c->char_color);
 				}
-				c->sp+=9;
 			}
 
 			else if (!strcmp(L"put ",op)) {		
