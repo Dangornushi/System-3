@@ -34,6 +34,11 @@ struct CONSOLE *putchar(unsigned short moji[][12][8], unsigned short cha, struct
 	else if (cha < 58) { c = print(moji,cha+20,c,color); }
 	else if (cha < 96) { c = print(moji,cha-9,c,color); }
 	else { c = print(moji,cha-71,c,color);}//小文字
+
+	if (sp == 1000) {
+		c->sp = 0;
+		c->ent+=13;
+	}
 	return c;
 }
 
