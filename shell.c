@@ -627,9 +627,9 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 			}
 
 			else if (!strcmp(L"jmp ",op)) {
-				int input = getc();
+				int input = get();
 				switch (input)	{
-					case 0x3:
+					case 0x8:
 						k = j;
 						break;
 				
