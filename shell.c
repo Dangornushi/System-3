@@ -656,6 +656,15 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 					index++;
 				}
 			}
+			
+			else if (!strcmp(L"com ",op)) {
+				if (r==0) {
+					cls();
+					c->sp = 0;
+					c->ent = 0;
+				}
+			}
+			
 			l=-1;
 		}
 	}
