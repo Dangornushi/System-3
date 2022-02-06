@@ -13,6 +13,7 @@
 
 unsigned short *command(unsigned short *s1, unsigned short *s2, int n);
 int to_int(unsigned short *str);
+void cls(void);
 
 struct CONSOLE *print(unsigned short moji[][12][8], unsigned int arfa, struct CONSOLE *c, struct EFI_GRAPHICS_OUTPUT_BLT_PIXEL color ) {
 	for(int i=0;i<12;i++){
@@ -38,6 +39,11 @@ struct CONSOLE *putchar(unsigned short moji[][12][8], unsigned short cha, struct
 	if (c->sp > 700) {
 		c->sp = 0;
 		c->ent+=13;
+	}
+	if (c->ent > 400){
+		cls()
+		c->sp = 0;
+		c->ent = 0;
 	}
 	return c;
 }
