@@ -535,6 +535,12 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 		if (code[k] != L'\n') {
 			line[l] = code[k];
 		}
+		if (getc() == SC_ESC) {
+			c->sp = 0;
+			c->ent = 0;
+			cls();
+			return;
+		}
 		else {	
 			int m = 0;
 
@@ -632,13 +638,6 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 			}
 
 			else if (!strcmp(L"jmp ",op)) {
-				unsigned short input = get();
-				if (input == SC_ESC) {
-					cls();
-					c->sp = 0;
-					c->ent = 0;
-					return;
-				}
 				if (k!=to_int(right)) { 
 					k = to_int(left);		
 				}
