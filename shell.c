@@ -633,17 +633,11 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 
 			else if (!strcmp(L"jmp ",op)) {
 				unsigned short input = get();
-				switch (input)	{
-					case SC_ESC: {
-						cls();
-						c->sp = 0;
-						c->ent = 0;
-						return;
-					}
-						break;
-				
-					default:
-						break;
+				if (input == SC_ESC) {
+					cls();
+					c->sp = 0;
+					c->ent = 0;
+					return;
 				}
 				if (k!=to_int(right)) { 
 					k = to_int(left);		
