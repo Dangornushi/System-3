@@ -635,7 +635,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				int input = get();
 				switch (input)	{
 					case SC_ESC:
-						k = j;
+						return;
 						break;
 				
 					default:
