@@ -36,7 +36,6 @@ struct CONSOLE *putchar(unsigned short moji[][12][8], unsigned short cha, struct
 	else { c = print(moji,cha-71,c,color);}//小文字
 
 	if (c->sp > 700) {
-		puts(L"OK");
 		c->sp = 0;
 		c->ent+=13;
 	}
