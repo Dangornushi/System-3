@@ -632,7 +632,6 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 			}
 
 			else if (!strcmp(L"jmp ",op)) {
-				puts(L"ok");
 				unsigned short input = get();
 				switch (input)	{
 					case SC_ESC: {
