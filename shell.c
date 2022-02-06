@@ -41,7 +41,7 @@ struct CONSOLE *putchar(unsigned short moji[][12][8], unsigned short cha, struct
 		c->ent+=13;
 	}
 	if (c->ent > 400){
-		SystemTable->ConOut->ClearScreen(SystemTable->ConOut);
+		ST->ConOut->ClearScreen(SystemTable->ConOut);
 		c->sp = 0;
 		c->ent = 0;
 	}
