@@ -645,6 +645,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 			}
 
 			else if (!strcmp(L"gec ",op)) {
+				puts(L"OM");
 				unsigned short ch;
 				unsigned short num;
 				int index = to_int(left);
