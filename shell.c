@@ -352,6 +352,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 					c->sp=0;
 					c->ent+=13;
 					file_buf[i] = L'\n';
+					i++;
 				}
 				else {
 					c = putchar(moji, ch, c, c->char_color);
