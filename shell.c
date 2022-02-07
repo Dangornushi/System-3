@@ -672,6 +672,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 }
 
 void proto(unsigned short *file_name, struct CONSOLE *c, unsigned short moji[][12][8]) {
+	puts(L"OK");
 	unsigned long long status;
 	struct EFI_FILE_PROTOCOL *root;
 	struct EFI_FILE_PROTOCOL *file;
