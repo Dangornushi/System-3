@@ -538,7 +538,6 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 		}
 		else {	
 			int m = 0;
-	puts(L"OK");
 
 			line[l] = L'\0';
 			unsigned short* op = 0;
