@@ -528,7 +528,6 @@ int x_power(int data, int loop) {
 
 void proto_run(unsigned short code[128],int j, unsigned short memory[512], struct CONSOLE *c, unsigned short moji[][12][8] ) {	
 	unsigned short line[128];
-	puts(L"OK");
 
 	int l = 0;
 	int space = 0;
