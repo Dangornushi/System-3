@@ -687,8 +687,8 @@ void proto(unsigned short *file_name, struct CONSOLE *c, unsigned short moji[][1
 	status = file->Read(file, &buf_size, (void *)file_buf);
 	assert(status, L"file->Read");
 	unsigned short memory[512];
-	puts(L"OK");
 	proto_run(file_buf,sizeof(file_buf),memory,c,moji);
+	puts(L"OK");
 
 	file->Close(file);
 	root->Close(root);
