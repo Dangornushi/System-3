@@ -528,9 +528,19 @@ int x_power(int data, int loop) {
 
 void proto_run(unsigned short code[128],int j, unsigned short memory[512], struct CONSOLE *c, unsigned short moji[][12][8] ) {	
 	unsigned short line[128];
+	unsigned short sub_mem[128];
+	unsigned short enter[256];
 
 	int l = 0;
 	int space = 0;
+	int ent_c = 0;
+
+	for (int k=0;k<j;k++) {
+		if (code[k] == L'\n') {
+			enter[ent_c] = k;
+			ent_c++;
+		}
+	}
 
 	for (int k=0;k<j;k++,l++) {
 		if (code[k] != L'\n') {
@@ -635,6 +645,17 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 			else if (!strcmp(L"jmp ",op)) {
 				if (k!=to_int(right)) { 
 					k = to_int(left);		
+				}
+			}
+
+			else if (!strcmp(L"sub ",op)) {
+				sub_mem[le] = r;
+			}
+
+			else if (!strcmp(L"jmr ",op)) {
+				if (l < r) {}
+				else {
+					k = enter[sub_mem[0]];
 				}
 			}
 
