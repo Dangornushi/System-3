@@ -676,7 +676,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 			else if (!strcmp(L"gec ",op)) {
 				unsigned short num;
 				num = getc();
-				memory[le] = to_int(&num);
+				memory[le] = to_int(num);
 			}
 			
 			else if (!strcmp(L"com ",op)) {
