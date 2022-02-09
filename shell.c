@@ -659,18 +659,24 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				}
 			}
 
-			else if (!strcmp(L"gec ",op)) {
-				unsigned short ch;
-				unsigned short num;
-				int index = to_int(left);
-				while (TRUE) {
-					ch = getc();
-					num = getc();
-					putc(ch);
-					if (ch == L'\r') break;
-					memory[index] = to_int(&num);
-					index++;
+			else if (!strcmp(L"jml ",op)) {
+				if (l > r) {}
+				else {
+					k = enter[sub_mem[0]];
 				}
+			}
+
+			else if (!strcmp(L"jme ",op)) {
+				if (l == r) {}
+				else {
+					k = enter[sub_mem[0]];
+				}
+			}
+
+			else if (!strcmp(L"gec ",op)) {
+				unsigned short num;
+				num = getc();
+				memory[le] = to_int(&num);
 			}
 			
 			else if (!strcmp(L"com ",op)) {
