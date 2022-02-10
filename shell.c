@@ -9,6 +9,7 @@
 #define HEIGHT_PER_CH	20
 #define MAX_COMMAND_LEN	100
 #define K_SPACE 52
+#define K_ENTER 13
 
 
 unsigned short *command(unsigned short *s1, unsigned short *s2, int n);
