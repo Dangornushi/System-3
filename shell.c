@@ -84,11 +84,11 @@ void cls(void) {
 			}
 }
 
-void new_file_make(int idx, unsigned short *filename, struct CONSOLE *c) {
+void new_file_make(int idx, unsigned short *filename, struct CONSOLE *ci, unsigned short moji[12][8]) {
 	int i;
 
 	for (int i=0;i<MAX_FILE_NAME_LEN;i++) {
-		file.list[idx].name[i] = getc();
+		file_list[idx].name[i] = getc();
 		if (file_list[i].name[i] != L'\r')
 			c = putchar(moji,file_list[i].name[i],c,c->char_color);
 		else break;
@@ -113,10 +113,10 @@ void dialogue_get_filename(int idx)
 	file_list[idx].name[i] = L'\0';
 }
 
-void touch(unsigned short *file_name, struct CONSOLE *c) {
+void touch(unsigned short *file_name, struct CONSOLE *c, unsigned short moji[12][8]) {
 	int file_num = 0;
 	file_num = ls();
-	new_file_make(file_num,file_name,c);
+	new_file_make(file_num,file_name,c,moji);
 	edit(file_list[file_num].name);
 }
 
@@ -2453,7 +2453,7 @@ void cha(int mode, struct CONSOLE *console) {
 			console->sp = 0;
 		}
 		else if (!strcmp(L"touch ", command(s1,buf,6))) 
-			touch(buf+6,console);
+			touch(buf+6,console,moji);
 		else if (!strcmp(L"cat ", command(s1,buf,4))) {
 			unsigned long long status;
 			struct EFI_FILE_PROTOCOL *root;
