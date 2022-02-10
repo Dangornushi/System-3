@@ -84,7 +84,7 @@ void cls(void) {
 			}
 }
 
-void new_file_make(int idx, unsigned short *filename, struct CONSOLE *ci, unsigned short moji[12][8]) {
+void new_file_make(int idx, unsigned short *filename, struct CONSOLE *c, unsigned short moji[12][8]) {
 	int i;
 
 	for (int i=0;i<MAX_FILE_NAME_LEN;i++) {
