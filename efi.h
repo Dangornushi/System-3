@@ -5,10 +5,60 @@
 #define EFI_FILE_MODE_WRITE	0x0000000000000002
 #define EFI_FILE_MODE_CREATE	0x8000000000000000
 
-#define EFI_SUCCESS              0
-
-
 #define EFI_FILE_READ_ONLY	0x0000000000000001
+
+//*******************************************************
+// Attributes
+//*******************************************************
+#define EFI_BLACK		0x00
+#define EFI_BLUE		0x01
+#define EFI_GREEN		0x02
+#define EFI_CYAN		0x03
+#define EFI_RED			0x04
+#define EFI_MAGENTA		0x05
+#define EFI_BROWN		0x06
+#define EFI_LIGHTGRAY		0x07
+#define EFI_BRIGHT		0x08
+#define EFI_DARKGRAY		0x08
+#define EFI_LIGHTBLUE		0x09
+#define EFI_LIGHTGREEN		0x0A
+#define EFI_LIGHTCYAN		0x0B
+#define EFI_LIGHTRED		0x0C
+#define EFI_LIGHTMAGENTA	0x0D
+#define EFI_YELLOW		0x0E
+#define EFI_WHITE		0x0F
+
+#define EFI_BACKGROUND_BLACK		0x00
+#define EFI_BACKGROUND_BLUE		0x10
+#define EFI_BACKGROUND_GREEN		0x20
+#define EFI_BACKGROUND_CYAN		0x30
+#define EFI_BACKGROUND_RED		0x40
+#define EFI_BACKGROUND_MAGENTA		0x50
+#define EFI_BACKGROUND_BROWN		0x60
+#define EFI_BACKGROUND_LIGHTGRAY	0x70
+
+#define EFI_SUCCESS	0
+#define EFI_ERROR	0x8000000000000000
+#define EFI_UNSUPPORTED	(EFI_ERROR | 3)
+
+#define EFI_OPEN_PROTOCOL_BY_HANDLE_PROTOCOL	0x00000001
+#define EFI_OPEN_PROTOCOL_GET_PROTOCOL		0x00000002
+#define EFI_OPEN_PROTOCOL_TEST_PROTOCOL		0x00000004
+#define EFI_OPEN_PROTOCOL_BY_CHILD_CONTROLLER	0x00000008
+#define EFI_OPEN_PROTOCOL_BY_DRIVER		0x00000010
+#define EFI_OPEN_PROTOCOL_EXCLUSIVE		0x00000020
+
+#define EVT_TIMER				0x80000000
+#define EVT_RUNTIME				0x40000000
+#define EVT_NOTIFY_WAIT				0x00000100
+#define EVT_NOTIFY_SIGNAL			0x00000200
+#define EVT_SIGNAL_EXIT_BOOT_SERVICES		0x00000201
+#define EVT_SIGNAL_VIRTUAL_ADDRESS_CHANGE	0x60000202
+
+#define TPL_APPLICATION	4
+#define TPL_CALLBACK	8
+#define TPL_NOTIFY	16
+#define TPL_HIGH_LEVEL	31
 
 struct EFI_INPUT_KEY {
 	unsigned short ScanCode;
@@ -22,11 +72,41 @@ struct EFI_GUID {
 	unsigned char Data4[8];
 };
 
+enum EFI_MEMORY_TYPE {
+	EfiReservedMemoryType,
+	EfiLoaderCode,
+	EfiLoaderData,
+	EfiBootServicesCode,
+	EfiBootServicesData,
+	EfiRuntimeServicesCode,
+	EfiRuntimeServicesData,
+	EfiConventionalMemory,
+	EfiUnusableMemory,
+	EfiACPIReclaimMemory,
+	EfiACPIMemoryNVS,
+	EfiMemoryMappedIO,
+	EfiMemoryMappedIOPortSpace,
+	EfiPalCode,
+	EfiMaxMemoryType
+};
+
+enum EFI_TIMER_DELAY {
+	TimerCancel,
+	TimerPeriodic,
+	TimerRelative
+};
+
 enum EFI_RESET_TYPE {
 	EfiResetCold,
 	EfiResetWarm,
 	EfiResetShutdown,
 	EfiResetPlatformSpecific
+};
+
+struct EFI_DEVICE_PATH_PROTOCOL {
+	unsigned char Type;
+	unsigned char SubType;
+	unsigned char Length[2];
 };
 
 struct EFI_SYSTEM_TABLE {
@@ -44,11 +124,33 @@ struct EFI_SYSTEM_TABLE {
 		unsigned long long (*OutputString)(
 			struct EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL *This,
 			unsigned short *String);
-		unsigned long long _buf2[4];
+		unsigned long long (*TestString)(
+			struct EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL *This,
+			unsigned short *String);
+		unsigned long long (*QueryMode)(
+			struct EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL *This,
+			unsigned long long ModeNumber,
+			unsigned long long *Columns,
+			unsigned long long *Rows);
+		unsigned long long (*SetMode)(
+			struct EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL *This,
+			unsigned long long ModeNumber);
+		unsigned long long (*SetAttribute)(
+			struct EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL *This,
+			unsigned long long Attribute);
 		unsigned long long (*ClearScreen)(
 			struct EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL *This);
+		unsigned long long _buf4[2];
+		struct SIMPLE_TEXT_OUTPUT_MODE {
+			int MaxMode;
+			int Mode;
+			int Attribute;
+			int CursorColumn;
+			int CursorRow;
+			unsigned char CursorVisible;
+		} *Mode;
 	} *ConOut;
-	unsigned long long _buf3[3];
+	unsigned long long _buf3[2];
 	struct EFI_RUNTIME_SERVICES {
 		char _buf_rs1[24];
 
@@ -76,7 +178,7 @@ struct EFI_SYSTEM_TABLE {
 				    unsigned long long DataSize,
 				    void *ResetData);
 	} *RuntimeServices;
-    struct EFI_BOOT_SERVICES {
+	struct EFI_BOOT_SERVICES {
 		char _buf1[24];
 
 		//
@@ -87,12 +189,26 @@ struct EFI_SYSTEM_TABLE {
 		//
 		// Memory Services
 		//
-		unsigned long long _buf3[5];
+		unsigned long long _buf3[3];
+		unsigned long long (*AllocatePool)(
+			enum EFI_MEMORY_TYPE PoolType,
+			unsigned long long Size,
+			void **Buffer);
+		unsigned long long (*FreePool)(
+			void *Buffer);
 
 		//
 		// Event & Timer Services
 		//
-		unsigned long long _buf4[2];
+		unsigned long long (*CreateEvent)(
+			unsigned int Type,
+			unsigned long long NotifyTpl,
+			void (*NotifyFunction)(void *Event, void *Context),
+			void *NotifyContext,
+			void *Event);
+		unsigned long long (*SetTimer)(void *Event,
+					       enum EFI_TIMER_DELAY Type,
+					       unsigned long long TriggerTime);
 		unsigned long long (*WaitForEvent)(
 			unsigned long long NumberOfEvents,
 			void **Event,
@@ -107,7 +223,18 @@ struct EFI_SYSTEM_TABLE {
 		//
 		// Image Services
 		//
-		unsigned long long _buf6[5];
+		unsigned long long (*LoadImage)(
+			unsigned char BootPolicy,
+			void *ParentImageHandle,
+			struct EFI_DEVICE_PATH_PROTOCOL *DevicePath,
+			void *SourceBuffer,
+			unsigned long long SourceSize,
+			void **ImageHandle);
+		unsigned long long (*StartImage)(
+			void *ImageHandle,
+			unsigned long long *ExitDataSize,
+			unsigned short **ExitData);
+		unsigned long long _buf6[3];
 
 		//
 		// Miscellaneous Services
@@ -127,7 +254,14 @@ struct EFI_SYSTEM_TABLE {
 		//
 		// Open and Close Protocol Services
 		//
-		unsigned long long _buf9[3];
+		unsigned long long (*OpenProtocol)(
+			void *Handle,
+			struct EFI_GUID *Protocol,
+			void **Interface,
+			void *AgentHandle,
+			void *ControllerHandle,
+			unsigned int Attributes);
+		unsigned long long _buf9[2];
 
 		//
 		// Library Services
@@ -229,10 +363,89 @@ struct EFI_SIMPLE_FILE_SYSTEM_PROTOCOL {
 		struct EFI_FILE_PROTOCOL **Root);
 };
 
+struct EFI_KEY_STATE {
+	unsigned int KeyShiftState;
+	unsigned char KeyToggleState;
+};
+
+struct EFI_KEY_DATA {
+	struct EFI_INPUT_KEY Key;
+	struct EFI_KEY_STATE KeyState;
+};
+
+struct EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL {
+	unsigned long long (*Reset)(
+		struct EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL *This,
+		unsigned char ExtendedVerification);
+	unsigned long long (*ReadKeyStrokeEx)(
+		struct EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL *This,
+		struct EFI_KEY_DATA *KeyData);
+	void *WaitForKeyEx;
+	unsigned long long (*SetState)(
+		struct EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL *This,
+		unsigned char *KeyToggleState);
+	unsigned long long (*RegisterKeyNotify)(
+		struct EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL *This,
+		struct EFI_KEY_DATA *KeyData,
+		unsigned long long (*KeyNotificationFunction)(
+			struct EFI_KEY_DATA *KeyData),
+		void **NotifyHandle);
+	unsigned long long (*UnregisterKeyNotify)(
+		struct EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL *This,
+		void *NotificationHandle);
+};
+
+struct EFI_LOADED_IMAGE_PROTOCOL {
+	unsigned int Revision;
+	void *ParentHandle;
+	struct EFI_SYSTEM_TABLE *SystemTable;
+	// Source location of the image
+	void *DeviceHandle;
+	struct EFI_DEVICE_PATH_PROTOCOL *FilePath;
+	void *Reserved;
+	// Image’s load options
+	unsigned int LoadOptionsSize;
+	void *LoadOptions;
+	// Location where image was loaded
+	void *ImageBase;
+	unsigned long long ImageSize;
+	enum EFI_MEMORY_TYPE ImageCodeType;
+	enum EFI_MEMORY_TYPE ImageDataType;
+	unsigned long long (*Unload)(void *ImageHandle);
+};
+
+struct EFI_DEVICE_PATH_TO_TEXT_PROTOCOL {
+	unsigned long long _buf;
+	unsigned short *(*ConvertDevicePathToText)(
+		const struct EFI_DEVICE_PATH_PROTOCOL* DeviceNode,
+		unsigned char DisplayOnly,
+		unsigned char AllowShortcuts);
+};
+
+struct EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL {
+	struct EFI_DEVICE_PATH_PROTOCOL *(*ConvertTextToDeviceNode) (
+		const unsigned short *TextDeviceNode);
+	struct EFI_DEVICE_PATH_PROTOCOL *(*ConvertTextToDevicePath) (
+		const unsigned short *TextDevicePath);
+};
+
+struct EFI_DEVICE_PATH_UTILITIES_PROTOCOL {
+	unsigned long long _buf[3];
+	struct EFI_DEVICE_PATH_PROTOCOL *(*AppendDeviceNode)(
+		const struct EFI_DEVICE_PATH_PROTOCOL *DevicePath,
+		const struct EFI_DEVICE_PATH_PROTOCOL *DeviceNode);
+};
+
 extern struct EFI_SYSTEM_TABLE *ST;
 extern struct EFI_GRAPHICS_OUTPUT_PROTOCOL *GOP;
 extern struct EFI_SIMPLE_POINTER_PROTOCOL *SPP;
 extern struct EFI_SIMPLE_FILE_SYSTEM_PROTOCOL *SFSP;
+extern struct EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL *STIEP;
+extern struct EFI_DEVICE_PATH_TO_TEXT_PROTOCOL *DPTTP;
+extern struct EFI_DEVICE_PATH_FROM_TEXT_PROTOCOL *DPFTP;
+extern struct EFI_DEVICE_PATH_UTILITIES_PROTOCOL *DPUP;
+extern struct EFI_GUID lip_guid;
+extern struct EFI_GUID dpp_guid;
 
 void efi_init(struct EFI_SYSTEM_TABLE *SystemTable);
 
