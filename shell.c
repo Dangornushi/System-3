@@ -88,7 +88,7 @@ void new_file_make(int idx, unsigned short *filename, struct CONSOLE *c, unsigne
 	int i;
 
 	for (int i=0;i<MAX_FILE_NAME_LEN;i++) {
-		file_list[idx].name[i] = getc();
+		file_list[idx].name[i] = filename;
 		if (file_list[i].name[i] != L'\r')
 			c = putchar(moji,file_list[i].name[i],c,c->char_color);
 		else break;
