@@ -115,7 +115,7 @@ void rm(unsigned short *file_name) {
     int i = 0;
     file_name += L'\0';
     file_list[idx].name[i] = L'\0';
-	unsigned long long status;
+	/*unsigned long long status;
 	struct EFI_FILE_PROTOCOL *root;
 	struct EFI_FILE_PROTOCOL *file;
 	unsigned long long buf_size = MAX_FILE_BUF;
@@ -137,7 +137,7 @@ void rm(unsigned short *file_name) {
 	file->Flush(file);
 
 	file->Close(file);
-	root->Close(root);
+	root->Close(root);*/
 }
 
 void touch(unsigned short *file_name, struct CONSOLE *c, unsigned short moji[12][8]) {
