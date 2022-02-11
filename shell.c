@@ -115,7 +115,7 @@ void touch(unsigned short *file_name, struct CONSOLE *c, unsigned short moji[12]
 	file_num = ls();
     file_name += L'\0';
 	new_file_make(file_num,file_name,c,moji);
-	edit(file_list[file_num].name);
+	//edit(file_list[file_num].name);
 }
 
 void pstat(void)
