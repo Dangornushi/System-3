@@ -116,7 +116,7 @@ void rm(unsigned short *file_name) {
     file_name += L'\0';
     file_list[idx].name[i] = L'\0';
 
-    file_name = file_list[0].name;
+    file_name = file_list[idx].name;
 
 	unsigned long long status;
 	struct EFI_FILE_PROTOCOL *root;
