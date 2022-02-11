@@ -87,10 +87,14 @@ void cls(void) {
 void new_file_make(int idx, unsigned short *filename, struct CONSOLE *c, unsigned short moji[12][8]) {
     int i = 0;
 
+    puts(L"OK");
+
 	for (;i<&filename[i] != L'\0';i++) {
+        puts(L"1");
 		file_list[idx].name[i] = &filename[i];
 	}
 	file_list[idx].name[i] = L'\0';
+    puts(L"2");
 }
 
 void dialogue_get_filename(int idx)
@@ -116,6 +120,7 @@ void touch(unsigned short *file_name, struct CONSOLE *c, unsigned short moji[12]
     file_name += L'\0';
 	new_file_make(file_num,file_name,c,moji);
 	//edit(file_list[file_num].name);
+    puts(L"3");
 }
 
 void pstat(void)
