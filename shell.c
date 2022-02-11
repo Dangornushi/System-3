@@ -112,7 +112,7 @@ void dialogue_get_filename(int idx)
 void touch(unsigned short *file_name, struct CONSOLE *c, unsigned short moji[12][8]) {
 	int file_num = 0;
 	file_num = ls();
-    filename += L'\0';
+    file_name += L'\0';
 	new_file_make(file_num,file_name,c,moji);
 	edit(file_list[file_num].name);
 }
