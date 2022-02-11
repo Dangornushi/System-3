@@ -89,9 +89,9 @@ void new_file_make(int idx, unsigned short *filename, struct CONSOLE *c, unsigne
 
     puts(L"OK");
 
-	for (;i<&filename[i] != L'\0';i++) {
+	for (;i<filename[i] != L'\0';i++) {
         puts(L"1");
-		file_list[idx].name[i] = &filename[i];
+		file_list[idx].name[i] = filename[i];
 	}
 	file_list[idx].name[i] = L'\0';
     puts(L"2");
