@@ -5,7 +5,7 @@
 #define EFI_FILE_MODE_WRITE	0x0000000000000002
 #define EFI_FILE_MODE_CREATE	0x8000000000000000
 
-#define EFI_SUCESS              0;
+#define EFI_SUCCESS              0;
 
 
 #define EFI_FILE_READ_ONLY	0x0000000000000001
@@ -20,6 +20,13 @@ struct EFI_GUID {
 	unsigned short Data2;
 	unsigned short Data3;
 	unsigned char Data4[8];
+};
+
+enum EFI_RESET_TYPE {
+	EfiResetCold,
+	EfiResetWarm,
+	EfiResetShutdown,
+	EfiResetPlatformSpecific
 };
 
 struct EFI_SYSTEM_TABLE {
