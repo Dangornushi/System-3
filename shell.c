@@ -85,8 +85,9 @@ void cls(void) {
 }
 
 void new_file_make(int idx, unsigned short *filename, struct CONSOLE *c, unsigned short moji[12][8]) {
+    int i = 0;
 
-	for (int i=0;i<&filename[i] != L'\0';i++) {
+	for (;i<&filename[i] != L'\0';i++) {
 		file_list[idx].name[i] = &filename[i];
 	}
 	file_list[idx].name[i] = L'\0';
