@@ -5,6 +5,9 @@
 #define EFI_FILE_MODE_WRITE	0x0000000000000002
 #define EFI_FILE_MODE_CREATE	0x8000000000000000
 
+#define EFI_SUCESS              0;
+
+
 #define EFI_FILE_READ_ONLY	0x0000000000000001
 
 struct EFI_INPUT_KEY {
@@ -39,7 +42,34 @@ struct EFI_SYSTEM_TABLE {
 			struct EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL *This);
 	} *ConOut;
 	unsigned long long _buf3[3];
-	struct EFI_BOOT_SERVICES {
+	struct EFI_RUNTIME_SERVICES {
+		char _buf_rs1[24];
+
+		//
+		// Time Services
+		//
+		unsigned long long _buf_rs2[4];
+
+		//
+		// Virtual Memory Services
+		//
+		unsigned long long _buf_rs3[2];
+
+		//
+		// Variable Services
+		//
+		unsigned long long _buf_rs4[3];
+
+		//
+		// Miscellaneous Services
+		//
+		unsigned long long _buf_rs5;
+		void (*ResetSystem)(enum EFI_RESET_TYPE ResetType,
+				    unsigned long long ResetStatus,
+				    unsigned long long DataSize,
+				    void *ResetData);
+	} *RuntimeServices;
+    struct EFI_BOOT_SERVICES {
 		char _buf1[24];
 
 		//
