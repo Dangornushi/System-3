@@ -120,7 +120,6 @@ void rm(unsigned short *file_name) {
 	struct EFI_FILE_PROTOCOL *file;
 	unsigned long long buf_size = MAX_FILE_BUF;
 	unsigned short file_buf[MAX_FILE_BUF / 2];
-	int i = 0;
 
 	file_buf[i] = L'\0';
 
