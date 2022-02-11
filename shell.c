@@ -80,21 +80,16 @@ void cls(void) {
 					break;
 				}
 				l++;
-				
 			}
 }
 
 void new_file_make(int idx, unsigned short *filename, struct CONSOLE *c, unsigned short moji[12][8]) {
     int i = 0;
 
-    puts(L"OK");
-
 	for (;i<filename[i] != L'\0';i++) {
-        puts(L"1");
 		file_list[idx].name[i] = filename[i];
 	}
 	file_list[idx].name[i] = L'\0';
-    puts(L"2");
 }
 
 void dialogue_get_filename(int idx)
@@ -112,6 +107,38 @@ void dialogue_get_filename(int idx)
 			break;
 	}
 	file_list[idx].name[i] = L'\0';
+}
+
+
+void rm(unsigned short *file_name) {
+    int idx = ls();
+    int i = 0;
+    file_name += L'\0';
+    file_list[idx].name[i] = L'\0';
+	unsigned long long status;
+	struct EFI_FILE_PROTOCOL *root;
+	struct EFI_FILE_PROTOCOL *file;
+	unsigned long long buf_size = MAX_FILE_BUF;
+	unsigned short file_buf[MAX_FILE_BUF / 2];
+	int i = 0;
+
+	file_buf[i] = L'\0';
+
+	status = SFSP->OpenVolume(SFSP, &root);
+	assert(status, L"SFSP->OpenVolume");
+
+	status = root->Open(root, &file, file_name,
+			    EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE | \
+			    EFI_FILE_MODE_CREATE, 0);
+	assert(status, L"root->Open");
+
+	status = file->Write(file, &buf_size, (void *)file_buf);
+	assert(status, L"file->Write");
+
+	file->Flush(file);
+
+	file->Close(file);
+	root->Close(root);
 }
 
 void touch(unsigned short *file_name, struct CONSOLE *c, unsigned short moji[12][8]) {
@@ -143,7 +170,6 @@ void touch(unsigned short *file_name, struct CONSOLE *c, unsigned short moji[12]
 
 	file->Close(file);
 	root->Close(root);
-    puts(L"3");
 }
 
 void pstat(void)
@@ -2480,6 +2506,8 @@ void cha(int mode, struct CONSOLE *console) {
 		}
 		else if (!strcmp(L"touch ", command(s1,buf,6))) 
 			touch(buf+6,console,moji);
+        else if (!strcmp(L"rm ", command(s1,buf,3)))
+            rm(buf+3);
 		else if (!strcmp(L"cat ", command(s1,buf,4))) {
 			unsigned long long status;
 			struct EFI_FILE_PROTOCOL *root;
