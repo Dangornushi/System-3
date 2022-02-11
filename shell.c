@@ -2414,7 +2414,7 @@ void cha(int mode, struct CONSOLE *console) {
 		buf[n] = L'\0';
 
 		
-		if (!strcmp(L"exit",buf)) {}
+		if (!strcmp(L"exit",buf)) {
          ST->RuntimeServices->ResetSystem(EfiResetShutdown, EFI_SUCCESS, 0, NULL);
 			break;
         }
@@ -2561,7 +2561,7 @@ void cha(int mode, struct CONSOLE *console) {
 			console = print(moji,26, console,black);
 			console->ent += 13;
 			console->sp = 0;
-		}	
+		}
 	}
 }
 
