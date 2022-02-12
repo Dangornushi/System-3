@@ -42,7 +42,7 @@ struct CONSOLE *putchar(unsigned short moji[][12][8], unsigned short cha, struct
 		c->ent+=13;
 	}
 	if (c->ent > 400){
-		ST->ConOut->ClearScreen(ST->ConOut);
+		ST->ConOut->SetAttribute(ST->ConOut,EFI_BACKGROUND_LIGHTGRAY);
 		c->sp = 0;
 		c->ent = 0;
 	}
@@ -60,6 +60,9 @@ int icon_print(unsigned short icon[][30][24], unsigned int arfa, int sp, int ent
 }
 
 void cls(void) {
+ST->ConOut->SetAttribute(ST->ConOut,
+12:                              EFI_LIGHTGREEN | EFI_BACKGROUND_LIGHTGRAY);
+    /*
 			int wait = 0;
 			int l = 0;
 			for (int x = 0;x < 1000;x++) {		
@@ -81,6 +84,7 @@ void cls(void) {
 				}
 				l++;
 			}
+            */
 }
 
 void new_file_make(int idx, unsigned short *filename, struct CONSOLE *c, unsigned short moji[12][8]) {
@@ -96,7 +100,7 @@ void dialogue_get_filename(int idx)
 {
 	int i;
 
-	ST->ConOut->ClearScreen(ST->ConOut);
+	ST->ConOut->SetAttribute(ST->ConOut,EFI_BACKGROUND_LIGHTGRAY);
 
 	puts(L"New File Name: ");
 	for (i = 0; i < MAX_FILE_NAME_LEN; i++) {
@@ -402,7 +406,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			int i = 0;
 			unsigned short ch;
 
-			ST->ConOut->ClearScreen(ST->ConOut);
+			ST->ConOut->SetAttribute(ST->ConOut,EFI_BACKGROUND_LIGHTGRAY);
 
 			while (TRUE) {
 				ch = getc();
@@ -810,7 +814,7 @@ struct CONSOLE *proc(unsigned short *file_name, unsigned short moji[][12][8], st
 }
 
 void bse(unsigned short *file_name) {
-	ST->ConOut->ClearScreen(ST->ConOut);	
+	ST->ConOut->SetAttribute(ST->ConOut,EFI_BACKGROUND_LIGHTGRAY);	
 
 	unsigned long long status;
 	struct EFI_FILE_PROTOCOL *root;
@@ -867,7 +871,7 @@ void bse(unsigned short *file_name) {
 			root->Close(root);
 		}
 		if (!strcmp(inp,L"u")) {	
-			ST->ConOut->ClearScreen(ST->ConOut);
+			ST->ConOut->SetAttribute(ST->ConOut,EFI_BACKGROUND_LIGHTGRAY);
 			bse(file_name);	
 		}
 		if (!strcmp(inp,L"q")) {break;}
