@@ -2364,7 +2364,6 @@ void cha(int mode, struct CONSOLE *console) {
 				//if (console->sp > 18) {
 					console->sp-=9;
 					console = putchar(moji, 52, console, console->back_color);
-					puts(L"OK");
 					console->sp-=18;
 					n--;
 					buf[n]=0;
@@ -2418,10 +2417,11 @@ void cha(int mode, struct CONSOLE *console) {
 		buf[n] = L'\0';
 
 		
-		if (!strcmp(L"exit",buf)) {
-         ST->RuntimeServices->ResetSystem(EfiResetShutdown, EFI_SUCCESS, 0, NULL);
-			break;
+		if (!strcmp(L"shutdown",buf)) {
+            ST->RuntimeServices->ResetSystem(EfiResetShutdown, EFI_SUCCESS, 0, NULL);
         }
+        else if (!strcmp(L"exit", buf()))
+            break;
 		else if (!strcmp(L"edit ", command(s1,buf,5))) {
 			cls();
 			//edit_mode(buf+5,moji);
