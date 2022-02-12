@@ -60,8 +60,7 @@ int icon_print(unsigned short icon[][30][24], unsigned int arfa, int sp, int ent
 }
 
 void cls(void) {
-ST->ConOut->SetAttribute(ST->ConOut,
-12:                              EFI_LIGHTGREEN | EFI_BACKGROUND_LIGHTGRAY);
+ST->ConOut->SetAttribute(ST->ConOut,EFI_BACKGROUND_LIGHTGRAY);
     /*
 			int wait = 0;
 			int l = 0;
