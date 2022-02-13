@@ -2417,6 +2417,7 @@ void cha(int mode, struct CONSOLE *console) {
 
 		if (!strcmp(L"shutdown",buf)) {
             ST->RuntimeServices->ResetSystem(EfiResetShutdown, EFI_SUCCESS, 0, NULL);
+            break;
         }
         else if (!strcmp(L"exit", buf))
             break;
