@@ -595,6 +595,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 	unsigned short line[128];
 	unsigned short sub_mem[128];
 	unsigned short enter[256];
+    unsigned short labels[256]
 
 	int l = 0;
 	int space = 0;
@@ -611,13 +612,13 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 		if (code[k] != L'\n') {
 			line[l] = code[k];
 		}
-		else {	
+		else {
 			int m = 0;
 
 			line[l] = L'\0';
 			unsigned short* op = 0;
 			strncpy(op,line,4);
-			
+
 			unsigned short left[50];
 			unsigned short right[50];
 
@@ -640,10 +641,13 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 			int r = to_int(right);
 			int le = to_int(left);
 
+            //値を代入
 			if (!strcmp(L"mov ",op)) {
 				memory[le] = r;
 			}
 
+            //------
+            //四則演算
 			else if (!strcmp(L"add ", op)) {
 				memory[to_int(left)] = memory[to_int(left)] + memory[to_int(right)];
 			}
@@ -652,14 +656,16 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				memory[to_int(left)] -= memory[r];
 			}
 
-			else if (!strcmp(L"mul ", op)) { 
+			else if (!strcmp(L"mul ", op)) {
 				memory[to_int(left)] = memory[to_int(left)] * memory[to_int(right)];
 			}
 
-			else if (!strcmp(L"div ", op)) { 
+			else if (!strcmp(L"div ", op)) {
 				memory[to_int(left)] = memory[to_int(left)] / memory[to_int(right)];
 			}
+            //-------
 
+            //文字列を数にして表示
 			else if (!strcmp(L"msg ",op)) {
 				unsigned short char_num[50];
 				int index = 0;
@@ -703,13 +709,15 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				}
 			}
 
-			else if (!strcmp(L"put ",op)) {		
+            //文字列を表示
+			else if (!strcmp(L"put ",op)) {
 				putc(memory[to_int(left)]+65);
 			}
 
+            //指定業にジャンプ
 			else if (!strcmp(L"jmp ",op)) {
-				if (k!=to_int(right)) { 
-					k = to_int(left);		
+				if (k!=to_int(right)) {
+					k = to_int(left);
 				}
 			}
 
@@ -717,32 +725,45 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 				sub_mem[le] = r;
 			}
 
+            //lよりもRの方が大きければJmp
 			else if (!strcmp(L"jmr ",op)) {
-				if (l < r) {}
-				else {
+				if (l < r) {
 					k = enter[sub_mem[0]];
+                }
+				else {
 				}
 			}
 
+            //RよりもLの方が大きければJmp
 			else if (!strcmp(L"jml ",op)) {
-				if (l > r) {}
-				else {
+				if (l > r) {
 					k = enter[sub_mem[0]];
+                }
+				else {
 				}
 			}
 
+            //LとRが同じであればJmp
 			else if (!strcmp(L"jme ",op)) {
-				if (l == r) {}
-				else {
+				if (l == r) {
 					k = enter[sub_mem[0]];
+                }
+				else {
 				}
 			}
 
+            //プログラムを終了
+            else if (!strcmp(L"end ",op)) {
+                return;
+            }
+
+            //入力を受け取る
 			else if (!strcmp(L"gec ",op)) {
 				unsigned short num;
 				memory[le] = getc();
 			}
-			
+
+            //commandを実行する
 			else if (!strcmp(L"com ",op)) {
 				if (r==0) {
 					cls();
@@ -750,7 +771,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 					c->ent = 0;
 				}
 			}
-			
+
 			l=-1;
 		}
 	}
@@ -1162,7 +1183,33 @@ void draw_window(int w, int h, int px, int py) {
 void draw_tag(int w, unsigned short word[], unsigned short moji[][12][8]) {}
 
 void numa(struct CONSOLE *c, unsigned short moji[][12][8]) {
-	unsigned short cha[] = {'s','y','s','t','e','m','3','\n','m','a','d','e',' ','b','y',' ','d','a','n','g','o','m','u','s','h','i','\n','\0'};
+	unsigned short cha[] = {
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,00,0,0,0,0,0,0,00,0,0,0,1,1,1,4,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,4,
+        0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,4,
+        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,4,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,4,
+        1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4
+
+    };
 
 	for (int i=0;cha[i]!=L'\0';i++) {
 		c = putchar(moji, cha[i], c, c->char_color);
@@ -2425,7 +2472,6 @@ void cha(int mode, struct CONSOLE *console) {
             numa(console,moji);
 		else if (!strcmp(L"edit ", command(s1,buf,5))) {
 			cls();
-			//edit_mode(buf+5,moji);
 			edit(buf+5);
 			cls();
 			console->sp=0;
@@ -2491,7 +2537,7 @@ void cha(int mode, struct CONSOLE *console) {
 					for (int i=0;i<MAX_FILE_NAME_LEN-1;i++) {
 						console=putchar(moji, file_list[idx].name[i],console,console->char_color);
 						if (file_list[idx].name[i]==L'\0') { break; }
-					}	
+					}
 					idx++;
 					console->sp = 0;
 					console->ent+=13;
