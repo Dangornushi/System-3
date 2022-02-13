@@ -1165,7 +1165,7 @@ void numa(struct CONSOLE *c, unsigned short moji[][12][8]) {
 	unsigned short cha[] = {'s','y','s','t','e','m','3','\n','m','a','d','e',' ','b','y',' ','d','a','n','g','o','m','u','s','h','i','\n','\0'};
 
 	for (int i=0;cha[i]!=L'\0';i++) {
-		c = putchar(moji, cha[i], console, console->char_color);
+		c = putchar(moji, cha[i], c, c->char_color);
 	}
 }
 
