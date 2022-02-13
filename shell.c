@@ -278,11 +278,6 @@ void edit(unsigned short *file_name)
 	root->Close(root);
 }
 
-/*
- *
- *
-*/
-
 struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], struct CONSOLE *c) {
 	unsigned long long status;
 	struct EFI_FILE_PROTOCOL *root;
@@ -660,7 +655,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 			else if (!strcmp(L"mul ", op)) { 
 				memory[to_int(left)] = memory[to_int(left)] * memory[to_int(right)];
 			}
-			
+
 			else if (!strcmp(L"div ", op)) { 
 				memory[to_int(left)] = memory[to_int(left)] / memory[to_int(right)];
 			}
@@ -1164,9 +1159,15 @@ void draw_window(int w, int h, int px, int py) {
 	}
 }
 
-void draw_tag(int w, unsigned short word[], unsigned short moji[][12][8]) {	
-	
-} 
+void draw_tag(int w, unsigned short word[], unsigned short moji[][12][8]) {}
+
+void numa(struct CONSOLE *c, unsigned short moji[][12][8]) {
+	unsigned short cha[] = {'s','y','s','t','e','m','3','\n','m','a','d','e',' ','b','y',' ','d','a','n','g','o','m','u','s','h','i','\n','\0'};
+
+	for (int i=0;cha[i]!=L'\0';i++) {
+		console = putchar(moji, cha[i], console, console->char_color);
+	}
+}
 
 void cha(int mode, struct CONSOLE *console) {
 	cls();
@@ -1175,11 +1176,11 @@ void cha(int mode, struct CONSOLE *console) {
 	int list = 0;
 	static unsigned short moji[][12][8] = {
 		{//A
-			{0,0,0,1,1,0,0,0}, 
-			{0,0,0,1,1,0,0,0}, 
-			{0,0,1,0,0,1,0,0}, 
-			{0,0,1,0,0,1,0,0}, 
-			{0,0,1,0,0,1,0,0}, 
+			{0,0,0,1,1,0,0,0},
+			{0,0,0,1,1,0,0,0},
+			{0,0,1,0,0,1,0,0},
+			{0,0,1,0,0,1,0,0},
+			{0,0,1,0,0,1,0,0},
 			{0,1,1,1,1,1,1,0}, 
 			{0,1,0,0,0,0,1,0}, 
 			{0,1,0,0,0,0,1,0}, 
@@ -2406,7 +2407,6 @@ void cha(int mode, struct CONSOLE *console) {
 					n--;
 					upAndown--;
 			}
-					
 
 			else {
 					console=putchar(moji,buf[n],console,console->char_color);
@@ -2415,12 +2415,13 @@ void cha(int mode, struct CONSOLE *console) {
 		}
 		buf[n] = L'\0';
 
-		
 		if (!strcmp(L"shutdown",buf)) {
             ST->RuntimeServices->ResetSystem(EfiResetShutdown, EFI_SUCCESS, 0, NULL);
         }
         else if (!strcmp(L"exit", buf))
             break;
+        else if (!strcmp(L"numa", buf))
+            numa(console,moji);
 		else if (!strcmp(L"edit ", command(s1,buf,5))) {
 			cls();
 			//edit_mode(buf+5,moji);
@@ -2448,7 +2449,7 @@ void cha(int mode, struct CONSOLE *console) {
 				draw_pixel(y,0,black);
 				draw_pixel(y,1000,black);
 			}
-		
+
 			while (1) {
 				for (int i = 0;i < 1000;i++) {
 					draw_pixel(l,i,black);
@@ -2459,7 +2460,7 @@ void cha(int mode, struct CONSOLE *console) {
 					break;
 				}
 				l++;
-				
+
 			}
 		}
 		else if (!strcmp(L"pstat", buf))
@@ -2472,7 +2473,7 @@ void cha(int mode, struct CONSOLE *console) {
 				struct EFI_FILE_INFO *file_info;
 				int idx = 0;
 				int file_num;
-	
+
 				status = SFSP->OpenVolume(SFSP, &root);
 				assert(status, L"SFSP->OpenVolume");
 
@@ -2481,7 +2482,7 @@ void cha(int mode, struct CONSOLE *console) {
 					status = root->Read(root, &buf_size, (void *)file_buf);
 					assert(status, L"root->Read");
 					if (!buf_size) break;
-	
+
 					file_info = (struct EFI_FILE_INFO *)file_buf;
 					strncpy(file_list[idx].name, file_info->FileName, MAX_FILE_NAME_LEN - 1);
 					file_list[idx].name[MAX_FILE_NAME_LEN - 1] = L'\0';
@@ -2507,11 +2508,11 @@ void cha(int mode, struct CONSOLE *console) {
 			unsigned short echo[100];
 			for (int i=0;buf[i+5]!=L'\0';i++) {
 				console= putchar(moji, buf[i+5], console, console->char_color);
-			}	
+			}
 			console->ent += 13;
 			console->sp = 0;
 		}
-		else if (!strcmp(L"touch ", command(s1,buf,6))) 
+		else if (!strcmp(L"touch ", command(s1,buf,6)))
 			touch(buf+6,console,moji);
         else if (!strcmp(L"rm ", command(s1,buf,3)))
             rm(buf+3);
@@ -2552,14 +2553,12 @@ void cha(int mode, struct CONSOLE *console) {
 		else if (!strcmp(L"le ",command(s1,buf,3))) {
 			console = le(buf+3,moji, console);
 		}
-		//else if(!strcmp(L"vse ",command(s1,buf,4))) 
-		//	bse(buf+4);
 		else {
 
 			unsigned short err[] = {'e','r','r',' ','i','n','v','i','d',' ', 'c','o','m','m','a','n','d', '\0'};
-			
-			for (int i=0;err[i]!=L'\0';i++) { 
-				console = putchar(moji,err[i],console,console->char_color); 
+
+			for (int i=0;err[i]!=L'\0';i++) {
+				console = putchar(moji,err[i],console,console->char_color);
 			}
 			console = print(moji,26, console,black);
 			console->ent += 13;
