@@ -296,8 +296,6 @@ unsigned short *enter_s(unsigned short *file_name) {
 	status = file->Read(file, &buf_size, (void *)read_buf);
 	assert(status, L"file->Read");
 
-    *read_buf += L'\0';
-
     for (int n=0;read_buf[n]!=L'\0';n++) {
         if (read_buf[n]==L'\n') {
             enter_counter++;
