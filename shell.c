@@ -278,7 +278,7 @@ void edit(unsigned short *file_name)
 	root->Close(root);
 }
 
-unsigned short *enter_s(unsigned short file_name) {
+unsigned short *enter_s(unsigned short *file_name) {
 	unsigned long long status;
 	unsigned long long buf_size = MAX_FILE_BUF;
 	struct EFI_FILE_PROTOCOL *root;
