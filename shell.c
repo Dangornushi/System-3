@@ -436,7 +436,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			struct EFI_FILE_PROTOCOL *file;
 			unsigned long long buf_size = MAX_FILE_BUF;
 			unsigned short file_buf[MAX_FILE_BUF / 2];
-			int i = number;
+			int i = number-1;
 			unsigned short ch;
 
 			while (TRUE) {
