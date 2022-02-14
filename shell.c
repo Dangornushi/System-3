@@ -297,7 +297,7 @@ unsigned short *enter_s(unsigned short file_name) {
 	assert(status, L"file->Read");
 
     for (int n=0;read_buf[n]!=L'\0';n++) {
-        if (read_buf[n]j==L'\n') enter_counter++;
+        if (read_buf[n]==L'\n') enter_counter++;
         enter[enter_counter] = n;
     }
 
@@ -381,12 +381,13 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			}
 
             int index = number;
-            enter = enter_s();
+            enter = enter_s(file_name);
             number = enter[index];
 
 			c->sp = 0;
 			c->ent+=13;
 		}
+
 		if (!strcmp(L"p", com)) {
 			unsigned short read_buf[MAX_FILE_BUF];
 
@@ -414,7 +415,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 				}
 				inp[n2] = read_buf[n]; 
 			}
-			
+
 			for (int x=0;inp[x]!=L'\0';x++) {
 				c = putchar(moji,inp[x],c,c->char_color);
 			}
@@ -627,7 +628,7 @@ void proto_run(unsigned short code[128],int j, unsigned short memory[512], struc
 	unsigned short line[128];
 	unsigned short sub_mem[128];
 	unsigned short enter[256];
-    unsigned short labels[256]
+    unsigned short labels[256];
 
 	int l = 0;
 	int space = 0;
@@ -1215,37 +1216,6 @@ void draw_window(int w, int h, int px, int py) {
 void draw_tag(int w, unsigned short word[], unsigned short moji[][12][8]) {}
 
 void numa(struct CONSOLE *c, unsigned short moji[][12][8]) {
-	unsigned short cha[] = {
-        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,00,0,0,0,0,0,0,00,0,0,0,1,1,1,4,
-        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,4,
-        0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,4,
-        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,4,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,4,
-        1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4
-
-    };
-
-	for (int i=0;cha[i]!=L'\0';i++) {
-		c = putchar(moji, cha[i], c, c->char_color);
-	}
 }
 
 void cha(int mode, struct CONSOLE *console) {
