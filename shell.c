@@ -299,9 +299,9 @@ unsigned short *enter_s(unsigned short *file_name) {
     *read_buf += L'\0';
 
     for (int n=0;read_buf[n]!=L'\0';n++) {
-        if (read_buf[n]==L'\r') {
+        puts(read_buf[n]);
+        if (read_buf[n]==L'\n') {
             enter_counter++;
-            puts(L"ok");
         }
         enter[enter_counter] = n;
     }
