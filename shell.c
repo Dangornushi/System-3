@@ -297,8 +297,10 @@ unsigned short *enter_s(unsigned short *file_name) {
 	assert(status, L"file->Read");
 
     for (int n=0;read_buf[n]!=L'\0';n++) {
-        if (read_buf[n]==L'\n') enter_counter++;
-        puts(L"ok");
+        if (read_buf[n]==L'\n') {
+            enter_counter++;
+            puts(L"ok");
+        }
         enter[enter_counter] = n;
     }
 
