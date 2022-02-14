@@ -278,6 +278,35 @@ void edit(unsigned short *file_name)
 	root->Close(root);
 }
 
+unsigned short *enter_s(unsigned short file_name) {
+	unsigned long long status;
+	unsigned long long buf_size = MAX_FILE_BUF;
+	struct EFI_FILE_PROTOCOL *root;
+	struct EFI_FILE_PROTOCOL *file;
+    unsigned short read_buf[MAX_FILE_BUF];
+    unsigned short enter[256];
+    int enter_counter = 0;
+
+	status = SFSP->OpenVolume(SFSP, &root);
+	assert(status, L"SFSP->OpenVolume");
+
+	status = root->Open(root, &file, file_name, EFI_FILE_MODE_READ, 0);
+	assert(status, L"root->Open");
+
+	status = file->Read(file, &buf_size, (void *)read_buf);
+	assert(status, L"file->Read");
+
+    for (int n=0;read_buf[n]!=L'\0';n++) {
+        if (read_buf[n]j==L'\n') enter_counter++;
+        enter[enter_counter] = n;
+    }
+
+	file->Close(file);
+	root->Close(root);
+
+    return *enter;
+}
+
 struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], struct CONSOLE *c) {
 	unsigned long long status;
 	struct EFI_FILE_PROTOCOL *root;
@@ -302,11 +331,11 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 	unsigned short buf[] = {'n','u','m','b','e','r',' ','o','f',' ','l','i','n','e','s','>','\0'};
 	unsigned short *num = 0;
 	unsigned short *s1 = 0;
-	
+    unsigned short enter[256];
 
 	while (1) {
 		unsigned short com[MAX_FILE_BUF];
-		buf_size = MAX_FILE_BUF;		
+		buf_size = MAX_FILE_BUF;
 		tmp=0;
 
 		for (;tmp<MAX_COMMAND_LEN-1;tmp++) {
@@ -344,24 +373,29 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 					c->sp-=9;
 					ch=L'\0';
 				}
-				else {	
+				else {
 					c = putchar(moji,ch,c,c->char_color);
 					num = ch;
-					num++;			
+					num++;
 				}
 			}
+
+            int index = number;
+            enter = enter_s();
+            number = enter[index];
+
 			c->sp = 0;
 			c->ent+=13;
 		}
 		if (!strcmp(L"p", com)) {
 			unsigned short read_buf[MAX_FILE_BUF];
-	
+
 			status = SFSP->OpenVolume(SFSP, &root);
 			assert(status, L"SFSP->OpenVolume");
 
 			status = root->Open(root, &file, file_name, EFI_FILE_MODE_READ, 0);
 			assert(status, L"root->Open");
-	
+
 			status = file->Read(file, &buf_size, (void *)read_buf);
 			assert(status, L"file->Read");
 
@@ -397,17 +431,15 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			struct EFI_FILE_PROTOCOL *file;
 			unsigned long long buf_size = MAX_FILE_BUF;
 			unsigned short file_buf[MAX_FILE_BUF / 2];
-			int i = 0;
+			int i = number;
 			unsigned short ch;
-
-			ST->ConOut->SetAttribute(ST->ConOut,EFI_BACKGROUND_LIGHTGRAY);
 
 			while (TRUE) {
 				ch = getc();
 
 				if (ch == SC_ESC)
 					break;
-				
+
 				if (ch == 8) {
 					c->sp-=9;
 					c = putchar(moji, K_SPACE, c, c->back_color);
