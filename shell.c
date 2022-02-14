@@ -381,7 +381,7 @@ struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], stru
 			}
 
             int index = number;
-            enter = &enter_s(file_name);
+            &enter = enter_s(file_name);
             number = enter[index];
 
 			c->sp = 0;
