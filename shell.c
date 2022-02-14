@@ -299,7 +299,6 @@ unsigned short *enter_s(unsigned short *file_name) {
     *read_buf += L'\0';
 
     for (int n=0;read_buf[n]!=L'\0';n++) {
-        putc(read_buf[n]);
         if (read_buf[n]==L'\n') {
             enter_counter++;
         }
