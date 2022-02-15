@@ -235,6 +235,8 @@ int ls(void)
 	return file_num;
 }
 
+void edit(unsigned short *file_name) {}
+
 void editer(unsigned short *file_name, struct CONSOLE *c) {
     unsigned short a =L'A';
 	c = putchar(c->chr, a, c, c->char_color);
