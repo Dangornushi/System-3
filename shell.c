@@ -3740,7 +3740,7 @@ void shell(void) {
 	cons->sp = 0;
 	cons->ent = 0;
 	cons->comHis_c = 0;
-    cons->chr = moji[79][12][8];
+    cons->chr = &moji;
 	cons = startup(cons);
 	cha(mode, cons);
 }
