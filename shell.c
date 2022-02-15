@@ -2329,7 +2329,7 @@ void cha(int mode, struct CONSOLE *console) {
             numa(console,moji);
 		else if (!strcmp(L"edit ", command(s1,buf,5))) {
 			cls();
-			edit(buf+5,consol);
+			edit(buf+5,console);
 			cls();
 			console->sp=0;
 			console->ent=0;
