@@ -2626,7 +2626,7 @@ void shell(void) {
 	struct RECT r = {10, 10, 100, 200};
 	unsigned char is_exit = FALSE;
 	unsigned short *s1 = L"\0";
-    static unsigned short moji[][12][8] = {
+    static unsigned short moji[79][12][8] = {
 		{//A
 			{0,0,0,1,1,0,0,0},
 			{0,0,0,1,1,0,0,0},
@@ -3740,7 +3740,7 @@ void shell(void) {
 	cons->sp = 0;
 	cons->ent = 0;
 	cons->comHis_c = 0;
-    cons->chr = moji[][12][8];
+    cons->chr = moji[79][12][8];
 	cons = startup(cons);
 	cha(mode, cons);
 }

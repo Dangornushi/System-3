@@ -8,7 +8,7 @@ struct CONSOLE {
 	unsigned int ent;
     unsigned short com_his[50][256];
     int comHis_c;
-    unsigned short chr[][12][8];
+    unsigned short chr[79][12][8];
 };
 
 void dialogue_get_filename(int idx);
