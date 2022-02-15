@@ -965,17 +965,6 @@ void proto_inter(struct CONSOLE *c, unsigned short moji[][12][8]) {
 	}
 }
 
-/*
- *     x
- * (10,10)__________ (10,100)
- * y  |/////////////          
- *    |/////////////
- *    |/////////////
- *    |/////////////
- *    |///////////// (100,100) 
- * (100,10)
- * */
-
 void qube() {
 	cls();
 	int i = 10;
@@ -2330,11 +2319,7 @@ void cha(int mode, struct CONSOLE *console) {
         else if (!strcmp(L"numa", buf))
             numa(console,moji);
 		else if (!strcmp(L"edit ", command(s1,buf,5))) {
-			cls();
 			editer(buf+5,console);
-			cls();
-			console->sp=0;
-			console->ent=0;
 		}
 		else if (!strcmp(L"key",buf)) {
 			while (1) {
