@@ -238,25 +238,24 @@ int ls(void)
 void edit(unsigned short *file_name) {}
 
 void editer(unsigned short *file_name, struct CONSOLE *c) {
-    unsigned short a =L'A';
-	c = putchar(c->chr, a, c, c->char_color);
-    
-    /*
 	unsigned long long status;
 	struct EFI_FILE_PROTOCOL *root;
 	struct EFI_FILE_PROTOCOL *file;
 	unsigned long long buf_size = MAX_FILE_BUF;
 	unsigned short file_buf[MAX_FILE_BUF / 2];
 	int i = 0;
-	unsigned short ch;
+	unsigned short com;
+    unsigned short s1;
 
+    /*command mode*/
 	while (TRUE) {
-		ch = getc();
+		com = getc();
+		putchar(c->chr,com,c,c->char_color);
+		file_buf[i++] = com;
 
-		if (ch == L'\r')
-            break;
-		putc(ch);
-		file_buf[i++] = ch;
+        if (!strcmp(L"l", command(s1,com,5))) {
+            puts(L"OK");
+        }
 
 	}
 	file_buf[i] = L'\0';
@@ -264,8 +263,7 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
 	status = SFSP->OpenVolume(SFSP, &root);
 	assert(status, L"SFSP->OpenVolume");
 
-	status = root->Open(root, &file, file_name,
-			    EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE, 0);
+	status = root->Open(root, &file, file_name, EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE, 0);
 	assert(status, L"root->Open");
 
 	status = file->Write(file, &buf_size, (void *)file_buf);
@@ -275,7 +273,6 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
 
 	file->Close(file);
 	root->Close(root);
-    */
 }
 
 unsigned short *enter_s(unsigned short *file_name) {
@@ -2318,9 +2315,8 @@ void cha(int mode, struct CONSOLE *console) {
             break;
         else if (!strcmp(L"numa", buf))
             numa(console,moji);
-		else if (!strcmp(L"edit ", command(s1,buf,5))) {
+		else if (!strcmp(L"edit ", command(s1,buf,5)))
 			editer(buf+5,console);
-		}
 		else if (!strcmp(L"key",buf)) {
 			while (1) {
 				unsigned short num = getc();
@@ -2432,7 +2428,6 @@ void cha(int mode, struct CONSOLE *console) {
 			console->sp=0;
 			console->ent+=13;
 		}
-
 		else if (!strcmp(L"proto ",command(s1,buf,6))) {
 			proto(buf+6,console,moji);
 		}
