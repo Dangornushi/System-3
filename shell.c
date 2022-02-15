@@ -235,8 +235,9 @@ int ls(void)
 	return file_num;
 }
 
-void edit(unsigned short *file_name) {
+void edit(unsigned short *file_name, struct CONSOLE *c) {
     unsigned short a =L'A';
+	c = putchar(c->chr, a, c, c->char_color);
     
     /*
 	unsigned long long status;
@@ -1047,151 +1048,6 @@ void rogin() {
 		}
 	}
 	return;
-}
-
-void edit_mode(unsigned short* file_name, unsigned short moji[][12][8]) {	
-	/*unsigned long long status;
-	struct EFI_FILE_PROTOCOL *root;
-	struct EFI_FILE_PROTOCOL *file;
-	unsigned long long buf_size = MAX_FILE_BUF;
-	unsigned short file_buf[MAX_FILE_BUF / 2];
-	unsigned short file_0[MAX_FILE_BUF / 2];
-	unsigned short line[MAX_FILE_BUF / 2];
-	int line_c = 0;
-	int n = 0;
-	int sp=0;
-	int ent=0;
-	int i = 0;
-	int space = 0;
-	int ent_c = 0;
-	int ents_c2 = 0;
-	unsigned short *MODE = L"mode> \0";
-	unsigned short ch;	
-	unsigned short *inp = 0;
-	status = SFSP->OpenVolume(SFSP, &root);
-	assert(status, L"SFSP->OpenVolume");
-	status = root->Open(root, &file, file_name, EFI_FILE_MODE_READ, 0);
-	assert(status, L"root->Open");
-	status = file->Read(file, &buf_size, (void *)file_0);
-	assert(status, L"file->Read");
-	for (;L'\0'!=file_0[i];i++) {
-		if (file_0[i]==L'\r'){
-			ent += 12;
-			file_buf[i] = L'\r';
-			n++;
-			file_buf[i] = L'\n';
-			n++;
-			line[line_c] = ent_c;
-			line_c++;
-			ent_c=0;
-		}
-		else { 
-			sp = putchar(moji,file_0[i],sp,ent,console->char_color);
-			file_buf[i]=file_0[i];
-			ent_c++;
-		}
-	}
-	n=i;
-	file->Close(file);
-	root->Close(root);
-	
-	for (int i=0;MODE[i]!=L'\0';i++) {
-		space = putchar(moji,MODE[i],1,i+450,white);
-	}
-	while (1) {
-		putchar(moji,K_SPACE,1,456,black);
-		putchar(moji,*inp,1,456,white);
-		putchar(moji,K_SPACE,10,456,black);
-		putchar(moji,file_buf[n+1],10,456,console->char_color);
-		*inp = getc();
-		sp--;
-		sp = putchar(moji,K_SPACE,sp,ent,black);
-		sp--;
-		sp = putchar(moji,file_buf[n-1],sp,ent,console->char_color);
-		sp = print(moji,K_SPACE,sp,ent,console->char_color);
-		
-		sp = putchar(moji,K_SPACE,sp,ent,black);
-		sp--;
-		sp = putchar(moji,file_buf[n+1],sp,ent,console->char_color);	
-		sp--;
-		if (!strcmp(inp,L"i")) {
-			sp = print(moji,K_SPACE,sp,ent,console->char_color);
-			sp--;
-			while (1) {
-				ch = getc();
-				if (ch==SC_ESC) {sp++;break;}
-				else if (ch == L'\r') {
-					ent += 12;
-					sp = 1;
-					file_buf[n] = L'\r';
-					n++;
-					file_buf[n] = L'\n';
-					n++;
-				}
-				else if (ch == 8 && sp>-1) {
-					sp--;
-					sp = print(moji,K_SPACE,sp,ent,black);
-					n--;
-					ch=0;
-					sp-=2;
-					sp = print(moji,K_SPACE,sp,ent,console->char_color);
-//					sp--;
-				}
-				else {	
-					sp--;
-					sp = print(moji,K_SPACE,sp,ent,black);
-					sp--;
-					sp = putchar(moji,ch,sp,ent,console->char_color);
-					file_buf[n] = ch;
-					n++;
-					sp = print(moji,K_SPACE,sp,ent,console->char_color);
-//					sp--;
-				}
-			}
-		}
-		if (!strcmp(inp,L"c")) {
-			file_buf[n] = L'\0';
-			status = SFSP->OpenVolume(SFSP, &root);
-			assert(status, L"SFSP->OpenVolume");
-			status = root->Open(root, &file, file_name,
-			    EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE | \
-			    EFI_FILE_MODE_CREATE, 0);
-			assert(status, L"root->Open");
-			status = file->Write(file, &buf_size, (void *)file_buf);
-			assert(status, L"file->Write");
-			file->Flush(file);
-			file->Close(file);
-			root->Close(root);
-//			le(file_name,moji, console);
-			
-			edit_mode(file_name, moji);
-			return;
-			
-			/*n--;
-			if (n==L'\n') { 
-				ent-=12;
-				n--;
-			}
-		}
-		if (!strcmp(inp,L"h")) {n--;sp-=2;}//ents_c--;n-=ents[ents_c];}
-		if (!strcmp(inp,L"l")) {n++;}//ents_c++;n+=ents[ents_c];}
-		if (!strcmp(inp,L"w")) {
-			file_buf[n] = L'\0';
-			status = SFSP->OpenVolume(SFSP, &root);
-			assert(status, L"SFSP->OpenVolume");
-			status = root->Open(root, &file, file_name,
-			    EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE | \
-			    EFI_FILE_MODE_CREATE, 0);
-			assert(status, L"root->Open");
-			status = file->Write(file, &buf_size, (void *)file_buf);
-			assert(status, L"file->Write");
-			file->Flush(file);
-			file->Close(file);
-			root->Close(root);
-		}
-		if (!strcmp(inp,L"q")) {break;}
-	}
-	*/
 }
 
 void __chkstk_ms() {}
