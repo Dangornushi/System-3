@@ -236,6 +236,9 @@ int ls(void)
 }
 
 void edit(unsigned short *file_name) {
+    unsigned short a =L'A';
+    
+    /*
 	unsigned long long status;
 	struct EFI_FILE_PROTOCOL *root;
 	struct EFI_FILE_PROTOCOL *file;
@@ -269,6 +272,7 @@ void edit(unsigned short *file_name) {
 
 	file->Close(file);
 	root->Close(root);
+    */
 }
 
 unsigned short *enter_s(unsigned short *file_name) {
@@ -3736,7 +3740,7 @@ void shell(void) {
 	cons->sp = 0;
 	cons->ent = 0;
 	cons->comHis_c = 0;
-    cons->chr = moji[][12][8];
+    cons->chr = [12][8];
 	cons = startup(cons);
 	cha(mode, cons);
 }
