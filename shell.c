@@ -235,7 +235,7 @@ int ls(void)
 	return file_num;
 }
 
-void edit(unsigned short *file_name, struct CONSOLE *c) {
+void editer(unsigned short *file_name, struct CONSOLE *c) {
     unsigned short a =L'A';
 	c = putchar(c->chr, a, c, c->char_color);
     
@@ -2329,7 +2329,7 @@ void cha(int mode, struct CONSOLE *console) {
             numa(console,moji);
 		else if (!strcmp(L"edit ", command(s1,buf,5))) {
 			cls();
-			edit(buf+5,console);
+			editer(buf+5,console);
 			cls();
 			console->sp=0;
 			console->ent=0;
