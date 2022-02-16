@@ -244,21 +244,22 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
 	unsigned long long buf_size = MAX_FILE_BUF;
 	unsigned short file_buf[MAX_FILE_BUF / 2];
 	int i = 0;
-	unsigned short com;
+	unsigned short com = 0;
     unsigned short s1;
 
     /*command mode*/
 	while (TRUE) {
 		com = getc();
 		putchar(c->chr,com,c,c->char_color);
-		file_buf[i++] = com;
+		file_buf[i] = com;
 
-        if (com==L'\r') {
+        if (file_buf[i]==L'\r') {
             putc(com);
             if (!strcmp(L"l", command(s1,com,1))) {
               puts(L"OK");
             }
         }
+        i++;
 
 	}
 	file_buf[i] = L'\0';
