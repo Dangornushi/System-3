@@ -267,8 +267,8 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                 status = file->Read(file, &buf_size, (void *)read_buf);
                 assert(status, L"file->Read");
 
-                cls();
-                puts(file_buf);
+                for (int tmp=0;file_buf[tmp]!=L'\0';tmp++)
+                    putchar(c->chr,com,file_buf[tmp],c->char_color);
 
                 file->Close(file);
 	            root->Close(root);
