@@ -1079,8 +1079,8 @@ void cha(int mode, struct CONSOLE *console) {
 	int w = 8;
 	int h = 12;
 	int list = 0;
-	unsigned short moji[][12][8];
-    *moji = console->chr;
+    unsigned short *moji;
+    moji = console->chr;
 
 	unsigned short buf[MAX_COMMAND_LEN];
 	unsigned int sp = 0;
