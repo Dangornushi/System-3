@@ -2323,11 +2323,11 @@ void cha(int mode, struct CONSOLE *console) {
             numa(console,moji);
 		else if (!strcmp(L"edit ", command(s1,buf,5)))
 			editer(buf+5,console);
-		else i/ (!strcmp(L"key",buf)) {
+		else if (!strcmp(L"key",buf)) {
 			while (1) {
 				unsigned short num = getc();
 				console = print(moji,num-6, console,console->char_color);
-			}	
+			}
 		}
 		else if (!strcmp(L"cls", buf)) {
 			console->ent = 0;
