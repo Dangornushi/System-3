@@ -282,7 +282,7 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
 
                 for (int tmp=0;tmp<curs;tmp++) {
                     putchar(c->chr,L' ',c,c->back_color);
-                    c->sp-=9
+                    c->sp-=9;
                     putchar(c->chr,L'^',c,c->char_color);
                     c->sp-=9;
                 }
