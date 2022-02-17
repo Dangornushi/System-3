@@ -244,6 +244,7 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
 	unsigned long long buf_size = MAX_FILE_BUF;
 	unsigned short file_buf[MAX_FILE_BUF / 2];
 	int i = 0;
+    int line = 0;
 	unsigned short com = 0;
     unsigned short s1;
 
@@ -255,7 +256,9 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
 
         if (file_buf[i]==L'\r') {
             if (!strcmp(L"l", command(s1,file_buf,1))) {
-                puts(file_buf);
+                line = to_int(file_buf+1);
+                for (int tmp=0;tmp<line;tmp++)
+                    puts(L"OK");
                 i = -1;
             }
             else {
