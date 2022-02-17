@@ -256,6 +256,8 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
 
         if (file_buf[i]==L'\r') {
             if (!strcmp(L"l", command(s1,file_buf,1))) {
+                int curs = 0;
+
                 line = to_int(file_buf+1);
 
 	            status = SFSP->OpenVolume(SFSP, &root);
@@ -269,10 +271,14 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
 
                 *read_buf += L'\0';
 
-                for (int tmp=0;read_buf[tmp]!=L'\0';tmp++) {
-                    puts(L"OK");
-                    putchar(c->chr,read_buf[tmp],c,c->char_color);
-                }
+                c->sp = 0;
+                c->ent += 13;
+
+                for (;read_buf[curs]!=L'\0';curs++)
+                    putchar(c->chr,read_buf[curs],c,c->char_color);
+
+                for (int tmp=0;tmp<curs;tmp++)
+                    putchar(c->chr,L'^',c,c->char_color);
 
                 file->Close(file);
 	            root->Close(root);
