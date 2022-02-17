@@ -253,6 +253,8 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
 		putchar(c->chr,com,c,c->char_color);
 		file_buf[i] = com;
 
+        puts(L"good.");
+
         if (file_buf[i]==L'\r') {
             putc(com);
             if (!strcmp(L"l", command(s1,com,1))) {
@@ -2321,7 +2323,7 @@ void cha(int mode, struct CONSOLE *console) {
             numa(console,moji);
 		else if (!strcmp(L"edit ", command(s1,buf,5)))
 			editer(buf+5,console);
-		else if (!strcmp(L"key",buf)) {
+		else i/ (!strcmp(L"key",buf)) {
 			while (1) {
 				unsigned short num = getc();
 				console = print(moji,num-6, console,console->char_color);
