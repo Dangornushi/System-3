@@ -254,8 +254,10 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
 		file_buf[i] = com;
 
         if (file_buf[i]==L'\r') {
+            puts(file_buf);
             if (!strcmp(L"l", command(s1,file_buf,1))) {
               puts(L"OK");
+              file_buf = 0;
             }
             else {
                 break;
