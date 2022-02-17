@@ -243,6 +243,7 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
 	struct EFI_FILE_PROTOCOL *file;
 	unsigned long long buf_size = MAX_FILE_BUF;
 	unsigned short file_buf[MAX_FILE_BUF / 2];
+	unsigned short read_buf[MAX_FILE_BUF / 2];
 	int i = 0;
     int line = 0;
 	unsigned short com = 0;
@@ -257,8 +258,18 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
         if (file_buf[i]==L'\r') {
             if (!strcmp(L"l", command(s1,file_buf,1))) {
                 line = to_int(file_buf+1);
-                for (int tmp=0;tmp<line;tmp++)
-                    puts(L"OK");
+
+	            status = SFSP->OpenVolume(SFSP, &root);
+            	assert(status, L"SFSP->OpenVolume");
+
+                status = file->Read(file, &buf_size, (void *)read_buf);
+                assert(status, L"root->Open");
+
+                status = root->Open(root, &file, file_name, EFI_FILE_MODE_READ, 0);
+                assert(status, L"file->Read");
+
+                puts(file_buf);
+
                 i = -1;
             }
             else {
@@ -269,12 +280,6 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
 
 	}
 	file_buf[i] = L'\0';
-
-	status = SFSP->OpenVolume(SFSP, &root);
-	assert(status, L"SFSP->OpenVolume");
-
-	status = root->Open(root, &file, file_name, EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE, 0);
-	assert(status, L"root->Open");
 
 	status = file->Write(file, &buf_size, (void *)file_buf);
 	assert(status, L"file->Write");
