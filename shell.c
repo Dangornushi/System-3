@@ -1123,10 +1123,11 @@ void cha(int mode, struct CONSOLE *console) {
 		console->sp=0;
 		console->ent=0;
 		n=0;
-		if (!strcmp(L"dango1027",buf)) {break;}
+		if (!strcmp(L"dango1027",buf)) {
+            ST->ConOut->ClearScreen(ST->ConOut);
+            break;}
 	}
 	cls();
-    ST->ConOut->ClearScreen(ST->ConOut);
 	unsigned short cha[] = {'s','y','s','t','e','m','3','\n','m','a','d','e',' ','b','y',' ','d','a','n','g','o','m','u','s','h','i','\n','\0'};
 
 	for (int i=0;cha[i]!=L'\0';i++) {
