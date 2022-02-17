@@ -60,7 +60,8 @@ int icon_print(unsigned short icon[][30][24], unsigned int arfa, int sp, int ent
 }
 
 void cls(void) {
-ST->ConOut->SetAttribute(ST->ConOut,EFI_BACKGROUND_LIGHTGRAY);
+            ST->ConOut->SetAttribute(ST->ConOut,EFI_BACKGROUND_LIGHTGRAY);
+            SystemTable->ConOut->ClearScreen(SystemTable->ConOut);
     /*
 			int wait = 0;
 			int l = 0;
@@ -268,6 +269,7 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                 status = file->Read(file, &buf_size, (void *)read_buf);
                 assert(status, L"file->Read");
 
+                cls();
                 puts(file_buf);
 
                 file->Close(file);
