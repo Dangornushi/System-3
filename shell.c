@@ -256,7 +256,7 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
         if (file_buf[i]==L'\r') {
             if (!strcmp(L"l", command(s1,file_buf,1))) {
                 puts(file_buf);
-                unsigned short file_buf[MAX_FILE_BUF/2] = {0};
+                i = -1;
             }
             else {
                 break;
