@@ -61,7 +61,7 @@ int icon_print(unsigned short icon[][30][24], unsigned int arfa, int sp, int ent
 
 void cls(void) {
             ST->ConOut->SetAttribute(ST->ConOut,EFI_BACKGROUND_LIGHTGRAY);
-            SystemTable->ConOut->ClearScreen(SystemTable->ConOut);
+            ST->ConOut->ClearScreen(ST->ConOut);
     /*
 			int wait = 0;
 			int l = 0;
