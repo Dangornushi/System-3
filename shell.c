@@ -256,7 +256,7 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
         puts(L"good.");
 
         if (file_buf[i]==L'\r') {
-            puts(L"yeah?");
+            puts(com);
             if (!strcmp(L"l", command(s1,com,1))) {
               puts(L"OK");
             }
