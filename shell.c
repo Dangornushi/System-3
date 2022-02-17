@@ -277,6 +277,9 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                 for (;read_buf[curs]!=L'\0';curs++)
                     putchar(c->chr,read_buf[curs],c,c->char_color);
 
+                c->sp=0;
+                c->ent+=13;
+
                 for (int tmp=0;tmp<curs;tmp++)
                     putchar(c->chr,L'^',c,c->char_color);
 
