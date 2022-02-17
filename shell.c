@@ -2229,7 +2229,7 @@ void cha(int mode, struct CONSOLE *console) {
 		n=0;
 		if (!strcmp(L"dango1027",buf)) {break;}
 	}
-	
+	cls();
 	unsigned short cha[] = {'s','y','s','t','e','m','3','\n','m','a','d','e',' ','b','y',' ','d','a','n','g','o','m','u','s','h','i','\n','\0'};
 
 	for (int i=0;cha[i]!=L'\0';i++) {
