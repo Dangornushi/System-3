@@ -262,13 +262,16 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
 	            status = SFSP->OpenVolume(SFSP, &root);
             	assert(status, L"SFSP->OpenVolume");
 
-                status = file->Read(file, &buf_size, (void *)read_buf);
+                status = root->Open(root, &file, file_name, EFI_FILE_MODE_READ, 0);
                 assert(status, L"root->Open");
 
-                status = root->Open(root, &file, file_name, EFI_FILE_MODE_READ, 0);
+                status = file->Read(file, &buf_size, (void *)read_buf);
                 assert(status, L"file->Read");
 
                 puts(file_buf);
+
+                file->Close(file);
+	            root->Close(root);
 
                 i = -1;
             }
@@ -281,13 +284,6 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
 	}
 	file_buf[i] = L'\0';
 
-	status = file->Write(file, &buf_size, (void *)file_buf);
-	assert(status, L"file->Write");
-
-	file->Flush(file);
-
-	file->Close(file);
-	root->Close(root);
 }
 
 unsigned short *enter_s(unsigned short *file_name) {
