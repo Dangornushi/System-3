@@ -257,6 +257,9 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
             if (!strcmp(L"l", command(s1,file_buf,1))) {
               puts(L"OK");
             }
+            else {
+                break;
+            }
         }
         i++;
 
