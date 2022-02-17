@@ -253,11 +253,8 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
 		putchar(c->chr,com,c,c->char_color);
 		file_buf[i] = com;
 
-        puts(L"good.");
-
         if (file_buf[i]==L'\r') {
-            putc(com);
-            if (!strcmp(L"l", command(s1,com,1))) {
+            if (!strcmp(L"l", command(s1,file_buf,1))) {
               puts(L"OK");
             }
         }
