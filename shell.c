@@ -280,13 +280,19 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                 c->sp=0;
                 c->ent+=13;
 
-                for (int tmp=0;tmp<curs;tmp++)
+                for (int tmp=0;tmp<curs;tmp++) {
+                    putchar(c->chr,L' ',c,c->back_color);
+                    c->sp-=9
                     putchar(c->chr,L'^',c,c->char_color);
+                    c->sp-=9;
+                }
 
                 file->Close(file);
 	            root->Close(root);
 
                 i = -1;
+                c->sp=0;
+                c->ent+=13;
             }
             else {
                 break;
