@@ -269,8 +269,10 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
 
                 *read_buf += L'\0';
 
-                for (int tmp=0;read_buf[tmp]!=L'\0';tmp++)
+                for (int tmp=0;read_buf[tmp]!=L'\0';tmp++) {
+                    puts(L"OK");
                     putchar(c->chr,com,read_buf[tmp],c->char_color);
+                }
 
                 file->Close(file);
 	            root->Close(root);
