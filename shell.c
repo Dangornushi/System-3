@@ -277,22 +277,22 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                 c->sp = 0;
                 c->ent += 13;
 
-                /*ファイルを読み込んで改行ごとに切り分ける*/
-                for (int tmp=0;read_buf[curs]!=L'\0';curs++,tmp++) {
-                    enter_buf[enter][tmp] = read_buf[curs];
-
-                    if (read_buf[curs]==L'\n')  {
-                        enter++;
-                        tmp = -1;//ループ終了ごとにインクリメントされるのであらかじめ-1しておく
-                    }
-                }
-
-                int tmp = 0;
-                int True = 1;
-
                 while (True) {
 
-                /*選択された行を表示*/
+                    /*ファイルを読み込んで改行ごとに切り分ける*/
+                    for (int tmp=0;read_buf[curs]!=L'\0';curs++,tmp++) {
+                        enter_buf[enter][tmp] = read_buf[curs];
+
+                        if (read_buf[curs]==L'\n')  {
+                            enter++;
+                            tmp = -1;//ループ終了ごとにインクリメントされるのであらかじめ-1しておく
+                        }
+                    }
+
+                    int tmp = 0;
+                    int True = 1;
+
+                    /*選択された行を表示*/
                     for (;enter_buf[line][tmp]!=L'\n';tmp++) {
                         putchar(c->chr,enter_buf[line][tmp],c,c->char_color);
                     }
@@ -315,7 +315,7 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                     if (in_com==L'h' && co > 0)
                        co--;
                     if (in_com==L'q')
-                        True = 0;
+                        return;
 
                     cls();
 
@@ -327,9 +327,6 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                 i = -1;
                 c->sp=0;
                 c->ent+=13;
-            }
-            else {
-                break;
             }
         }
         i++;
