@@ -316,6 +316,8 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                     if (in_com==L'q')
                         return;
 
+                    c->sp = 0;
+                    c->ent = 0;
                     cls();
 
                 }
