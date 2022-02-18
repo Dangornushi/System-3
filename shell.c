@@ -277,7 +277,7 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
 
                     int tmp = 0;
                     /*ファイルを読み込んで改行ごとに切り分ける*/
-                    for (read_buf[curs]!=L'\0';curs++,tmp++) {
+                    for (;read_buf[curs]!=L'\0';curs++,tmp++) {
                         enter_buf[enter][tmp] = read_buf[curs];
 
                         if (read_buf[curs]==L'\n')  {
