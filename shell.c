@@ -243,6 +243,7 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
 	unsigned long long buf_size = MAX_FILE_BUF;
 	unsigned short file_buf[MAX_FILE_BUF / 2];
 	unsigned short read_buf[MAX_FILE_BUF / 2];
+    unsigned short enter_buf[MAX_FILE_BUF / 2];
 	int i = 0;
     int line = 0;
 	unsigned short com = 0;
@@ -257,6 +258,7 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
         if (file_buf[i]==L'\r') {
             if (!strcmp(L"l", command(s1,file_buf,1))) {
                 int curs = 0;
+                int enter = 0;
 
                 line = to_int(file_buf+1);
 
@@ -274,13 +276,20 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                 c->sp = 0;
                 c->ent += 13;
 
-                for (;read_buf[curs]!=L'\0';curs++)
+                for (;read_buf[curs]!=L'\0';curs++) {
                     putchar(c->chr,read_buf[curs],c,c->char_color);
+
+                    enter_buf[enter] = read_buf[curs];
+
+                    if (read_buf[curs]==L'\n')  {
+                        enter++;
+                    }
+                }
 
                 c->sp=0;
                 c->ent+=13;
 
-                for (int tmp=0;tmp<curs;tmp++) {
+                for (int tmp=0;enter_buf[tmp]!=L'\n';tmp++) {
                     putchar(c->chr,L' ',c,c->back_color);
                     putchar(c->chr,L'o',c,c->char_color);
                     c->sp-=9;
