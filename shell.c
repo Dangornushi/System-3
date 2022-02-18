@@ -303,11 +303,12 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                         putchar(c->chr,L' ',c,c->back_color);
                         putchar(c->chr,L'o',c,c->char_color);
                         c->sp-=9;
+                        puts(L"OK");
                     }
 
                     in_com = getc();
 
-                    if (in_com==L'l' && co < tmp) {
+                    if (in_com==L'l') {
                         co--;
                     }
                     if (in_com==L'h') {
