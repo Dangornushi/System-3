@@ -291,7 +291,7 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                     putchar(c->chr,enter_buf[line][tmp],c,c->char_color);
                 }
 
-                c->sp=-9;
+                c->sp=0;
                 c->ent+=13;
 
                 /*表事行の指定ポイントにカーソルを表示*/
