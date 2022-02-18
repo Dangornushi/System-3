@@ -256,6 +256,7 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
 
         if (file_buf[i]==L'\r') {
             if (!strcmp(L"l", command(s1,file_buf,1))) {
+                cls();
                 int curs = 0;
                 int enter = 0;
                 unsigned short in_com;
@@ -288,28 +289,34 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
 
                 int tmp = 0;
 
+                while () {
+
                 /*選択された行を表示*/
-                for (;enter_buf[line][tmp]!=L'\n';tmp++) {
-                    putchar(c->chr,enter_buf[line][tmp],c,c->char_color);
+                    for (;enter_buf[line][tmp]!=L'\n';tmp++) {
+                        putchar(c->chr,enter_buf[line][tmp],c,c->char_color);
+                    }
+
+                    c->sp=0;
+                    c->ent+=13;
+
+
+                   /*表事行の指定ポイントにカーソルを表示*/
+                    for (;co<tmp;co++) {
+                        putchar(c->chr,L' ',c,c->back_color);
+                        putchar(c->chr,L'o',c,c->char_color);
+                        c->sp-=9;
+                    }
+
+                    in_com = getc();
+
+                    if (in_com==L'l' && co < tmp)
+                        co++;
+                    if (in_com==L'h' && co > 0)
+                       co--;
+
+                    cls();
+
                 }
-
-                c->sp=0;
-                c->ent+=13;
-
-
-                /*表事行の指定ポイントにカーソルを表示*/
-                for (;co<tmp;co++) {
-                    putchar(c->chr,L' ',c,c->back_color);
-                    putchar(c->chr,L'o',c,c->char_color);
-                    c->sp-=9;
-                }
-
-                in_com = getc();
-
-                if (in_com==L'l' && co < tmp)
-                    co++;
-                if (in_com==L'h' && co > 0)
-                    co--;
 
                 file->Close(file);
 	            root->Close(root);
