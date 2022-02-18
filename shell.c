@@ -285,7 +285,7 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                             tmp = -1;//ループ終了ごとにインクリメントされるのであらかじめ-1しておく
                         }
                     }
-                    int tmp2=0;
+                    int tmp2=tmp;
 
                 while (1) {
                     /*選択された行を表示*/
