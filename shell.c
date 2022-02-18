@@ -296,6 +296,7 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                     c->ent+=13;
 
                     int tmp2=tmp;
+                    tmp = 0;
 
                    /*表事行の指定ポイントにカーソルを表示*/
                     for (;co<tmp2;co++) {
