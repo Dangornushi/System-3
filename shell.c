@@ -42,7 +42,6 @@ struct CONSOLE *putchar(unsigned short moji[][12][8], unsigned short cha, struct
 		c->ent+=13;
 	}
 	if (c->ent > 400){
-		ST->ConOut->SetAttribute(ST->ConOut,EFI_BACKGROUND_LIGHTGRAY);
 		c->sp = 0;
 		c->ent = 0;
 	}
@@ -99,7 +98,6 @@ void dialogue_get_filename(int idx)
 {
 	int i;
 
-	ST->ConOut->SetAttribute(ST->ConOut,EFI_BACKGROUND_LIGHTGRAY);
 
 	puts(L"New File Name: ");
 	for (i = 0; i < MAX_FILE_NAME_LEN; i++) {
@@ -969,7 +967,6 @@ struct CONSOLE *proc(unsigned short *file_name, unsigned short moji[][12][8], st
 }
 
 void bse(unsigned short *file_name) {
-	ST->ConOut->SetAttribute(ST->ConOut,EFI_BACKGROUND_LIGHTGRAY);	
 
 	unsigned long long status;
 	struct EFI_FILE_PROTOCOL *root;
