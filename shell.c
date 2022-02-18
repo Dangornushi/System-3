@@ -288,8 +288,9 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                 }
 
                 int tmp = 0;
+                int True = 1;
 
-                while () {
+                while (True) {
 
                 /*選択された行を表示*/
                     for (;enter_buf[line][tmp]!=L'\n';tmp++) {
@@ -313,6 +314,8 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                         co++;
                     if (in_com==L'h' && co > 0)
                        co--;
+                    if (in_com==L'q')
+                        True = 0;
 
                     cls();
 
