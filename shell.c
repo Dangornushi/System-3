@@ -277,7 +277,7 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                 c->sp = 0;
                 c->ent += 13;
 
-                while (True) {
+                while (1) {
 
                     /*ファイルを読み込んで改行ごとに切り分ける*/
                     for (int tmp=0;read_buf[curs]!=L'\0';curs++,tmp++) {
@@ -290,7 +290,6 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                     }
 
                     int tmp = 0;
-                    int True = 1;
 
                     /*選択された行を表示*/
                     for (;enter_buf[line][tmp]!=L'\n';tmp++) {
