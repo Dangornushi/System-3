@@ -286,10 +286,9 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                         }
                     }
 
-                    int tmp3 = tmp;
+                    int tmp=0;
                 while (1) {
                     /*選択された行を表示*/
-                    tmp = tmp3;
                     for (;enter_buf[line][tmp]!=L'\n';tmp++) {
                         putchar(c->chr,enter_buf[line][tmp],c,c->char_color);
                     }
@@ -321,6 +320,7 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                     c->sp = 0;
                     c->ent = 0;
                     cls();
+                    tmp=0;
 
                 }
 
