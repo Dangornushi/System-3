@@ -246,6 +246,7 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
     int line = 0;
 	unsigned short com = 0;
     unsigned short s1;
+    unsigned short co = 2;
 
     /*command mode*/
 	while (TRUE) {
@@ -257,6 +258,7 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
             if (!strcmp(L"l", command(s1,file_buf,1))) {
                 int curs = 0;
                 int enter = 0;
+                unsigned short in_com;
 
                 line = to_int(file_buf+1);
 
@@ -294,12 +296,20 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                 c->sp=0;
                 c->ent+=13;
 
+
                 /*表事行の指定ポイントにカーソルを表示*/
-                for (int tmp2=2;tmp2<tmp;tmp2++) {
+                for (;co<tmp;co++) {
                     putchar(c->chr,L' ',c,c->back_color);
                     putchar(c->chr,L'o',c,c->char_color);
                     c->sp-=9;
                 }
+
+                in_com = getc();
+
+                if (in_com==L'l' && co < tmp2-2)
+                    co++;
+                if (in_com==L'h' && co > 0)
+                    co--;
 
                 file->Close(file);
 	            root->Close(root);
