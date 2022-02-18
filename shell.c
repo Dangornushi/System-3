@@ -62,7 +62,7 @@ int icon_print(unsigned short icon[][30][24], unsigned int arfa, int sp, int ent
 void cls(void) {
      //       ST->ConOut->SetAttribute(ST->ConOut,EFI_BACKGROUND_LIGHTGRAY);
             ST->ConOut->ClearScreen(ST->ConOut);
-			int wait = 0;
+	/*		int wait = 0;
 			int l = 0;
 			for (int x = 0;x < 1000;x++) {		
 				draw_pixel(0,x,black);
@@ -83,6 +83,7 @@ void cls(void) {
 				}
 				l++;
 			}
+            */
 }
 
 void new_file_make(int idx, unsigned short *filename, struct CONSOLE *c, unsigned short moji[12][8]) {
