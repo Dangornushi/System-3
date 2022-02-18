@@ -286,11 +286,9 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                             tmp = -1;//ループ終了ごとにインクリメントされるのであらかじめ-1しておく
                         }
                     }
-
-                while (1) {
-
                     int tmp = 0;
 
+                while (1) {
                     /*選択された行を表示*/
                     for (;enter_buf[line][tmp]!=L'\n';tmp++) {
                         putchar(c->chr,enter_buf[line][tmp],c,c->char_color);
@@ -310,9 +308,9 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                     in_com = getc();
 
                     if (in_com==L'l' && co < tmp)
-                        co++;
+                        tmp++;
                     if (in_com==L'h' && co > 2)
-                       co--;
+                        tmp--;
                     if (in_com==L'q')
                         return;
 
