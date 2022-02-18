@@ -241,7 +241,7 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
 	unsigned long long buf_size = MAX_FILE_BUF;
 	unsigned short file_buf[MAX_FILE_BUF / 2];
 	unsigned short read_buf[MAX_FILE_BUF / 2];
-    unsigned short enter_buf[MAX_FILE_BUF / 2];
+    unsigned short enter_buf[256][MAX_FILE_BUF / 2];
 	int i = 0;
     int line = 0;
 	unsigned short com = 0;
@@ -274,20 +274,28 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                 c->sp = 0;
                 c->ent += 13;
 
-                for (;read_buf[curs]!=L'\0';curs++) {
-                    putchar(c->chr,read_buf[curs],c,c->char_color);
-
-                    enter_buf[enter] = read_buf[curs];
+                /*ファイルを読み込んで改行ごとに切り分ける*/
+                for (int tmp=0;read_buf[curs]!=L'\0';curs++,tmp++) {
+                    enter_buf[enter][tmp] = read_buf[curs];
 
                     if (read_buf[curs]==L'\n')  {
                         enter++;
+                        tmp = 0;
                     }
+                }
+
+                int tmp = 0;
+
+                /*選択された行を表示*/
+                for (;enter_buf[line][tmp]!=L'\n';tmp++) {
+                    putchar(c->chr,enter_buf[line][tmp],c,c->char_color);
                 }
 
                 c->sp=0;
                 c->ent+=13;
 
-                for (int tmp=0;enter_buf[tmp]!=L'\n';tmp++) {
+                /*表事行の指定ポイントにカーソルを表示*/
+                for (int tmp2=0;tmp2<tmp;tmp2++) {
                     putchar(c->chr,L' ',c,c->back_color);
                     putchar(c->chr,L'o',c,c->char_color);
                     c->sp-=9;
