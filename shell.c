@@ -234,8 +234,6 @@ int ls(void)
 	return file_num;
 }
 
-void edit(unsigned short *file_name) {}
-
 void editer(unsigned short *file_name, struct CONSOLE *c) {
 	unsigned long long status;
 	struct EFI_FILE_PROTOCOL *root;
@@ -343,6 +341,51 @@ unsigned short *enter_s(unsigned short *file_name) {
 
     return *enter;
 }
+
+void edit(unsigned short *file_name)
+{
+	unsigned long long status;
+	struct EFI_FILE_PROTOCOL *root;
+	struct EFI_FILE_PROTOCOL *file;
+	unsigned long long buf_size = MAX_FILE_BUF;
+	unsigned short file_buf[MAX_FILE_BUF / 2];
+	int i = 0;
+	unsigned short ch;
+
+	ST->ConOut->ClearScreen(ST->ConOut);
+
+	while (TRUE) {
+		ch = getc();
+
+		if (ch == SC_ESC)
+			break;
+
+		putc(ch);
+		file_buf[i++] = ch;
+
+		if (ch == L'\r') {
+			putc(L'\n');
+			file_buf[i++] = L'\n';
+		}
+	}
+	file_buf[i] = L'\0';
+
+	status = SFSP->OpenVolume(SFSP, &root);
+	assert(status, L"SFSP->OpenVolume");
+
+	status = root->Open(root, &file, file_name,
+			    EFI_FILE_MODE_READ | EFI_FILE_MODE_WRITE, 0);
+	assert(status, L"root->Open");
+
+	status = file->Write(file, &buf_size, (void *)file_buf);
+	assert(status, L"file->Write");
+
+	file->Flush(file);
+
+	file->Close(file);
+	root->Close(root);
+}
+
 
 struct CONSOLE *le(unsigned short *file_name, unsigned short moji[][12][8], struct CONSOLE *c) {
 	unsigned long long status;
@@ -1253,6 +1296,8 @@ void cha(int mode, struct CONSOLE *console) {
             numa(console,moji);
 		else if (!strcmp(L"edit ", command(s1,buf,5)))
 			editer(buf+5,console);
+		else if (!strcmp(L"new ", command(s1,buf,4)))
+            edit(buf+4);
 		else if (!strcmp(L"key",buf)) {
 			while (1) {
 				unsigned short num = getc();
