@@ -280,7 +280,7 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
 
                     if (read_buf[curs]==L'\n')  {
                         enter++;
-                        tmp = 0;
+                        tmp = -1;//ループ終了ごとにインクリメントされるのであらかじめ-1しておく
                     }
                 }
 
@@ -295,7 +295,7 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                 c->ent+=13;
 
                 /*表事行の指定ポイントにカーソルを表示*/
-                for (int tmp2=0;tmp2<tmp;tmp2++) {
+                for (int tmp2=1;tmp2<tmp;tmp2++) {
                     putchar(c->chr,L' ',c,c->back_color);
                     putchar(c->chr,L'o',c,c->char_color);
                     c->sp-=9;
