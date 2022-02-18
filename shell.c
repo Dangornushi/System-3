@@ -291,11 +291,11 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                     putchar(c->chr,enter_buf[line][tmp],c,c->char_color);
                 }
 
-                c->sp=0;
+                c->sp=-9;
                 c->ent+=13;
 
                 /*表事行の指定ポイントにカーソルを表示*/
-                for (int tmp2=1;tmp2<=tmp;tmp2++) {
+                for (int tmp2=1;tmp2<tmp;tmp2++) {
                     putchar(c->chr,L' ',c,c->back_color);
                     putchar(c->chr,L'o',c,c->char_color);
                     c->sp-=9;
