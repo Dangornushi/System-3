@@ -276,12 +276,12 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
 
                 /*ファイルを読み込んで改行ごとに切り分ける*/
                 for (int tmp=0;read_buf[curs]!=L'\0';curs++,tmp++) {
+                    enter_buf[enter][tmp] = read_buf[curs];
 
                     if (read_buf[curs]==L'\n')  {
                         enter++;
                         tmp = -1;//ループ終了ごとにインクリメントされるのであらかじめ-1しておく
                     }
-                    enter_buf[enter][tmp] = read_buf[curs];
                 }
 
                 int tmp = 0;
