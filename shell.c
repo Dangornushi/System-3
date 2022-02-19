@@ -310,7 +310,7 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                     if (in_com==L'l' && co > 1) {
                         co--;
                     }
-                    if (in_com==L'h' && co < tmp) {
+                    if (in_com==L'h' && co < tmp+1) {
                         co++;
                     }
                     if (in_com==L'q')
