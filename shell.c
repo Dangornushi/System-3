@@ -299,7 +299,7 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                     co2 = co;
 
                    /*表事行の指定ポイントにカーソルを表示*/
-                    for (;co2<tmp;co2++) {
+                    for (;co2!=tmp;co2++) {
                         c->sp-=9;
                         putchar(c->chr,L' ',c,c->back_color);
                         putchar(c->chr,L'o',c,c->char_color);
