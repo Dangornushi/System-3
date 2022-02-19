@@ -295,6 +295,9 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                     c->sp=0;
                     c->ent+=13;
 
+                    for (int i=0;i<co;i++)
+                        puts(L"OK");
+
                    /*表事行の指定ポイントにカーソルを表示*/
                     for (;co<tmp;co++) {
                         putchar(c->chr,L' ',c,c->back_color);
