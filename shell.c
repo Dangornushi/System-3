@@ -285,6 +285,7 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                             tmp = -1;//ループ終了ごとにインクリメントされるのであらかじめ-1しておく
                         }
                     }
+                int co2 = 0;
 
                 while (1) {
                     /*選択された行を表示*/
@@ -293,13 +294,12 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                     }
 
                     c->sp=0;
-                    c->ent+=13;
+                    c->ent+=13;;
 
-                    for (int i=0;i<co;i++)
-                        puts(L"OK");
+                    co2 = co;
 
                    /*表事行の指定ポイントにカーソルを表示*/
-                    for (;co<tmp;co++) {
+                    for (;co2<tmp;co2++) {
                         putchar(c->chr,L' ',c,c->back_color);
                         putchar(c->chr,L'o',c,c->char_color);
                         c->sp-=9;
