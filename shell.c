@@ -286,8 +286,8 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                         }
                     }
 
-                tmp=0;
                 while (1) {
+                tmp=0;
                     /*選択された行を表示*/
                     for (;enter_buf[line][tmp]!=L'\n';tmp++) {
                         putchar(c->chr,enter_buf[line][tmp],c,c->char_color);
