@@ -288,6 +288,7 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
 
                     int tmp=0;
                 while (1) {
+                        puts(L"OK");
                     /*選択された行を表示*/
                     for (;enter_buf[line][tmp]!=L'\n';tmp++) {
                         putchar(c->chr,enter_buf[line][tmp],c,c->char_color);
@@ -303,7 +304,6 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                         putchar(c->chr,L' ',c,c->back_color);
                         putchar(c->chr,L'o',c,c->char_color);
                         c->sp-=9;
-                        puts(L"OK");
                     }
 
                     in_com = getc();
