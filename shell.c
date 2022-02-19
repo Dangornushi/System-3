@@ -273,7 +273,7 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                 *read_buf += L'\0';
 
                 c->sp = 0;
-                c->ent += 13;
+                c->ent = 0;
 
                     int tmp = 0;
                     /*ファイルを読み込んで改行ごとに切り分ける*/
@@ -287,7 +287,6 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                     }
 
                 while (1) {
-                tmp=0;
                     /*選択された行を表示*/
                     for (;enter_buf[line][tmp]!=L'\n';tmp++) {
                         putchar(c->chr,enter_buf[line][tmp],c,c->char_color);
@@ -300,11 +299,11 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
 
                    /*表事行の指定ポイントにカーソルを表示*/
                     for (;co<tmp2;co++) {
+                    puts(L"OK");
                         putchar(c->chr,L' ',c,c->back_color);
                         putchar(c->chr,L'o',c,c->char_color);
                         c->sp-=9;
                     }
-                    puts(L"OK");
 
                     in_com = getc();
 
