@@ -307,10 +307,10 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
 
                     in_com = getc();
 
-                    if (in_com==L'l') {
+                    if (in_com==L'l' && co > 0) {
                         co--;
                     }
-                    if (in_com==L'h') {
+                    if (in_com==L'h' && co < tmp) {
                         co++;
                     }
                     if (in_com==L'q')
