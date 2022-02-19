@@ -288,18 +288,15 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
 
                 while (1) {
                     /*選択された行を表示*/
-                    for (;enter_buf[line][tmp]!=L'\n';tmp++) {
+                    for (tmp=0;enter_buf[line][tmp]!=L'\n';tmp++) {
                         putchar(c->chr,enter_buf[line][tmp],c,c->char_color);
                     }
 
                     c->sp=0;
                     c->ent+=13;
 
-                    int tmp2=tmp+2;
-
                    /*表事行の指定ポイントにカーソルを表示*/
-                    for (;co<tmp2;co++) {
-                    puts(L"OK");
+                    for (;co<tmp;co++) {
                         putchar(c->chr,L' ',c,c->back_color);
                         putchar(c->chr,L'o',c,c->char_color);
                         c->sp-=9;
@@ -319,8 +316,6 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                     c->sp = 0;
                     c->ent = 0;
                     cls();
-                    tmp=0;
-
                 }
 
                 file->Close(file);
