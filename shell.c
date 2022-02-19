@@ -286,7 +286,7 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                         }
                     }
 
-                    int tmp=0;
+                tmp=0;
                 while (1) {
                         puts(L"OK");
                     /*選択された行を表示*/
