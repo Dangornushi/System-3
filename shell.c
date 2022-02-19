@@ -300,9 +300,9 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
 
                    /*表事行の指定ポイントにカーソルを表示*/
                     for (;co2<tmp;co2++) {
+                        c->sp-=9;
                         putchar(c->chr,L' ',c,c->back_color);
                         putchar(c->chr,L'o',c,c->char_color);
-                        c->sp-=9;
                     }
 
                     in_com = getc();
@@ -310,7 +310,7 @@ void editer(unsigned short *file_name, struct CONSOLE *c) {
                     if (in_com==L'l' && co > 2) {
                         co--;
                     }
-                    if (in_com==L'h' && co != tmp-1) {
+                    if (in_com==L'h' && co != tmp) {
                         co++;
                     }
                     if (in_com==L'q')
